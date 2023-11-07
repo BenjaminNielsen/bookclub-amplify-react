@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifybe139f7076324-staging-212104-authRole",
+      "UnauthRoleArn": "arn:aws:iam::047630148793:role/amplify-amplifybe139f7076324-staging-212104-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::047630148793:role/amplify-amplifybe139f7076324-staging-212104-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplifybe139f7076324-staging-212104-deployment",
+      "UnauthRoleName": "amplify-amplifybe139f7076324-staging-212104-unauthRole",
+      "StackName": "amplify-amplifybe139f7076324-staging-212104",
+      "StackId": "arn:aws:cloudformation:us-east-1:047630148793:stack/amplify-amplifybe139f7076324-staging-212104/e5bd57c0-7a8e-11ee-8559-0e5c4f8d7051",
+      "AmplifyAppId": "d3p7awky1t81xy"
+    },
+    "categories": {
+      "auth": {
+        "bookclubamplifyreact7fc1a661": {}
+      }
+    }
+  }
+}
