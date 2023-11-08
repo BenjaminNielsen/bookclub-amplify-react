@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "bookclubamplifyreact7fc1a661": {}
+      },
+      "api": {
+        "bookclubamplifyreact": {}
       }
     }
   }
