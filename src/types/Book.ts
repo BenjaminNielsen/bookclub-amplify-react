@@ -7,5 +7,5 @@ export type Book = {
     numberInSeries: String
     wordCount: number
     description: String
-    dateAdded: Date
+    createdAt: Date
 }

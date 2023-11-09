@@ -11,5 +11,4 @@ type Book @model @auth(rules: [ { allow: public } ] ) {
   numberInSeries: String
   wordCount: Int
   description: String
-  dateAdded: String
 }

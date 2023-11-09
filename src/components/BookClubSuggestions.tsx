@@ -1,79 +1,83 @@
-import {Button, Flex, Text, View} from "@aws-amplify/ui-react";
+import {Button, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {API} from "aws-amplify";
 import {listBooks} from "../graphql/queries";
 import {deleteBook as deleteBookMutation} from "../graphql/mutations";
-import {
-    createColumnHelper,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from '@tanstack/react-table'
+
+import {CompactTable} from '@table-library/react-table-library/compact';
+import {useTheme} from '@table-library/react-table-library/theme';
+import {getTheme} from '@table-library/react-table-library/baseline';
+
 import {Book} from "../types/Book";
+import {BsFillTrashFill} from "react-icons/bs";
+import {IconContext} from "react-icons";
 
 export default function BookClubSuggestions() {
 
-    const [books, setBooks] = useState([]);
-    //const table = useReactTable(options)
-
-    const defaultTestData = [ {
-        isbn:"1234567890",
-        title: "test1",
-        description: "test description",
-        author: "test author",
-        numberInSeries: "1",
-        wordCount: 123000,
-    },
-        {
-            isbn:"1234567891",
-            title: "test2",
-            description: "test description",
-            author: "test author",
-            numberInSeries: "2",
-            wordCount: 123002,
-        },
-        {
-            isbn:"1234567893",
-            title: "test3",
-            description: "test description",
-            author: "test author",
-            numberInSeries: "3",
-            wordCount: 123003,
-        },
-        {
-            isbn:"1234567894",
-            title: "test4",
-            description: "test description",
-            author: "test author",
-            numberInSeries: "4",
-            wordCount: 123004,
-        }]
-
+    const [books, setBooks] = useState(() => [])
+    const theme = useTheme(getTheme());
 
     useEffect(() => {
         fetchBooks();
     }, []);
 
     async function fetchBooks() {
-        const apiData: any = await API.graphql({ query: listBooks });
+        const apiData: any = await API.graphql({query: listBooks});
         const booksFromAPI = apiData.data.listBooks.items;
         setBooks(booksFromAPI);
     }
 
     async function deleteBook(id: string) {
-        const newBooks = books.filter((book:Book) => book.id !== id);
+        const newBooks = books.filter((book: Book) => book.id !== id);
         setBooks(newBooks);
         await API.graphql({
             query: deleteBookMutation,
-            variables: { input: { id } },
+            variables: {input: {id}},
         });
     }
 
+    // const sort = useSort(
+    //     data,
+    //     {
+    //         onChange: onSortChange,
+    //     },
+    //     {
+    //         sortFns: {
+    //             TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+    //             DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+    //             TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+    //             COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+    //             TASKS: (array) =>
+    //                 array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
+    //         },
+    //     }
+    // );
 
+    // function onSortChange(action, state) {
+    //     console.log(action, state);
+    // }
+
+    const COLUMNS = [
+        {label: 'Title', renderCell: (book: Book) => book.title, resize: true},
+        {label: 'Author', renderCell: (book: Book) => book.author, resize: true},
+        {label: 'Genre', renderCell: (book: Book) => book.genre, resize: true},
+        {label: 'Word Count', renderCell: (book: Book) => book.wordCount, resize: true},
+        {
+            label: 'Delete', renderCell: (book: Book) => {
+                return (
+                    <IconContext.Provider value={{color: "red"}}>
+                        <div onClick={(e) => deleteBook(book.id)}>
+                            <BsFillTrashFill/>
+                        </div>
+                    </IconContext.Provider>
+                )
+            }
+        },
+    ];
 
     return (
         <View>
-
+            <CompactTable columns={COLUMNS} data={{nodes: books}} theme={theme}/>
         </View>
     )
 }

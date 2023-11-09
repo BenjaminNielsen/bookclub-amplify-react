@@ -3,6 +3,7 @@ import {createBook as createBookMutation} from "../graphql/mutations";
 import {Button, Flex, TextField, View} from "@aws-amplify/ui-react";
 import React from "react";
 import BookCreateForm from "../ui-components/BookCreateForm";
+import ISBN from 'isbn3';
 
 export default function AddBook() {
 
@@ -24,6 +25,14 @@ export default function AddBook() {
         event.target.reset();
     }
 
+    function onIsbnChange(e: React.ChangeEvent<HTMLInputElement>) {
+        console.log("Isbn change fired. Event: %o", e)
+        console.log("e.target.value: %o", e.target.value)
+        const newIsbnValue = e.target.value
+        const isbnResult:ISBN|null = ISBN.parse(newIsbnValue);
+        console.log("isbnResult %o", isbnResult)
+    }
+
     return (
     <View as="form" margin="3rem 0" onSubmit={createBook}>
         <Flex direction="row" justifyContent="center">
@@ -33,7 +42,7 @@ export default function AddBook() {
                 label="ISBN"
                 labelHidden
                 variation="quiet"
-                required
+                onChange={onIsbnChange}
             />
             <TextField
                 name="title"
@@ -49,7 +58,6 @@ export default function AddBook() {
                 label="Book Description"
                 labelHidden
                 variation="quiet"
-                required
             />
             <TextField
                 name="author"
@@ -73,7 +81,6 @@ export default function AddBook() {
                 label="Word Count"
                 labelHidden
                 variation="quiet"
-                required
             />
             {/*<BookCreateForm></BookCreateForm>*/}
             <Button type="submit" variation="primary">

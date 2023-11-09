@@ -22,7 +22,7 @@ class App extends React.Component {
                             justifyContent="flex-start">
                             <TabItem title="My Books"></TabItem>
                             <TabItem title="Book Club Ideas">
-                                <Heading level={2}>Current Books</Heading>
+                                <Heading level={2}>Current Book Suggestions</Heading>
                                 <BookClubSuggestions></BookClubSuggestions>
                             </TabItem>
                             <TabItem title="Add a Book">
