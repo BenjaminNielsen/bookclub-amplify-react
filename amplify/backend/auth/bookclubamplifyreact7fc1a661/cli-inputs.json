@@ -57,18 +57,18 @@
     "breakCircularDependency": true,
     "dependsOn": [],
     "hostedUI": true,
-    "hostedUIDomainName": "bens-book-club",
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "hostedUIDomainName": "bookclubamplifyreact6af61585-6af61585",
     "authProvidersUserPool": [
       "Facebook",
       "Google",
       "LoginWithAmazon"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}},{\"ProviderName\":\"LoginWithAmazon\",\"authorize_scopes\":\"profile profile:user_id\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"user_id\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://bens-book-club.com/\"],\"LogoutURLs\":[\"https://bens-book-club.com/\"]}",
-    "authProviders": [],
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    },
-    "permissions": []
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://bens-book-club.com/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://bens-book-club.com/\"]}",
+    "authProviders": []
   }
 }
