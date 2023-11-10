@@ -15,7 +15,6 @@ export const createBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename
@@ -36,7 +35,6 @@ export const updateBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename
@@ -57,7 +55,6 @@ export const deleteBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename

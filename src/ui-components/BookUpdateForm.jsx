@@ -197,7 +197,6 @@ export default function BookUpdateForm(props) {
     numberInSeries: "",
     wordCount: "",
     description: "",
-    dateAdded: "",
   };
   const [isbn, setIsbn] = React.useState(initialValues.isbn);
   const [title, setTitle] = React.useState(initialValues.title);
@@ -210,7 +209,6 @@ export default function BookUpdateForm(props) {
   const [description, setDescription] = React.useState(
     initialValues.description
   );
-  const [dateAdded, setDateAdded] = React.useState(initialValues.dateAdded);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = bookRecord
@@ -224,7 +222,6 @@ export default function BookUpdateForm(props) {
     setNumberInSeries(cleanValues.numberInSeries);
     setWordCount(cleanValues.wordCount);
     setDescription(cleanValues.description);
-    setDateAdded(cleanValues.dateAdded);
     setErrors({});
   };
   const [bookRecord, setBookRecord] = React.useState(bookModelProp);
@@ -253,7 +250,6 @@ export default function BookUpdateForm(props) {
     numberInSeries: [],
     wordCount: [],
     description: [],
-    dateAdded: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -288,7 +284,6 @@ export default function BookUpdateForm(props) {
           numberInSeries: numberInSeries ?? null,
           wordCount: wordCount ?? null,
           description: description ?? null,
-          dateAdded: dateAdded ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -356,7 +351,6 @@ export default function BookUpdateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              dateAdded,
             };
             const result = onChange(modelFields);
             value = result?.isbn ?? value;
@@ -387,7 +381,6 @@ export default function BookUpdateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              dateAdded,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -418,7 +411,6 @@ export default function BookUpdateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              dateAdded,
             };
             const result = onChange(modelFields);
             value = result?.author ?? value;
@@ -445,7 +437,6 @@ export default function BookUpdateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              dateAdded,
             };
             const result = onChange(modelFields);
             values = result?.genre ?? values;
@@ -501,7 +492,6 @@ export default function BookUpdateForm(props) {
               numberInSeries: value,
               wordCount,
               description,
-              dateAdded,
             };
             const result = onChange(modelFields);
             value = result?.numberInSeries ?? value;
@@ -536,7 +526,6 @@ export default function BookUpdateForm(props) {
               numberInSeries,
               wordCount: value,
               description,
-              dateAdded,
             };
             const result = onChange(modelFields);
             value = result?.wordCount ?? value;
@@ -567,7 +556,6 @@ export default function BookUpdateForm(props) {
               numberInSeries,
               wordCount,
               description: value,
-              dateAdded,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -581,37 +569,6 @@ export default function BookUpdateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
-      <TextField
-        label="Date added"
-        isRequired={false}
-        isReadOnly={false}
-        value={dateAdded}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              isbn,
-              title,
-              author,
-              genre,
-              numberInSeries,
-              wordCount,
-              description,
-              dateAdded: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.dateAdded ?? value;
-          }
-          if (errors.dateAdded?.hasError) {
-            runValidationTasks("dateAdded", value);
-          }
-          setDateAdded(value);
-        }}
-        onBlur={() => runValidationTasks("dateAdded", dateAdded)}
-        errorMessage={errors.dateAdded?.errorMessage}
-        hasError={errors.dateAdded?.hasError}
-        {...getOverrideProps(overrides, "dateAdded")}
       ></TextField>
       <Flex
         justifyContent="space-between"

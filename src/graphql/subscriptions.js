@@ -12,7 +12,6 @@ export const onCreateBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename
@@ -30,7 +29,6 @@ export const onUpdateBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename
@@ -48,7 +46,6 @@ export const onDeleteBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename

@@ -12,7 +12,6 @@ export const getBook = /* GraphQL */ `
       numberInSeries
       wordCount
       description
-      dateAdded
       createdAt
       updatedAt
       __typename
@@ -35,7 +34,6 @@ export const listBooks = /* GraphQL */ `
         numberInSeries
         wordCount
         description
-        dateAdded
         createdAt
         updatedAt
         __typename

@@ -29,7 +29,6 @@ export declare type BookUpdateFormInputValues = {
     numberInSeries?: string;
     wordCount?: number;
     description?: string;
-    dateAdded?: string;
 };
 export declare type BookUpdateFormValidationValues = {
     isbn?: ValidationFunction<string>;
@@ -39,7 +38,6 @@ export declare type BookUpdateFormValidationValues = {
     numberInSeries?: ValidationFunction<string>;
     wordCount?: ValidationFunction<number>;
     description?: ValidationFunction<string>;
-    dateAdded?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type BookUpdateFormOverridesProps = {
@@ -51,7 +49,6 @@ export declare type BookUpdateFormOverridesProps = {
     numberInSeries?: PrimitiveOverrideProps<TextFieldProps>;
     wordCount?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
-    dateAdded?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type BookUpdateFormProps = React.PropsWithChildren<{
     overrides?: BookUpdateFormOverridesProps | undefined | null;

@@ -7,7 +7,7 @@ import {
     Heading, TabItem, Tabs,
     View,
 } from "@aws-amplify/ui-react";
-import AddBook from "./components/AddBook";
+import AddBook from "./components/AddBook/AddBook";
 import BookClubSuggestions from "./components/BookClubSuggestions";
 
 class App extends React.Component {
