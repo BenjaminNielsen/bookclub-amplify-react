@@ -1,13 +1,8 @@
 import {TextField} from "@aws-amplify/ui-react";
 import React from "react";
+import {FieldProps} from "./FieldProps";
 
-interface IsbnFieldProps {
-    isbn: string;
-    hasError: boolean;
-    onChange: any;
-}
-export default function IsbnField({isbn, hasError, onChange}: IsbnFieldProps){
-
+export default function IsbnField({value, hasError, onChange}: FieldProps){
     return (
         <TextField
             name="isbn"
@@ -16,7 +11,7 @@ export default function IsbnField({isbn, hasError, onChange}: IsbnFieldProps){
             variation="quiet"
             hasError={hasError}
             errorMessage="invalid ISBN"
-            value={isbn}
+            value={value}
             onChange={onChange}
         />
     )

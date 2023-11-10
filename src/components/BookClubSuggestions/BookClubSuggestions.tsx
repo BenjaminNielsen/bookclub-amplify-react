@@ -1,14 +1,14 @@
-import {Button, View} from "@aws-amplify/ui-react";
+import {View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {API} from "aws-amplify";
-import {listBooks} from "../graphql/queries";
-import {deleteBook as deleteBookMutation} from "../graphql/mutations";
+import {listBooks} from "../../graphql/queries";
+import {deleteBook as deleteBookMutation} from "../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
 import {useTheme} from '@table-library/react-table-library/theme';
 import {getTheme} from '@table-library/react-table-library/baseline';
 
-import {Book} from "../types/Book";
+import {Book} from "../../types/Book";
 import {BsFillTrashFill} from "react-icons/bs";
 import {IconContext} from "react-icons";
 
@@ -59,8 +59,8 @@ export default function BookClubSuggestions() {
 
     const COLUMNS = [
         {label: 'Title', renderCell: (book: Book) => book.title, resize: true},
-        {label: 'Author', renderCell: (book: Book) => book.author, resize: true},
-        {label: 'Genre', renderCell: (book: Book) => book.genre, resize: true},
+        {label: 'Author(s)', renderCell: (book: Book) => book.author?.join(', '), resize: true},
+        {label: 'Genre(s)', renderCell: (book: Book) => book.genre?.join(', '), resize: true},
         {label: 'Word Count', renderCell: (book: Book) => book.wordCount, resize: true},
         {
             label: 'Delete', renderCell: (book: Book) => {

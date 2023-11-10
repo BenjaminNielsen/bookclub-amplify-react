@@ -1,12 +1,8 @@
 import {TextField} from "@aws-amplify/ui-react";
 import React from "react";
+import {FieldProps} from "./FieldProps";
 
-interface TitleFieldProps {
-    title: string;
-    hasError: boolean;
-    onChange: any;
-}
-export default function TitleField({title, hasError, onChange}: TitleFieldProps){
+export default function TitleField({value, hasError, onChange}: FieldProps){
 
     return (
         <TextField
@@ -16,7 +12,7 @@ export default function TitleField({title, hasError, onChange}: TitleFieldProps)
             variation="quiet"
             hasError={hasError}
             errorMessage="invalid"
-            value={title}
+            value={value}
             onChange={onChange}
             required
         />

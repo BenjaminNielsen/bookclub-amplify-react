@@ -8,7 +8,7 @@ import {
     View,
 } from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
-import BookClubSuggestions from "./components/BookClubSuggestions";
+import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
 
 class App extends React.Component {
     render() {
