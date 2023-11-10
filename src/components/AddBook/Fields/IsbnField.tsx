@@ -15,7 +15,7 @@ export default function IsbnField({isbn, hasError, onChange}: IsbnFieldProps){
             label="ISBN"
             variation="quiet"
             hasError={hasError}
-            errorMessage="invalidate isbn"
+            errorMessage="invalid ISBN"
             value={isbn}
             onChange={onChange}
         />

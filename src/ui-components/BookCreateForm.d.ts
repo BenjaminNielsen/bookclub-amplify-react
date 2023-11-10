@@ -24,7 +24,7 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type BookCreateFormInputValues = {
     isbn?: string;
     title?: string;
-    author?: string;
+    author?: string[];
     genre?: string[];
     numberInSeries?: string;
     wordCount?: number;

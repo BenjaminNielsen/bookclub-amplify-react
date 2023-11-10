@@ -190,7 +190,7 @@ export default function BookCreateForm(props) {
   const initialValues = {
     isbn: "",
     title: "",
-    author: "",
+    author: [],
     genre: [],
     numberInSeries: "",
     wordCount: "",
@@ -212,6 +212,7 @@ export default function BookCreateForm(props) {
     setIsbn(initialValues.isbn);
     setTitle(initialValues.title);
     setAuthor(initialValues.author);
+    setCurrentAuthorValue("");
     setGenre(initialValues.genre);
     setCurrentGenreValue("");
     setNumberInSeries(initialValues.numberInSeries);
@@ -219,6 +220,8 @@ export default function BookCreateForm(props) {
     setDescription(initialValues.description);
     setErrors({});
   };
+  const [currentAuthorValue, setCurrentAuthorValue] = React.useState("");
+  const authorRef = React.createRef();
   const [currentGenreValue, setCurrentGenreValue] = React.useState("");
   const genreRef = React.createRef();
   const validations = {
@@ -376,36 +379,57 @@ export default function BookCreateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
-      <TextField
-        label="Author"
-        isRequired={false}
-        isReadOnly={false}
-        value={author}
-        onChange={(e) => {
-          let { value } = e.target;
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
           if (onChange) {
             const modelFields = {
               isbn,
               title,
-              author: value,
+              author: values,
               genre,
               numberInSeries,
               wordCount,
               description,
             };
             const result = onChange(modelFields);
-            value = result?.author ?? value;
+            values = result?.author ?? values;
           }
-          if (errors.author?.hasError) {
-            runValidationTasks("author", value);
-          }
-          setAuthor(value);
+          setAuthor(values);
+          setCurrentAuthorValue("");
         }}
-        onBlur={() => runValidationTasks("author", author)}
-        errorMessage={errors.author?.errorMessage}
-        hasError={errors.author?.hasError}
-        {...getOverrideProps(overrides, "author")}
-      ></TextField>
+        currentFieldValue={currentAuthorValue}
+        label={"Author"}
+        items={author}
+        hasError={errors?.author?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("author", currentAuthorValue)
+        }
+        errorMessage={errors?.author?.errorMessage}
+        setFieldValue={setCurrentAuthorValue}
+        inputFieldRef={authorRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Author"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentAuthorValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.author?.hasError) {
+              runValidationTasks("author", value);
+            }
+            setCurrentAuthorValue(value);
+          }}
+          onBlur={() => runValidationTasks("author", currentAuthorValue)}
+          errorMessage={errors.author?.errorMessage}
+          hasError={errors.author?.hasError}
+          ref={authorRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "author")}
+        ></TextField>
+      </ArrayField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
