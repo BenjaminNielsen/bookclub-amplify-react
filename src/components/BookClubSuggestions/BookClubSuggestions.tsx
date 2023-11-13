@@ -1,4 +1,4 @@
-import {View} from "@aws-amplify/ui-react";
+import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {API} from "aws-amplify";
 import {listBooks} from "../../graphql/queries";
@@ -12,7 +12,7 @@ import {Book} from "../../types/Book";
 import {BsFillTrashFill} from "react-icons/bs";
 import {IconContext} from "react-icons";
 
-export default function BookClubSuggestions() {
+export default function BookClubSuggestions(): React.ReactElement | null {
 
     const [books, setBooks] = useState(() => [])
     const theme = useTheme(getTheme());
@@ -77,6 +77,7 @@ export default function BookClubSuggestions() {
 
     return (
         <View>
+            <Heading level={2}>Current Book Suggestions</Heading>
             <CompactTable columns={COLUMNS} data={{nodes: books}} theme={theme}/>
         </View>
     )

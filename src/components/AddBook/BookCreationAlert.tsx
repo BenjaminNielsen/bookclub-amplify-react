@@ -6,7 +6,7 @@ interface BookCreationAlertProps {
     onDismiss: any
 }
 
-export default function BookCreationAlert({isVisible, onDismiss}: BookCreationAlertProps) {
+export default function BookCreationAlert({isVisible, onDismiss}: BookCreationAlertProps): React.ReactElement | null {
     return <> {isVisible &&
         <Alert
             variation="error"

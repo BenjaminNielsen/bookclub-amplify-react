@@ -16,7 +16,7 @@ import {getBookByIsbn} from "../../services/GoogleBookAPI";
 import BookCreationAlert from "./BookCreationAlert";
 
 
-export default function AddBook() {
+export default function AddBook():React.ReactElement | null {
 
     const [givenIsbn, setIsbn] = useState('')
     const [title, setTitle] = useState('')

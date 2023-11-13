@@ -9,9 +9,10 @@ import {
 } from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
 import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
+import MyBooks from "./components/MyBooks/MyBooks";
 
 class App extends React.Component {
-    render() {
+    render(): React.ReactElement | null {
         return (
             <Authenticator>
                 {({ signOut, user }) => (
@@ -20,10 +21,11 @@ class App extends React.Component {
                         <Button onClick={signOut}>Sign out</Button>
                         <Tabs
                             justifyContent="flex-start">
-                            <TabItem title="My Books"></TabItem>
+                            <TabItem title="My Books">
+                                <MyBooks/>
+                            </TabItem>
                             <TabItem title="Book Club Ideas">
-                                <Heading level={2}>Current Book Suggestions</Heading>
-                                <BookClubSuggestions></BookClubSuggestions>
+                                <BookClubSuggestions/>
                             </TabItem>
                             <TabItem title="Add a Book">
                                 <AddBook/>
