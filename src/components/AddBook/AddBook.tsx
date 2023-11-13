@@ -13,7 +13,7 @@ import GenreField from "./Fields/DetailField/GenreField";
 import {GoogleBookInfo} from "../../types/GoogleBookInfo";
 import WordCountField from "./Fields/DetailField/WordCount";
 import {getBookByIsbn} from "../../services/GoogleBookAPI";
-import BookCreationAlert from "./BookCreationAlert";
+import BookCreationAlert from "./alerts/BookCreationAlert";
 
 
 export default function AddBook():React.ReactElement | null {
