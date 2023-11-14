@@ -9,14 +9,14 @@ import DescriptionField from "./Fields/DetailField/DescriptionField";
 import AuthorField from "./Fields/DetailField/AuthorField";
 import NumberInSeriesField from "./Fields/DetailField/NumberInSeriesField";
 import GenreField from "./Fields/DetailField/GenreField";
-import { GraphQLResult } from '@aws-amplify/api-graphql';
 
 import {GoogleBookInfo} from "../../types/GoogleBookInfo";
 import WordCountField from "./Fields/DetailField/WordCount";
-import {getBookByIsbn, getBookByTitle} from "../../services/GoogleBookAPI";
+import {getBookByIsbn} from "../../services/GoogleBookAPI";
+import BookCreationAlert from "./Alerts/BookCreationAlert";
 
 
-export default function AddBook() {
+export default function AddBook():React.ReactElement | null {
 
     const [givenIsbn, setIsbn] = useState('')
     const [title, setTitle] = useState('')
@@ -27,6 +27,7 @@ export default function AddBook() {
     const [wordCount, setWordCount] = useState(0)
     const [hasIsbnError, setHasIsbnError] = React.useState(false);
     const [detailsVisible, setDetailsVisible] = React.useState(false);
+    const [hasBookCreateError, setHasBookCreateError] = React.useState(false);
 
     async function createBook(event: any) {
         event.preventDefault();
@@ -41,7 +42,7 @@ export default function AddBook() {
             genre:(form.get("genre") as String)?.split(', ')
         };
         try{
-            const createResult:GraphQLResult<any> = await API.graphql({
+            await API.graphql({
                 query: createBookMutation,
                 variables: {input: data},
             });
@@ -49,6 +50,7 @@ export default function AddBook() {
             event.target.reset();
         } catch (e) {
             console.error("Caught error creating book: %o", e)
+            setHasBookCreateError(true)
         }
 
     }
@@ -58,7 +60,9 @@ export default function AddBook() {
         setDescription('')
         setNumberInSeries('Standalone')
         setGenre('')
+        setWordCount(0)
         setDetailsVisible(false)
+        setHasBookCreateError(false)
     }
     function setAllFieldsToDefault(){
         setIsbn('')
@@ -74,18 +78,18 @@ export default function AddBook() {
             return
         populateFieldsFromGoogleBookInfo(bookInfo)
     }
-    async function populateFieldByTitle(title: string) {
-        const bookInfo =  await getBookByTitle(title)
-        if(bookInfo === null)
-            return
-        populateFieldsFromGoogleBookInfo(bookInfo)
-    }
+    // async function populateFieldByTitle(title: string) {
+    //     const bookInfo =  await getBookByTitle(title)
+    //     if(bookInfo === null)
+    //         return
+    //     populateFieldsFromGoogleBookInfo(bookInfo)
+    // }
 
-    function populateFieldsFromGoogleBookInfo(bookInfo: GoogleBookInfo){
+    function populateFieldsFromGoogleBookInfo(bookInfo: GoogleBookInfo):void {
         setTitle(bookInfo.title)
-        setAuthor(bookInfo.authors.join(', '))
+        setAuthor(bookInfo.authors?.join(', '))
         setDescription(bookInfo.description)
-        setGenre(bookInfo.categories.join(', '))
+        setGenre(bookInfo.categories?.join(', '))
         setDetailsVisible(true)
     }
 
@@ -99,7 +103,7 @@ export default function AddBook() {
             return
         }
 
-        populateFieldByIsbn(isbnResult)
+        populateFieldByIsbn(isbnResult);
     }
     function onTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setTitle(e.target.value)
@@ -120,6 +124,10 @@ export default function AddBook() {
         setWordCount(Number.parseInt(e.target.value))
     }
 
+    function onErrorDismiss() {
+        setHasBookCreateError(false)
+    }
+
     return (
         <Card variation="outlined">
             <Grid
@@ -129,6 +137,7 @@ export default function AddBook() {
                 padding="20px"
                 onSubmit={createBook}
             >
+                <BookCreationAlert isVisible={hasBookCreateError} onDismiss={onErrorDismiss}/>
                 <IsbnField value={givenIsbn} hasError={hasIsbnError} onChange={onIsbnChange}/>
                 <TitleField value={title} hasError={false} onChange={onTitleChange}/>
                 <DescriptionField value={description} hasError={false} onChange={onDescriptionChange} isVisible={detailsVisible}/>
