@@ -3,22 +3,21 @@ import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 import {
     Authenticator,
-    Button,
-    Heading, TabItem, Tabs,
+    TabItem, Tabs,
     View,
 } from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
 import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
 import MyBooks from "./components/MyBooks/MyBooks";
+import Header from "./components/Header/Header";
 
 class App extends React.Component {
     render(): React.ReactElement | null {
         return (
             <Authenticator>
-                {({ signOut, user }) => (
+                {({signOut, user}) => (
                     <View className="App">
-                        <Heading level={1}>My Books App {user?.username}</Heading>
-                        <Button onClick={signOut}>Sign out</Button>
+                        <Header user={user} signOut={signOut}></Header>
                         <Tabs
                             justifyContent="flex-start">
                             <TabItem title="My Books">
