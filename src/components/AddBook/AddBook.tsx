@@ -1,4 +1,4 @@
-import {API} from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {createBook as createBookMutation} from "../../graphql/mutations";
 import {Button, Card, Grid} from "@aws-amplify/ui-react";
 import React, {useState} from "react";
@@ -28,21 +28,22 @@ export default function AddBook():React.ReactElement | null {
     const [hasIsbnError, setHasIsbnError] = React.useState(false);
     const [detailsVisible, setDetailsVisible] = React.useState(false);
     const [hasBookCreateError, setHasBookCreateError] = React.useState(false);
+    const client = generateClient()
 
     async function createBook(event: any) {
         event.preventDefault();
         const form = new FormData(event.target);
         const data = {
-            isbn: form.get("isbn"),
-            title: form.get("title"),
-            description: form.get("description"),
+            isbn: form.get("isbn") as string,
+            title: form.get("title") as string,
+            description: form.get("description") as string,
             author: (form.get("author") as String)?.split(', '),
-            numberInSeries: form.get("numberInSeries"),
-            wordCount: form.get("wordCount"),
+            numberInSeries: form.get("numberInSeries") as string,
+            wordCount: parseInt(form.get("wordCount") as string),
             genre:(form.get("genre") as String)?.split(', ')
         };
         try{
-            await API.graphql({
+            await client.graphql({
                 query: createBookMutation,
                 variables: {input: data},
             });

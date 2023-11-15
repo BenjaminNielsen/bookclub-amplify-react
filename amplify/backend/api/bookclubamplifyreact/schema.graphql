@@ -1,4 +1,4 @@
-type UserBooks @model @auth(rules: [{allow: public}, {allow: private}, {allow: owner}]) {
+type UserBooks @model @auth(rules: [{allow: owner}]) {
   id: ID!
   isbn: String
   title: String

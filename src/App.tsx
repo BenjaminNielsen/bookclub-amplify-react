@@ -3,7 +3,7 @@ import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 import {
     Authenticator,
-    TabItem, Tabs,
+    Tabs,
     View,
 } from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
@@ -18,18 +18,12 @@ class App extends React.Component {
                 {({signOut, user}) => (
                     <View className="App">
                         <Header user={user} signOut={signOut}></Header>
-                        <Tabs
-                            justifyContent="flex-start">
-                            <TabItem title="My Books">
-                                <MyBooks/>
-                            </TabItem>
-                            <TabItem title="Book Club Ideas">
-                                <BookClubSuggestions/>
-                            </TabItem>
-                            <TabItem title="Add a Book">
-                                <AddBook/>
-                            </TabItem>
-                        </Tabs>
+                        <Tabs justifyContent="flex-start"
+                            items={[
+                            { label: 'My Books', value: '1', content: <MyBooks/> },
+                            { label: 'Book Club Ideas', value: '2', content: <BookClubSuggestions/> },
+                            { label: 'Add Book', value: '3', content: <AddBook/> },
+                        ]}/>
                     </View>
                 )}
             </Authenticator>

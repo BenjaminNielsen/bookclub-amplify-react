@@ -1,8 +1,8 @@
 import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
-import {API} from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {listBooks} from "../../graphql/queries";
-import {deleteBook as deleteBookMutation} from "../../graphql/mutations";
+import {deleteBook} from "../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
 import {useTheme} from '@table-library/react-table-library/theme';
@@ -14,12 +14,13 @@ import {IconContext} from "react-icons";
 
 export default function BookClubSuggestions(): React.ReactElement | null {
 
+    const API = generateClient();
     const [books, setBooks] = useState(() => [])
     const theme = useTheme(getTheme());
 
     useEffect(() => {
         fetchBooks();
-    }, []);
+    });
 
     async function fetchBooks() {
         const apiData: any = await API.graphql({query: listBooks});
@@ -27,11 +28,11 @@ export default function BookClubSuggestions(): React.ReactElement | null {
         setBooks(booksFromAPI);
     }
 
-    async function deleteBook(id: string) {
+    async function onDeleteBook(id: string) {
         const newBooks = books.filter((book: Book) => book.id !== id);
         setBooks(newBooks);
         await API.graphql({
-            query: deleteBookMutation,
+            query: deleteBook,
             variables: {input: {id}},
         });
     }
@@ -66,7 +67,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
                     <IconContext.Provider value={{color: "red"}}>
-                        <div onClick={(e) => deleteBook(book.id)}>
+                        <div onClick={(e) => onDeleteBook(book.id)}>
                             <BsFillTrashFill/>
                         </div>
                     </IconContext.Provider>
