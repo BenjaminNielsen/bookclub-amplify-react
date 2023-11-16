@@ -1,6 +1,6 @@
-import {Button, Heading, TextField,  View} from "@aws-amplify/ui-react";
+import {Button, Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
-import { generateClient } from 'aws-amplify/api';
+import {generateClient} from 'aws-amplify/api';
 import {createUserBooks, deleteUserBooks} from "../../graphql/mutations";
 import {Book} from "../../types/Book";
 import {IconContext} from "react-icons";
@@ -10,35 +10,29 @@ import {listUserBooks} from "../../graphql/queries";
 import {UserBook} from "../../types/UserBooks";
 import EditUserBookDetails from "../EditUserBookDetails/EditUserBookDetails";
 import {useRowSelect} from "@table-library/react-table-library/select";
-import {useTheme} from "@table-library/react-table-library/theme";
-import {getTheme} from "@table-library/react-table-library/baseline";
-import {Theme} from "@emotion/react";
-
+import {useTheme} from '@table-library/react-table-library/theme';
+import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';
 
 export default function MyBooks(): React.ReactElement | null {
 
     const [books, setBooks] = useState<Array<UserBook>>(() => [])
     const [selectedBook, setSelectedBook] = useState<UserBook | null>(null)
     const API = generateClient({authMode: 'userPool'})
+    const materialTheme = getTheme(DEFAULT_OPTIONS);
+    const theme = useTheme(materialTheme);
+    const data: { nodes: Array<UserBook> } = {nodes:books}
 
-    const select = useRowSelect({nodes: books}, {
+    const select = useRowSelect(data, {
         onChange: onSelectChange,
     });
 
-    const theme: Theme = useTheme([
-        getTheme(),
-        {
-            Table: `
-        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
-      `,
-        },
-    ]);
-
     function onSelectChange(action: any, state: any) {
+        if(state.id === null)
+            return
         console.log(action, state);
         console.log("Finding book with id: %o", state.id)
         const book = books.find((book) => book.id === state.id)
-        if(book === undefined){
+        if (book === undefined) {
             console.error("Error, could not find book from table selection")
             setSelectedBook(null)
             return
@@ -48,7 +42,7 @@ export default function MyBooks(): React.ReactElement | null {
 
     useEffect(() => {
         fetchBooks();
-    }, []);
+    },[]);
 
     async function fetchBooks() {
         const apiData: any = await API.graphql({query: listUserBooks});
@@ -78,9 +72,13 @@ export default function MyBooks(): React.ReactElement | null {
         });
     }
 
-    async function deleteBook(id: string) {
-        const newBooks = books.filter((book: UserBook) => book.id !== id);
-        setBooks(newBooks);
+    async function deleteBook(id: string | null) {
+        if (id == null) {
+            console.error("null passed into onDeleteBook")
+            return
+        }
+        const newBooks: UserBook[] = books.filter((book: UserBook) => book.id !== id);
+        setBooks(newBooks)
         await API.graphql({
             query: deleteUserBooks,
             variables: {input: {id}},
@@ -96,7 +94,7 @@ export default function MyBooks(): React.ReactElement | null {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
                     <IconContext.Provider value={{color: "red"}}>
-                        <div onClick={(e) => deleteBook(book.id)}>
+                        <div onClick={() => deleteBook(book.id ?? null)}>
                             <BsFillTrashFill/>
                         </div>
                     </IconContext.Provider>
@@ -108,11 +106,11 @@ export default function MyBooks(): React.ReactElement | null {
     return (
         <div>
             <View>
-                <Heading level={2}>Current Book Suggestions</Heading>
-                <CompactTable theme={theme} columns={COLUMNS} data={{nodes: books}} select={select}/>
+                <Heading level={2}>My Books</Heading>
+                <CompactTable theme={theme} columns={COLUMNS} data={data} select={select}/>
             </View>
             <Button onClick={onClick}>Add Book</Button>
-            {selectedBook!=null && <EditUserBookDetails userBook={selectedBook}/>}
+            {selectedBook != null && <EditUserBookDetails userBook={selectedBook}/>}
         </div>
     )
 

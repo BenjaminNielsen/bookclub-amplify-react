@@ -1,42 +1,45 @@
 import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
-import { generateClient } from 'aws-amplify/api';
+import {generateClient} from 'aws-amplify/api';
 import {listSuggestionBooks} from "../../graphql/queries";
-import {deleteSuggestionBooks} from "../../graphql/mutations";
+import {createUserBooks, deleteSuggestionBooks} from "../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
 import {useTheme} from '@table-library/react-table-library/theme';
-import {getTheme} from '@table-library/react-table-library/baseline';
+import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';
 
 import {Book} from "../../types/Book";
 import {BsFillTrashFill} from "react-icons/bs";
 import {IconContext} from "react-icons";
 import {BiSolidBookAdd} from "react-icons/bi";
+import {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreateForm";
+import suggestionBookToUserBook from "../../services/bookConverters";
+import {SuggestionBooks} from "../../types/API";
 
 export default function BookClubSuggestions(): React.ReactElement | null {
 
     const API = generateClient({authMode: 'userPool'});
-    const [books, setBooks] = useState(() => [])
-    const theme = useTheme([
-        getTheme(),
-        {
-            Table: `
-        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
-      `,
-        },
-    ]);
-    useEffect(() => {
-        fetchBooks();
-    });
+    const [books, setBooks] = useState<Array<SuggestionBooks>>(() => [])
+    DEFAULT_OPTIONS.highlightOnHover = true;
+    const materialTheme = getTheme(DEFAULT_OPTIONS);
+    const theme = useTheme(materialTheme);
 
-    async function fetchBooks() {
+    useEffect(() => {
+        fetchBooks()
+            .then((booksFromAPI:SuggestionBooks[]) => setBooks(booksFromAPI));
+    },[]);
+
+    async function fetchBooks():Promise<Array<SuggestionBooks>> {
         const apiData: any = await API.graphql({query: listSuggestionBooks});
-        const booksFromAPI = apiData.data.listSuggestionBooks.items;
-        setBooks(booksFromAPI);
+        return apiData.data.listSuggestionBooks.items;
     }
 
-    async function onDeleteBook(id: string) {
-        const newBooks = books.filter((book: Book) => book.id !== id);
+    async function onDeleteBook(id: string | null) {
+        if(id == null){
+            console.error("null passed into onDeleteBook")
+            return
+        }
+        const newBooks = books.filter((book: SuggestionBooks) => book.id !== id);
         setBooks(newBooks);
         await API.graphql({
             query: deleteSuggestionBooks,
@@ -44,29 +47,17 @@ export default function BookClubSuggestions(): React.ReactElement | null {
         });
     }
 
-    // const sort = useSort(
-    //     data,
-    //     {
-    //         onChange: onSortChange,
-    //     },
-    //     {
-    //         sortFns: {
-    //             TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
-    //             DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
-    //             TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
-    //             COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
-    //             TASKS: (array) =>
-    //                 array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
-    //         },
-    //     }
-    // );
-
-    // function onSortChange(action, state) {
-    //     console.log(action, state);
-    // }
-
-    function onAddToMyBooks(book: Book): void {
-        console.log("adding the folling book to MyBooks: %o", book)
+    async function onAddToMyBooks(book: Book): Promise<void> {
+        console.log("adding the following book to MyBooks: %o", book)
+        //turn Book into UserBooks
+        const newUserBook: UserBooksCreateFormInputValues = suggestionBookToUserBook(book)
+        //call add in for user books api
+        await API.graphql({
+            query: createUserBooks,
+            variables: {
+                input: newUserBook
+            },
+        });
     }
 
     const COLUMNS = [
@@ -78,7 +69,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
                     <IconContext.Provider value={{color: "green"}}>
-                        <div onClick={(e) => onAddToMyBooks(book)}>
+                        <div onClick={() => onAddToMyBooks(book)}>
                             <BiSolidBookAdd />
                         </div>
                     </IconContext.Provider>
@@ -89,7 +80,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
                     <IconContext.Provider value={{color: "red"}}>
-                        <div onClick={(e) => onDeleteBook(book.id)}>
+                        <div onClick={() => onDeleteBook(book.id??null)}>
                             <BsFillTrashFill/>
                         </div>
                     </IconContext.Provider>

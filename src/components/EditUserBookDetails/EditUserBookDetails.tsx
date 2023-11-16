@@ -15,6 +15,10 @@ export default function EditUserBookDetails({userBook}: EditUserBookDetailsProps
     const API = generateClient()
 
     async function onSubmit() {
+        if(!userBook.id){
+            console.error("tried to edit details on book with no id")
+            return
+        }
         await API.graphql({
             query: updateUserBooks,
             variables: {
@@ -37,6 +41,10 @@ export default function EditUserBookDetails({userBook}: EditUserBookDetailsProps
     }
 
     async function deleteBook() {
+        if(!userBook.id){
+            console.error("tried to delete  book with no id")
+            return
+        }
         await API.graphql({
             query: deleteUserBooks,
             variables: {input: {id:userBook.id}},
@@ -45,6 +53,7 @@ export default function EditUserBookDetails({userBook}: EditUserBookDetailsProps
 
     return (
         <Card>
+            {/*<UserBooksUpdateForm id={userBook.id}></UserBooksUpdateForm>*/}
             {userBook.title}
         </Card>
     )
