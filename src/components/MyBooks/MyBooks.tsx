@@ -1,4 +1,4 @@
-import {Button, Heading, TextField, View} from "@aws-amplify/ui-react";
+import {Button, Heading, TextField,  View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import { generateClient } from 'aws-amplify/api';
 import {createUserBooks, deleteUserBooks} from "../../graphql/mutations";
@@ -10,6 +10,9 @@ import {listUserBooks} from "../../graphql/queries";
 import {UserBook} from "../../types/UserBooks";
 import EditUserBookDetails from "../EditUserBookDetails/EditUserBookDetails";
 import {useRowSelect} from "@table-library/react-table-library/select";
+import {useTheme} from "@table-library/react-table-library/theme";
+import {getTheme} from "@table-library/react-table-library/baseline";
+import {Theme} from "@emotion/react";
 
 
 export default function MyBooks(): React.ReactElement | null {
@@ -21,6 +24,15 @@ export default function MyBooks(): React.ReactElement | null {
     const select = useRowSelect({nodes: books}, {
         onChange: onSelectChange,
     });
+
+    const theme: Theme = useTheme([
+        getTheme(),
+        {
+            Table: `
+        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+      `,
+        },
+    ]);
 
     function onSelectChange(action: any, state: any) {
         console.log(action, state);
@@ -97,7 +109,7 @@ export default function MyBooks(): React.ReactElement | null {
         <div>
             <View>
                 <Heading level={2}>Current Book Suggestions</Heading>
-                <CompactTable columns={COLUMNS} data={{nodes: books}} select={select}/>
+                <CompactTable theme={theme} columns={COLUMNS} data={{nodes: books}} select={select}/>
             </View>
             <Button onClick={onClick}>Add Book</Button>
             {selectedBook!=null && <EditUserBookDetails userBook={selectedBook}/>}

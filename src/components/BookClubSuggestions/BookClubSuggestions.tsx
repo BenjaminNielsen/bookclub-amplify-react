@@ -11,13 +11,20 @@ import {getTheme} from '@table-library/react-table-library/baseline';
 import {Book} from "../../types/Book";
 import {BsFillTrashFill} from "react-icons/bs";
 import {IconContext} from "react-icons";
+import {BiSolidBookAdd} from "react-icons/bi";
 
 export default function BookClubSuggestions(): React.ReactElement | null {
 
     const API = generateClient({authMode: 'userPool'});
     const [books, setBooks] = useState(() => [])
-    const theme = useTheme(getTheme());
-
+    const theme = useTheme([
+        getTheme(),
+        {
+            Table: `
+        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+      `,
+        },
+    ]);
     useEffect(() => {
         fetchBooks();
     });
@@ -58,11 +65,26 @@ export default function BookClubSuggestions(): React.ReactElement | null {
     //     console.log(action, state);
     // }
 
+    function onAddToMyBooks(book: Book): void {
+        console.log("adding the folling book to MyBooks: %o", book)
+    }
+
     const COLUMNS = [
         {label: 'Title', renderCell: (book: Book) => book.title, resize: true},
         {label: 'Author(s)', renderCell: (book: Book) => book.author?.join(', '), resize: true},
         {label: 'Genre(s)', renderCell: (book: Book) => book.genre?.join(', '), resize: true},
         {label: 'Word Count', renderCell: (book: Book) => book.wordCount, resize: true},
+        {
+            label: 'Add to My Books', renderCell: (book: Book) => {
+                return (
+                    <IconContext.Provider value={{color: "green"}}>
+                        <div onClick={(e) => onAddToMyBooks(book)}>
+                            <BiSolidBookAdd />
+                        </div>
+                    </IconContext.Provider>
+                )
+            }
+        },
         {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
