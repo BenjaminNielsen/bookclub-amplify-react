@@ -1,5 +1,5 @@
 import React from "react";
-import {generateClient} from "aws-amplify/src/api";
+import {generateClient} from "aws-amplify/api";
 import {deleteUserBooks, updateUserBooks} from "../../graphql/mutations";
 import {UserBook} from "../../types/UserBooks";
 

@@ -9,6 +9,7 @@ import {CompactTable} from "@table-library/react-table-library/compact";
 import {listUserBooks} from "../../graphql/queries";
 import {UserBook} from "../../types/UserBooks";
 import EditUserBookDetails from "../EditUserBookDetails/EditUserBookDetails";
+import {useRowSelect} from "@table-library/react-table-library/select";
 
 
 export default function MyBooks(): React.ReactElement | null {
@@ -16,6 +17,22 @@ export default function MyBooks(): React.ReactElement | null {
     const [books, setBooks] = useState<Array<UserBook>>(() => [])
     const [selectedBook, setSelectedBook] = useState<UserBook | null>(null)
     const API = generateClient({authMode: 'userPool'})
+
+    const select = useRowSelect({nodes: books}, {
+        onChange: onSelectChange,
+    });
+
+    function onSelectChange(action: any, state: any) {
+        console.log(action, state);
+        console.log("Finding book with id: %o", state.id)
+        const book = books.find((book) => book.id === state.id)
+        if(book === undefined){
+            console.error("Error, could not find book from table selection")
+            setSelectedBook(null)
+            return
+        }
+        setSelectedBook(book)
+    }
 
     useEffect(() => {
         fetchBooks();
@@ -80,7 +97,7 @@ export default function MyBooks(): React.ReactElement | null {
         <div>
             <View>
                 <Heading level={2}>Current Book Suggestions</Heading>
-                <CompactTable columns={COLUMNS} data={{nodes: books}}/>
+                <CompactTable columns={COLUMNS} data={{nodes: books}} select={select}/>
             </View>
             <Button onClick={onClick}>Add Book</Button>
             {selectedBook!=null && <EditUserBookDetails userBook={selectedBook}/>}
