@@ -1,4 +1,4 @@
-import {Button, Heading, View} from "@aws-amplify/ui-react";
+import {Button, Heading, TextField, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import { generateClient } from 'aws-amplify/api';
 import {createUserBooks, deleteUserBooks} from "../../graphql/mutations";
@@ -7,11 +7,14 @@ import {IconContext} from "react-icons";
 import {BsFillTrashFill} from "react-icons/bs";
 import {CompactTable} from "@table-library/react-table-library/compact";
 import {listUserBooks} from "../../graphql/queries";
+import {UserBook} from "../../types/UserBooks";
+import EditUserBookDetails from "../EditUserBookDetails/EditUserBookDetails";
 
 
 export default function MyBooks(): React.ReactElement | null {
 
-    const [books, setBooks] = useState(() => [])
+    const [books, setBooks] = useState<Array<UserBook>>(() => [])
+    const [selectedBook, setSelectedBook] = useState<UserBook | null>(null)
     const API = generateClient({authMode: 'userPool'})
 
     useEffect(() => {
@@ -47,7 +50,7 @@ export default function MyBooks(): React.ReactElement | null {
     }
 
     async function deleteBook(id: string) {
-        const newBooks = books.filter((book: Book) => book.id !== id);
+        const newBooks = books.filter((book: UserBook) => book.id !== id);
         setBooks(newBooks);
         await API.graphql({
             query: deleteUserBooks,
@@ -56,10 +59,10 @@ export default function MyBooks(): React.ReactElement | null {
     }
 
     const COLUMNS = [
-        {label: 'Title', renderCell: (book: Book) => book.title, resize: true},
-        {label: 'Author(s)', renderCell: (book: Book) => book.author?.join(', '), resize: true},
-        {label: 'Genre(s)', renderCell: (book: Book) => book.genre?.join(', '), resize: true},
-        {label: 'Word Count', renderCell: (book: Book) => book.wordCount, resize: true},
+        {label: 'Title', renderCell: (book: UserBook) => book.title, resize: true},
+        {label: 'Word Count', renderCell: (book: UserBook) => book.wordCount, resize: true},
+        {label: 'Start Date', renderCell: (book: UserBook) => book.dateStarted},
+        {label: 'End Date', renderCell: (book: UserBook) => book.dateFinished},
         {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
@@ -80,6 +83,7 @@ export default function MyBooks(): React.ReactElement | null {
                 <CompactTable columns={COLUMNS} data={{nodes: books}}/>
             </View>
             <Button onClick={onClick}>Add Book</Button>
+            {selectedBook!=null && <EditUserBookDetails userBook={selectedBook}/>}
         </div>
     )
 
