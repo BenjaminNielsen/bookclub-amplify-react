@@ -6,7 +6,7 @@
 
 import * as React from "react";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { Book } from "../types/API.ts";
+import { SuggestionBooks } from "../types/API.ts";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -22,7 +22,7 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type BookUpdateFormInputValues = {
+export declare type SuggestionBooksUpdateFormInputValues = {
     isbn?: string;
     title?: string;
     author?: string[];
@@ -31,7 +31,7 @@ export declare type BookUpdateFormInputValues = {
     wordCount?: number;
     description?: string;
 };
-export declare type BookUpdateFormValidationValues = {
+export declare type SuggestionBooksUpdateFormValidationValues = {
     isbn?: ValidationFunction<string>;
     title?: ValidationFunction<string>;
     author?: ValidationFunction<string>;
@@ -41,8 +41,8 @@ export declare type BookUpdateFormValidationValues = {
     description?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type BookUpdateFormOverridesProps = {
-    BookUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type SuggestionBooksUpdateFormOverridesProps = {
+    SuggestionBooksUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     isbn?: PrimitiveOverrideProps<TextFieldProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
     author?: PrimitiveOverrideProps<TextFieldProps>;
@@ -51,15 +51,15 @@ export declare type BookUpdateFormOverridesProps = {
     wordCount?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type BookUpdateFormProps = React.PropsWithChildren<{
-    overrides?: BookUpdateFormOverridesProps | undefined | null;
+export declare type SuggestionBooksUpdateFormProps = React.PropsWithChildren<{
+    overrides?: SuggestionBooksUpdateFormOverridesProps | undefined | null;
 } & {
     id?: string;
-    book?: Book;
-    onSubmit?: (fields: BookUpdateFormInputValues) => BookUpdateFormInputValues;
-    onSuccess?: (fields: BookUpdateFormInputValues) => void;
-    onError?: (fields: BookUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: BookUpdateFormInputValues) => BookUpdateFormInputValues;
-    onValidate?: BookUpdateFormValidationValues;
+    suggestionBooks?: SuggestionBooks;
+    onSubmit?: (fields: SuggestionBooksUpdateFormInputValues) => SuggestionBooksUpdateFormInputValues;
+    onSuccess?: (fields: SuggestionBooksUpdateFormInputValues) => void;
+    onError?: (fields: SuggestionBooksUpdateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: SuggestionBooksUpdateFormInputValues) => SuggestionBooksUpdateFormInputValues;
+    onValidate?: SuggestionBooksUpdateFormValidationValues;
 } & React.CSSProperties>;
-export default function BookUpdateForm(props: BookUpdateFormProps): React.ReactElement;
+export default function SuggestionBooksUpdateForm(props: SuggestionBooksUpdateFormProps): React.ReactElement;

@@ -124,7 +124,7 @@ export type DeleteUserBooksInput = {
   id: string,
 };
 
-export type CreateBookInput = {
+export type CreateSuggestionBooksInput = {
   id?: string | null,
   isbn?: string | null,
   title?: string | null,
@@ -135,7 +135,7 @@ export type CreateBookInput = {
   description?: string | null,
 };
 
-export type ModelBookConditionInput = {
+export type ModelSuggestionBooksConditionInput = {
   isbn?: ModelStringInput | null,
   title?: ModelStringInput | null,
   author?: ModelStringInput | null,
@@ -143,13 +143,13 @@ export type ModelBookConditionInput = {
   numberInSeries?: ModelStringInput | null,
   wordCount?: ModelIntInput | null,
   description?: ModelStringInput | null,
-  and?: Array< ModelBookConditionInput | null > | null,
-  or?: Array< ModelBookConditionInput | null > | null,
-  not?: ModelBookConditionInput | null,
+  and?: Array< ModelSuggestionBooksConditionInput | null > | null,
+  or?: Array< ModelSuggestionBooksConditionInput | null > | null,
+  not?: ModelSuggestionBooksConditionInput | null,
 };
 
-export type Book = {
-  __typename: "Book",
+export type SuggestionBooks = {
+  __typename: "SuggestionBooks",
   id: string,
   isbn?: string | null,
   title?: string | null,
@@ -162,7 +162,7 @@ export type Book = {
   updatedAt: string,
 };
 
-export type UpdateBookInput = {
+export type UpdateSuggestionBooksInput = {
   id: string,
   isbn?: string | null,
   title?: string | null,
@@ -173,7 +173,7 @@ export type UpdateBookInput = {
   description?: string | null,
 };
 
-export type DeleteBookInput = {
+export type DeleteSuggestionBooksInput = {
   id: string,
 };
 
@@ -217,7 +217,7 @@ export type ModelUserBooksConnection = {
   nextToken?: string | null,
 };
 
-export type ModelBookFilterInput = {
+export type ModelSuggestionBooksFilterInput = {
   id?: ModelIDInput | null,
   isbn?: ModelStringInput | null,
   title?: ModelStringInput | null,
@@ -226,14 +226,14 @@ export type ModelBookFilterInput = {
   numberInSeries?: ModelStringInput | null,
   wordCount?: ModelIntInput | null,
   description?: ModelStringInput | null,
-  and?: Array< ModelBookFilterInput | null > | null,
-  or?: Array< ModelBookFilterInput | null > | null,
-  not?: ModelBookFilterInput | null,
+  and?: Array< ModelSuggestionBooksFilterInput | null > | null,
+  or?: Array< ModelSuggestionBooksFilterInput | null > | null,
+  not?: ModelSuggestionBooksFilterInput | null,
 };
 
-export type ModelBookConnection = {
-  __typename: "ModelBookConnection",
-  items:  Array<Book | null >,
+export type ModelSuggestionBooksConnection = {
+  __typename: "ModelSuggestionBooksConnection",
+  items:  Array<SuggestionBooks | null >,
   nextToken?: string | null,
 };
 
@@ -296,7 +296,7 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
-export type ModelSubscriptionBookFilterInput = {
+export type ModelSubscriptionSuggestionBooksFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   isbn?: ModelSubscriptionStringInput | null,
   title?: ModelSubscriptionStringInput | null,
@@ -305,8 +305,8 @@ export type ModelSubscriptionBookFilterInput = {
   numberInSeries?: ModelSubscriptionStringInput | null,
   wordCount?: ModelSubscriptionIntInput | null,
   description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionBookFilterInput | null > | null,
-  or?: Array< ModelSubscriptionBookFilterInput | null > | null,
+  and?: Array< ModelSubscriptionSuggestionBooksFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSuggestionBooksFilterInput | null > | null,
 };
 
 export type CreateUserBooksMutationVariables = {
@@ -387,14 +387,14 @@ export type DeleteUserBooksMutation = {
   } | null,
 };
 
-export type CreateBookMutationVariables = {
-  input: CreateBookInput,
-  condition?: ModelBookConditionInput | null,
+export type CreateSuggestionBooksMutationVariables = {
+  input: CreateSuggestionBooksInput,
+  condition?: ModelSuggestionBooksConditionInput | null,
 };
 
-export type CreateBookMutation = {
-  createBook?:  {
-    __typename: "Book",
+export type CreateSuggestionBooksMutation = {
+  createSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,
@@ -408,14 +408,14 @@ export type CreateBookMutation = {
   } | null,
 };
 
-export type UpdateBookMutationVariables = {
-  input: UpdateBookInput,
-  condition?: ModelBookConditionInput | null,
+export type UpdateSuggestionBooksMutationVariables = {
+  input: UpdateSuggestionBooksInput,
+  condition?: ModelSuggestionBooksConditionInput | null,
 };
 
-export type UpdateBookMutation = {
-  updateBook?:  {
-    __typename: "Book",
+export type UpdateSuggestionBooksMutation = {
+  updateSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,
@@ -429,14 +429,14 @@ export type UpdateBookMutation = {
   } | null,
 };
 
-export type DeleteBookMutationVariables = {
-  input: DeleteBookInput,
-  condition?: ModelBookConditionInput | null,
+export type DeleteSuggestionBooksMutationVariables = {
+  input: DeleteSuggestionBooksInput,
+  condition?: ModelSuggestionBooksConditionInput | null,
 };
 
-export type DeleteBookMutation = {
-  deleteBook?:  {
-    __typename: "Book",
+export type DeleteSuggestionBooksMutation = {
+  deleteSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,
@@ -506,13 +506,13 @@ export type ListUserBooksQuery = {
   } | null,
 };
 
-export type GetBookQueryVariables = {
+export type GetSuggestionBooksQueryVariables = {
   id: string,
 };
 
-export type GetBookQuery = {
-  getBook?:  {
-    __typename: "Book",
+export type GetSuggestionBooksQuery = {
+  getSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,
@@ -526,17 +526,17 @@ export type GetBookQuery = {
   } | null,
 };
 
-export type ListBooksQueryVariables = {
-  filter?: ModelBookFilterInput | null,
+export type ListSuggestionBooksQueryVariables = {
+  filter?: ModelSuggestionBooksFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListBooksQuery = {
-  listBooks?:  {
-    __typename: "ModelBookConnection",
+export type ListSuggestionBooksQuery = {
+  listSuggestionBooks?:  {
+    __typename: "ModelSuggestionBooksConnection",
     items:  Array< {
-      __typename: "Book",
+      __typename: "SuggestionBooks",
       id: string,
       isbn?: string | null,
       title?: string | null,
@@ -630,13 +630,13 @@ export type OnDeleteUserBooksSubscription = {
   } | null,
 };
 
-export type OnCreateBookSubscriptionVariables = {
-  filter?: ModelSubscriptionBookFilterInput | null,
+export type OnCreateSuggestionBooksSubscriptionVariables = {
+  filter?: ModelSubscriptionSuggestionBooksFilterInput | null,
 };
 
-export type OnCreateBookSubscription = {
-  onCreateBook?:  {
-    __typename: "Book",
+export type OnCreateSuggestionBooksSubscription = {
+  onCreateSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,
@@ -650,13 +650,13 @@ export type OnCreateBookSubscription = {
   } | null,
 };
 
-export type OnUpdateBookSubscriptionVariables = {
-  filter?: ModelSubscriptionBookFilterInput | null,
+export type OnUpdateSuggestionBooksSubscriptionVariables = {
+  filter?: ModelSubscriptionSuggestionBooksFilterInput | null,
 };
 
-export type OnUpdateBookSubscription = {
-  onUpdateBook?:  {
-    __typename: "Book",
+export type OnUpdateSuggestionBooksSubscription = {
+  onUpdateSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,
@@ -670,13 +670,13 @@ export type OnUpdateBookSubscription = {
   } | null,
 };
 
-export type OnDeleteBookSubscriptionVariables = {
-  filter?: ModelSubscriptionBookFilterInput | null,
+export type OnDeleteSuggestionBooksSubscriptionVariables = {
+  filter?: ModelSubscriptionSuggestionBooksFilterInput | null,
 };
 
-export type OnDeleteBookSubscription = {
-  onDeleteBook?:  {
-    __typename: "Book",
+export type OnDeleteSuggestionBooksSubscription = {
+  onDeleteSuggestionBooks?:  {
+    __typename: "SuggestionBooks",
     id: string,
     isbn?: string | null,
     title?: string | null,

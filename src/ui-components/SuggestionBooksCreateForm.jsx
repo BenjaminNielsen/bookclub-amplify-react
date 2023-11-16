@@ -19,9 +19,9 @@ import {
   useTheme,
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { API } from "aws-amplify";
-import { getBook } from "../graphql/queries";
-import { updateBook } from "../graphql/mutations";
+import { generateClient } from "aws-amplify/api";
+import { createSuggestionBooks } from "../graphql/mutations";
+const client = generateClient();
 function ArrayField({
   items = [],
   onChange,
@@ -177,10 +177,9 @@ function ArrayField({
     </React.Fragment>
   );
 }
-export default function BookUpdateForm(props) {
+export default function SuggestionBooksCreateForm(props) {
   const {
-    id: idProp,
-    book: bookModelProp,
+    clearOnSuccess = true,
     onSuccess,
     onError,
     onSubmit,
@@ -211,36 +210,17 @@ export default function BookUpdateForm(props) {
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = bookRecord
-      ? { ...initialValues, ...bookRecord }
-      : initialValues;
-    setIsbn(cleanValues.isbn);
-    setTitle(cleanValues.title);
-    setAuthor(cleanValues.author ?? []);
+    setIsbn(initialValues.isbn);
+    setTitle(initialValues.title);
+    setAuthor(initialValues.author);
     setCurrentAuthorValue("");
-    setGenre(cleanValues.genre ?? []);
+    setGenre(initialValues.genre);
     setCurrentGenreValue("");
-    setNumberInSeries(cleanValues.numberInSeries);
-    setWordCount(cleanValues.wordCount);
-    setDescription(cleanValues.description);
+    setNumberInSeries(initialValues.numberInSeries);
+    setWordCount(initialValues.wordCount);
+    setDescription(initialValues.description);
     setErrors({});
   };
-  const [bookRecord, setBookRecord] = React.useState(bookModelProp);
-  React.useEffect(() => {
-    const queryData = async () => {
-      const record = idProp
-        ? (
-            await API.graphql({
-              query: getBook.replaceAll("__typename", ""),
-              variables: { id: idProp },
-            })
-          )?.data?.getBook
-        : bookModelProp;
-      setBookRecord(record);
-    };
-    queryData();
-  }, [idProp, bookModelProp]);
-  React.useEffect(resetStateValues, [bookRecord]);
   const [currentAuthorValue, setCurrentAuthorValue] = React.useState("");
   const authorRef = React.createRef();
   const [currentGenreValue, setCurrentGenreValue] = React.useState("");
@@ -280,13 +260,13 @@ export default function BookUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          isbn: isbn ?? null,
-          title: title ?? null,
-          author: author ?? null,
-          genre: genre ?? null,
-          numberInSeries: numberInSeries ?? null,
-          wordCount: wordCount ?? null,
-          description: description ?? null,
+          isbn,
+          title,
+          author,
+          genre,
+          numberInSeries,
+          wordCount,
+          description,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -316,17 +296,19 @@ export default function BookUpdateForm(props) {
               modelFields[key] = null;
             }
           });
-          await API.graphql({
-            query: updateBook.replaceAll("__typename", ""),
+          await client.graphql({
+            query: createSuggestionBooks.replaceAll("__typename", ""),
             variables: {
               input: {
-                id: bookRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
+          }
+          if (clearOnSuccess) {
+            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -335,7 +317,7 @@ export default function BookUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "BookUpdateForm")}
+      {...getOverrideProps(overrides, "SuggestionBooksCreateForm")}
       {...rest}
     >
       <TextField
@@ -599,14 +581,13 @@ export default function BookUpdateForm(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Reset"
+          children="Clear"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || bookModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -616,10 +597,7 @@ export default function BookUpdateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || bookModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
+            isDisabled={Object.values(errors).some((e) => e?.hasError)}
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

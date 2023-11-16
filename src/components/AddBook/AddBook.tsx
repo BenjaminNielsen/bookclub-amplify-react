@@ -1,5 +1,5 @@
 import { generateClient } from 'aws-amplify/api';
-import {createBook as createBookMutation} from "../../graphql/mutations";
+import {createSuggestionBooks} from "../../graphql/mutations";
 import {Button, Card, Grid} from "@aws-amplify/ui-react";
 import React, {useState} from "react";
 import ISBN from 'isbn3';
@@ -44,7 +44,7 @@ export default function AddBook():React.ReactElement | null {
         };
         try{
             await client.graphql({
-                query: createBookMutation,
+                query: createSuggestionBooks,
                 variables: {input: data},
             });
             setAllFieldsToDefault()

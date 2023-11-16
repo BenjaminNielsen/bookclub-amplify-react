@@ -1,8 +1,8 @@
 import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import { generateClient } from 'aws-amplify/api';
-import {listBooks} from "../../graphql/queries";
-import {deleteBook} from "../../graphql/mutations";
+import {listSuggestionBooks} from "../../graphql/queries";
+import {deleteSuggestionBooks} from "../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
 import {useTheme} from '@table-library/react-table-library/theme';
@@ -14,7 +14,7 @@ import {IconContext} from "react-icons";
 
 export default function BookClubSuggestions(): React.ReactElement | null {
 
-    const API = generateClient();
+    const API = generateClient({authMode: 'userPool'});
     const [books, setBooks] = useState(() => [])
     const theme = useTheme(getTheme());
 
@@ -23,8 +23,8 @@ export default function BookClubSuggestions(): React.ReactElement | null {
     });
 
     async function fetchBooks() {
-        const apiData: any = await API.graphql({query: listBooks});
-        const booksFromAPI = apiData.data.listBooks.items;
+        const apiData: any = await API.graphql({query: listSuggestionBooks});
+        const booksFromAPI = apiData.data.listSuggestionBooks.items;
         setBooks(booksFromAPI);
     }
 
@@ -32,7 +32,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
         const newBooks = books.filter((book: Book) => book.id !== id);
         setBooks(newBooks);
         await API.graphql({
-            query: deleteBook,
+            query: deleteSuggestionBooks,
             variables: {input: {id}},
         });
     }

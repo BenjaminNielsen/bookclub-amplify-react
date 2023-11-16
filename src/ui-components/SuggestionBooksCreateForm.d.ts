@@ -21,7 +21,7 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type BookCreateFormInputValues = {
+export declare type SuggestionBooksCreateFormInputValues = {
     isbn?: string;
     title?: string;
     author?: string[];
@@ -30,7 +30,7 @@ export declare type BookCreateFormInputValues = {
     wordCount?: number;
     description?: string;
 };
-export declare type BookCreateFormValidationValues = {
+export declare type SuggestionBooksCreateFormValidationValues = {
     isbn?: ValidationFunction<string>;
     title?: ValidationFunction<string>;
     author?: ValidationFunction<string>;
@@ -40,8 +40,8 @@ export declare type BookCreateFormValidationValues = {
     description?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type BookCreateFormOverridesProps = {
-    BookCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type SuggestionBooksCreateFormOverridesProps = {
+    SuggestionBooksCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     isbn?: PrimitiveOverrideProps<TextFieldProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
     author?: PrimitiveOverrideProps<TextFieldProps>;
@@ -50,14 +50,14 @@ export declare type BookCreateFormOverridesProps = {
     wordCount?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type BookCreateFormProps = React.PropsWithChildren<{
-    overrides?: BookCreateFormOverridesProps | undefined | null;
+export declare type SuggestionBooksCreateFormProps = React.PropsWithChildren<{
+    overrides?: SuggestionBooksCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: BookCreateFormInputValues) => BookCreateFormInputValues;
-    onSuccess?: (fields: BookCreateFormInputValues) => void;
-    onError?: (fields: BookCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: BookCreateFormInputValues) => BookCreateFormInputValues;
-    onValidate?: BookCreateFormValidationValues;
+    onSubmit?: (fields: SuggestionBooksCreateFormInputValues) => SuggestionBooksCreateFormInputValues;
+    onSuccess?: (fields: SuggestionBooksCreateFormInputValues) => void;
+    onError?: (fields: SuggestionBooksCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: SuggestionBooksCreateFormInputValues) => SuggestionBooksCreateFormInputValues;
+    onValidate?: SuggestionBooksCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function BookCreateForm(props: BookCreateFormProps): React.ReactElement;
+export default function SuggestionBooksCreateForm(props: SuggestionBooksCreateFormProps): React.ReactElement;

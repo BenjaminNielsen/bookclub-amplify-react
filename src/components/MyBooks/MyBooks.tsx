@@ -1,33 +1,29 @@
-import {Button, Card, Heading, View} from "@aws-amplify/ui-react";
+import {Button, Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
-import UserBooksCreateForm, {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreateForm";
 import { generateClient } from 'aws-amplify/api';
 import {createUserBooks, deleteUserBooks} from "../../graphql/mutations";
-import {listUserBooks} from "../../graphql/queries";
 import {Book} from "../../types/Book";
 import {IconContext} from "react-icons";
 import {BsFillTrashFill} from "react-icons/bs";
 import {CompactTable} from "@table-library/react-table-library/compact";
-import {GRAPHQL_AUTH_MODE} from "@aws-amplify/auth/src/types/Auth";
-
+import {listUserBooks} from "../../graphql/queries";
 
 
 export default function MyBooks(): React.ReactElement | null {
 
     const [books, setBooks] = useState(() => [])
-    const API = generateClient()
+    const API = generateClient({authMode: 'userPool'})
 
-    // useEffect(() => {
-    //     fetchBooks();
-    // }, []);
+    useEffect(() => {
+        fetchBooks();
+    }, []);
 
-    // async function fetchBooks() {
-    //
-    //     const apiData: any = await API.graphql({query: listUserBooks});
-    //     console.log(apiData)
-    //     const booksFromAPI = apiData.data.listUserBooks.items;
-    //     setBooks(booksFromAPI);
-    // }
+    async function fetchBooks() {
+        const apiData: any = await API.graphql({query: listUserBooks});
+        console.log(apiData)
+        const booksFromAPI = apiData.data.listUserBooks.items;
+        setBooks(booksFromAPI);
+    }
 
     async function onClick() {
         const newUserBooks = await API.graphql({

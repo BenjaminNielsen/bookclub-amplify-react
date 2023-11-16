@@ -89,8 +89,10 @@ export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
   APITypes.OnDeleteUserBooksSubscriptionVariables,
   APITypes.OnDeleteUserBooksSubscription
 >;
-export const onCreateBook = /* GraphQL */ `subscription OnCreateBook($filter: ModelSubscriptionBookFilterInput) {
-  onCreateBook(filter: $filter) {
+export const onCreateSuggestionBooks = /* GraphQL */ `subscription OnCreateSuggestionBooks(
+  $filter: ModelSubscriptionSuggestionBooksFilterInput
+) {
+  onCreateSuggestionBooks(filter: $filter) {
     id
     isbn
     title
@@ -105,11 +107,13 @@ export const onCreateBook = /* GraphQL */ `subscription OnCreateBook($filter: Mo
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateBookSubscriptionVariables,
-  APITypes.OnCreateBookSubscription
+  APITypes.OnCreateSuggestionBooksSubscriptionVariables,
+  APITypes.OnCreateSuggestionBooksSubscription
 >;
-export const onUpdateBook = /* GraphQL */ `subscription OnUpdateBook($filter: ModelSubscriptionBookFilterInput) {
-  onUpdateBook(filter: $filter) {
+export const onUpdateSuggestionBooks = /* GraphQL */ `subscription OnUpdateSuggestionBooks(
+  $filter: ModelSubscriptionSuggestionBooksFilterInput
+) {
+  onUpdateSuggestionBooks(filter: $filter) {
     id
     isbn
     title
@@ -124,11 +128,13 @@ export const onUpdateBook = /* GraphQL */ `subscription OnUpdateBook($filter: Mo
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateBookSubscriptionVariables,
-  APITypes.OnUpdateBookSubscription
+  APITypes.OnUpdateSuggestionBooksSubscriptionVariables,
+  APITypes.OnUpdateSuggestionBooksSubscription
 >;
-export const onDeleteBook = /* GraphQL */ `subscription OnDeleteBook($filter: ModelSubscriptionBookFilterInput) {
-  onDeleteBook(filter: $filter) {
+export const onDeleteSuggestionBooks = /* GraphQL */ `subscription OnDeleteSuggestionBooks(
+  $filter: ModelSubscriptionSuggestionBooksFilterInput
+) {
+  onDeleteSuggestionBooks(filter: $filter) {
     id
     isbn
     title
@@ -143,6 +149,6 @@ export const onDeleteBook = /* GraphQL */ `subscription OnDeleteBook($filter: Mo
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteBookSubscriptionVariables,
-  APITypes.OnDeleteBookSubscription
+  APITypes.OnDeleteSuggestionBooksSubscriptionVariables,
+  APITypes.OnDeleteSuggestionBooksSubscription
 >;

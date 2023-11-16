@@ -1,6 +1,6 @@
 projects:
   bookclubamplifyreact:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/bookclubamplifyreact/build/schema.graphql
     includes:
       - src/graphql/**/*.ts
     excludes:
@@ -11,6 +11,8 @@ projects:
         codeGenTarget: typescript
         generatedFileName: src/types/API.ts
         docsFilePath: src/graphql
+        region: us-east-1
+        apiId: null
         maxDepth: 2
 extensions:
   amplify:

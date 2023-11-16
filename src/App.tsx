@@ -18,12 +18,14 @@ class App extends React.Component {
                 {({signOut, user}) => (
                     <View className="App">
                         <Header user={user} signOut={signOut}></Header>
-                        <Tabs justifyContent="flex-start"
+                        <Tabs justifyContent="center" defaultValue={'1'}
                             items={[
                             { label: 'My Books', value: '1', content: <MyBooks/> },
                             { label: 'Book Club Ideas', value: '2', content: <BookClubSuggestions/> },
                             { label: 'Add Book', value: '3', content: <AddBook/> },
-                        ]}/>
+                        ]}
+                              isLazy={true}
+                        />
                     </View>
                 )}
             </Authenticator>

@@ -89,11 +89,11 @@ export const deleteUserBooks = /* GraphQL */ `mutation DeleteUserBooks(
   APITypes.DeleteUserBooksMutationVariables,
   APITypes.DeleteUserBooksMutation
 >;
-export const createBook = /* GraphQL */ `mutation CreateBook(
-  $input: CreateBookInput!
-  $condition: ModelBookConditionInput
+export const createSuggestionBooks = /* GraphQL */ `mutation CreateSuggestionBooks(
+  $input: CreateSuggestionBooksInput!
+  $condition: ModelSuggestionBooksConditionInput
 ) {
-  createBook(input: $input, condition: $condition) {
+  createSuggestionBooks(input: $input, condition: $condition) {
     id
     isbn
     title
@@ -108,14 +108,14 @@ export const createBook = /* GraphQL */ `mutation CreateBook(
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateBookMutationVariables,
-  APITypes.CreateBookMutation
+  APITypes.CreateSuggestionBooksMutationVariables,
+  APITypes.CreateSuggestionBooksMutation
 >;
-export const updateBook = /* GraphQL */ `mutation UpdateBook(
-  $input: UpdateBookInput!
-  $condition: ModelBookConditionInput
+export const updateSuggestionBooks = /* GraphQL */ `mutation UpdateSuggestionBooks(
+  $input: UpdateSuggestionBooksInput!
+  $condition: ModelSuggestionBooksConditionInput
 ) {
-  updateBook(input: $input, condition: $condition) {
+  updateSuggestionBooks(input: $input, condition: $condition) {
     id
     isbn
     title
@@ -130,14 +130,14 @@ export const updateBook = /* GraphQL */ `mutation UpdateBook(
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateBookMutationVariables,
-  APITypes.UpdateBookMutation
+  APITypes.UpdateSuggestionBooksMutationVariables,
+  APITypes.UpdateSuggestionBooksMutation
 >;
-export const deleteBook = /* GraphQL */ `mutation DeleteBook(
-  $input: DeleteBookInput!
-  $condition: ModelBookConditionInput
+export const deleteSuggestionBooks = /* GraphQL */ `mutation DeleteSuggestionBooks(
+  $input: DeleteSuggestionBooksInput!
+  $condition: ModelSuggestionBooksConditionInput
 ) {
-  deleteBook(input: $input, condition: $condition) {
+  deleteSuggestionBooks(input: $input, condition: $condition) {
     id
     isbn
     title
@@ -152,6 +152,6 @@ export const deleteBook = /* GraphQL */ `mutation DeleteBook(
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteBookMutationVariables,
-  APITypes.DeleteBookMutation
+  APITypes.DeleteSuggestionBooksMutationVariables,
+  APITypes.DeleteSuggestionBooksMutation
 >;

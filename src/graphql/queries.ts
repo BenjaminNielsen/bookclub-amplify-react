@@ -64,8 +64,8 @@ export const listUserBooks = /* GraphQL */ `query ListUserBooks(
   APITypes.ListUserBooksQueryVariables,
   APITypes.ListUserBooksQuery
 >;
-export const getBook = /* GraphQL */ `query GetBook($id: ID!) {
-  getBook(id: $id) {
+export const getSuggestionBooks = /* GraphQL */ `query GetSuggestionBooks($id: ID!) {
+  getSuggestionBooks(id: $id) {
     id
     isbn
     title
@@ -79,13 +79,16 @@ export const getBook = /* GraphQL */ `query GetBook($id: ID!) {
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetBookQueryVariables, APITypes.GetBookQuery>;
-export const listBooks = /* GraphQL */ `query ListBooks(
-  $filter: ModelBookFilterInput
+` as GeneratedQuery<
+  APITypes.GetSuggestionBooksQueryVariables,
+  APITypes.GetSuggestionBooksQuery
+>;
+export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
+  $filter: ModelSuggestionBooksFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listBooks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listSuggestionBooks(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       isbn
@@ -103,4 +106,7 @@ export const listBooks = /* GraphQL */ `query ListBooks(
     __typename
   }
 }
-` as GeneratedQuery<APITypes.ListBooksQueryVariables, APITypes.ListBooksQuery>;
+` as GeneratedQuery<
+  APITypes.ListSuggestionBooksQueryVariables,
+  APITypes.ListSuggestionBooksQuery
+>;
