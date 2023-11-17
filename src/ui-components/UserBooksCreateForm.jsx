@@ -196,7 +196,6 @@ export default function UserBooksCreateForm(props) {
     numberInSeries: "",
     wordCount: "",
     description: "",
-    rating: "",
     progress: "",
     dateStarted: "",
     dateFinished: "",
@@ -212,7 +211,6 @@ export default function UserBooksCreateForm(props) {
   const [description, setDescription] = React.useState(
     initialValues.description
   );
-  const [rating, setRating] = React.useState(initialValues.rating);
   const [progress, setProgress] = React.useState(initialValues.progress);
   const [dateStarted, setDateStarted] = React.useState(
     initialValues.dateStarted
@@ -231,7 +229,6 @@ export default function UserBooksCreateForm(props) {
     setNumberInSeries(initialValues.numberInSeries);
     setWordCount(initialValues.wordCount);
     setDescription(initialValues.description);
-    setRating(initialValues.rating);
     setProgress(initialValues.progress);
     setDateStarted(initialValues.dateStarted);
     setDateFinished(initialValues.dateFinished);
@@ -249,7 +246,6 @@ export default function UserBooksCreateForm(props) {
     numberInSeries: [],
     wordCount: [],
     description: [],
-    rating: [],
     progress: [],
     dateStarted: [],
     dateFinished: [],
@@ -287,7 +283,6 @@ export default function UserBooksCreateForm(props) {
           numberInSeries,
           wordCount,
           description,
-          rating,
           progress,
           dateStarted,
           dateFinished,
@@ -360,7 +355,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -394,7 +388,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -424,7 +417,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -479,7 +471,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -538,7 +529,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries: value,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -576,7 +566,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount: value,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -610,7 +599,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description: value,
-              rating,
               progress,
               dateStarted,
               dateFinished,
@@ -627,44 +615,6 @@ export default function UserBooksCreateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
-      <TextField
-        label="Rating"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={rating}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              isbn,
-              title,
-              author,
-              genre,
-              numberInSeries,
-              wordCount,
-              description,
-              rating: value,
-              progress,
-              dateStarted,
-              dateFinished,
-            };
-            const result = onChange(modelFields);
-            value = result?.rating ?? value;
-          }
-          if (errors.rating?.hasError) {
-            runValidationTasks("rating", value);
-          }
-          setRating(value);
-        }}
-        onBlur={() => runValidationTasks("rating", rating)}
-        errorMessage={errors.rating?.errorMessage}
-        hasError={errors.rating?.hasError}
-        {...getOverrideProps(overrides, "rating")}
       ></TextField>
       <TextField
         label="Progress"
@@ -686,7 +636,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress: value,
               dateStarted,
               dateFinished,
@@ -721,7 +670,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted: value,
               dateFinished,
@@ -756,7 +704,6 @@ export default function UserBooksCreateForm(props) {
               numberInSeries,
               wordCount,
               description,
-              rating,
               progress,
               dateStarted,
               dateFinished: value,

@@ -31,7 +31,6 @@ export default function EditUserBookDetails({userBook}: EditUserBookDetailsProps
                     "numberInSeries": "Lorem ipsum dolor sit amet",
                     "wordCount": 1020,
                     "description": "Lorem ipsum dolor sit amet",
-                    "rating": 1020,
                     "progress": 1020,
                     "dateStarted": "1970-01-01Z",
                     "dateFinished": "1970-01-01Z"

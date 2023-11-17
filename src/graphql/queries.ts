@@ -8,6 +8,40 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
+  getBookRating(id: $id) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetBookRatingQueryVariables,
+  APITypes.GetBookRatingQuery
+>;
+export const listBookRatings = /* GraphQL */ `query ListBookRatings(
+  $filter: ModelBookRatingFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBookRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      overallEnjoyment
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListBookRatingsQueryVariables,
+  APITypes.ListBookRatingsQuery
+>;
 export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
   getUserBooks(id: $id) {
     id
@@ -18,12 +52,19 @@ export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
     numberInSeries
     wordCount
     description
-    rating
     progress
+    userRating {
+      overallEnjoyment
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
     dateStarted
     dateFinished
     createdAt
     updatedAt
+    userBooksUserRatingId
     owner
     __typename
   }
@@ -47,12 +88,12 @@ export const listUserBooks = /* GraphQL */ `query ListUserBooks(
       numberInSeries
       wordCount
       description
-      rating
       progress
       dateStarted
       dateFinished
       createdAt
       updatedAt
+      userBooksUserRatingId
       owner
       __typename
     }
@@ -72,6 +113,7 @@ export const getSuggestionBooks = /* GraphQL */ `query GetSuggestionBooks($id: I
     author
     genre
     numberInSeries
+    rating
     wordCount
     description
     createdAt
@@ -96,6 +138,7 @@ export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
       author
       genre
       numberInSeries
+      rating
       wordCount
       description
       createdAt

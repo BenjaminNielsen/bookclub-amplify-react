@@ -27,6 +27,7 @@ export declare type SuggestionBooksCreateFormInputValues = {
     author?: string[];
     genre?: string[];
     numberInSeries?: string;
+    rating?: number;
     wordCount?: number;
     description?: string;
 };
@@ -36,6 +37,7 @@ export declare type SuggestionBooksCreateFormValidationValues = {
     author?: ValidationFunction<string>;
     genre?: ValidationFunction<string>;
     numberInSeries?: ValidationFunction<string>;
+    rating?: ValidationFunction<number>;
     wordCount?: ValidationFunction<number>;
     description?: ValidationFunction<string>;
 };
@@ -47,6 +49,7 @@ export declare type SuggestionBooksCreateFormOverridesProps = {
     author?: PrimitiveOverrideProps<TextFieldProps>;
     genre?: PrimitiveOverrideProps<TextFieldProps>;
     numberInSeries?: PrimitiveOverrideProps<TextFieldProps>;
+    rating?: PrimitiveOverrideProps<TextFieldProps>;
     wordCount?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

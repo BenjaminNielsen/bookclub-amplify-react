@@ -8,6 +8,51 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
+export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating(
+  $filter: ModelSubscriptionBookRatingFilterInput
+) {
+  onCreateBookRating(filter: $filter) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateBookRatingSubscriptionVariables,
+  APITypes.OnCreateBookRatingSubscription
+>;
+export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating(
+  $filter: ModelSubscriptionBookRatingFilterInput
+) {
+  onUpdateBookRating(filter: $filter) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateBookRatingSubscriptionVariables,
+  APITypes.OnUpdateBookRatingSubscription
+>;
+export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating(
+  $filter: ModelSubscriptionBookRatingFilterInput
+) {
+  onDeleteBookRating(filter: $filter) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteBookRatingSubscriptionVariables,
+  APITypes.OnDeleteBookRatingSubscription
+>;
 export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
   $filter: ModelSubscriptionUserBooksFilterInput
   $owner: String
@@ -21,12 +66,19 @@ export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
     numberInSeries
     wordCount
     description
-    rating
     progress
+    userRating {
+      overallEnjoyment
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
     dateStarted
     dateFinished
     createdAt
     updatedAt
+    userBooksUserRatingId
     owner
     __typename
   }
@@ -48,12 +100,19 @@ export const onUpdateUserBooks = /* GraphQL */ `subscription OnUpdateUserBooks(
     numberInSeries
     wordCount
     description
-    rating
     progress
+    userRating {
+      overallEnjoyment
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
     dateStarted
     dateFinished
     createdAt
     updatedAt
+    userBooksUserRatingId
     owner
     __typename
   }
@@ -75,12 +134,19 @@ export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
     numberInSeries
     wordCount
     description
-    rating
     progress
+    userRating {
+      overallEnjoyment
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
     dateStarted
     dateFinished
     createdAt
     updatedAt
+    userBooksUserRatingId
     owner
     __typename
   }
@@ -99,6 +165,7 @@ export const onCreateSuggestionBooks = /* GraphQL */ `subscription OnCreateSugge
     author
     genre
     numberInSeries
+    rating
     wordCount
     description
     createdAt
@@ -120,6 +187,7 @@ export const onUpdateSuggestionBooks = /* GraphQL */ `subscription OnUpdateSugge
     author
     genre
     numberInSeries
+    rating
     wordCount
     description
     createdAt
@@ -141,6 +209,7 @@ export const onDeleteSuggestionBooks = /* GraphQL */ `subscription OnDeleteSugge
     author
     genre
     numberInSeries
+    rating
     wordCount
     description
     createdAt

@@ -196,6 +196,7 @@ export default function SuggestionBooksUpdateForm(props) {
     author: [],
     genre: [],
     numberInSeries: "",
+    rating: "",
     wordCount: "",
     description: "",
   };
@@ -206,6 +207,7 @@ export default function SuggestionBooksUpdateForm(props) {
   const [numberInSeries, setNumberInSeries] = React.useState(
     initialValues.numberInSeries
   );
+  const [rating, setRating] = React.useState(initialValues.rating);
   const [wordCount, setWordCount] = React.useState(initialValues.wordCount);
   const [description, setDescription] = React.useState(
     initialValues.description
@@ -222,6 +224,7 @@ export default function SuggestionBooksUpdateForm(props) {
     setGenre(cleanValues.genre ?? []);
     setCurrentGenreValue("");
     setNumberInSeries(cleanValues.numberInSeries);
+    setRating(cleanValues.rating);
     setWordCount(cleanValues.wordCount);
     setDescription(cleanValues.description);
     setErrors({});
@@ -254,6 +257,7 @@ export default function SuggestionBooksUpdateForm(props) {
     author: [],
     genre: [],
     numberInSeries: [],
+    rating: [],
     wordCount: [],
     description: [],
   };
@@ -288,6 +292,7 @@ export default function SuggestionBooksUpdateForm(props) {
           author: author ?? null,
           genre: genre ?? null,
           numberInSeries: numberInSeries ?? null,
+          rating: rating ?? null,
           wordCount: wordCount ?? null,
           description: description ?? null,
         };
@@ -355,6 +360,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author,
               genre,
               numberInSeries,
+              rating,
               wordCount,
               description,
             };
@@ -385,6 +391,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author,
               genre,
               numberInSeries,
+              rating,
               wordCount,
               description,
             };
@@ -411,6 +418,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author: values,
               genre,
               numberInSeries,
+              rating,
               wordCount,
               description,
             };
@@ -462,6 +470,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author,
               genre: values,
               numberInSeries,
+              rating,
               wordCount,
               description,
             };
@@ -517,6 +526,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author,
               genre,
               numberInSeries: value,
+              rating,
               wordCount,
               description,
             };
@@ -532,6 +542,41 @@ export default function SuggestionBooksUpdateForm(props) {
         errorMessage={errors.numberInSeries?.errorMessage}
         hasError={errors.numberInSeries?.hasError}
         {...getOverrideProps(overrides, "numberInSeries")}
+      ></TextField>
+      <TextField
+        label="Rating"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={rating}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              isbn,
+              title,
+              author,
+              genre,
+              numberInSeries,
+              rating: value,
+              wordCount,
+              description,
+            };
+            const result = onChange(modelFields);
+            value = result?.rating ?? value;
+          }
+          if (errors.rating?.hasError) {
+            runValidationTasks("rating", value);
+          }
+          setRating(value);
+        }}
+        onBlur={() => runValidationTasks("rating", rating)}
+        errorMessage={errors.rating?.errorMessage}
+        hasError={errors.rating?.hasError}
+        {...getOverrideProps(overrides, "rating")}
       ></TextField>
       <TextField
         label="Word count"
@@ -551,6 +596,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author,
               genre,
               numberInSeries,
+              rating,
               wordCount: value,
               description,
             };
@@ -581,6 +627,7 @@ export default function SuggestionBooksUpdateForm(props) {
               author,
               genre,
               numberInSeries,
+              rating,
               wordCount,
               description: value,
             };

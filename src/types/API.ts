@@ -2,6 +2,61 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateBookRatingInput = {
+  overallEnjoyment?: number | null,
+  id?: string | null,
+};
+
+export type ModelBookRatingConditionInput = {
+  overallEnjoyment?: ModelIntInput | null,
+  and?: Array< ModelBookRatingConditionInput | null > | null,
+  or?: Array< ModelBookRatingConditionInput | null > | null,
+  not?: ModelBookRatingConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type BookRating = {
+  __typename: "BookRating",
+  overallEnjoyment?: number | null,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateBookRatingInput = {
+  overallEnjoyment?: number | null,
+  id: string,
+};
+
+export type DeleteBookRatingInput = {
+  id: string,
+};
+
 export type CreateUserBooksInput = {
   id?: string | null,
   isbn?: string | null,
@@ -11,10 +66,10 @@ export type CreateUserBooksInput = {
   numberInSeries?: string | null,
   wordCount?: number | null,
   description?: string | null,
-  rating?: number | null,
   progress?: number | null,
   dateStarted?: string | null,
   dateFinished?: string | null,
+  userBooksUserRatingId?: string | null,
 };
 
 export type ModelUserBooksConditionInput = {
@@ -25,13 +80,13 @@ export type ModelUserBooksConditionInput = {
   numberInSeries?: ModelStringInput | null,
   wordCount?: ModelIntInput | null,
   description?: ModelStringInput | null,
-  rating?: ModelIntInput | null,
   progress?: ModelIntInput | null,
   dateStarted?: ModelStringInput | null,
   dateFinished?: ModelStringInput | null,
   and?: Array< ModelUserBooksConditionInput | null > | null,
   or?: Array< ModelUserBooksConditionInput | null > | null,
   not?: ModelUserBooksConditionInput | null,
+  userBooksUserRatingId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -50,20 +105,6 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
 export type ModelSizeInput = {
   ne?: number | null,
   eq?: number | null,
@@ -72,127 +113,6 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type UserBooks = {
-  __typename: "UserBooks",
-  id: string,
-  isbn?: string | null,
-  title?: string | null,
-  author?: Array< string | null > | null,
-  genre?: Array< string | null > | null,
-  numberInSeries?: string | null,
-  wordCount?: number | null,
-  description?: string | null,
-  rating?: number | null,
-  progress?: number | null,
-  dateStarted?: string | null,
-  dateFinished?: string | null,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type UpdateUserBooksInput = {
-  id: string,
-  isbn?: string | null,
-  title?: string | null,
-  author?: Array< string | null > | null,
-  genre?: Array< string | null > | null,
-  numberInSeries?: string | null,
-  wordCount?: number | null,
-  description?: string | null,
-  rating?: number | null,
-  progress?: number | null,
-  dateStarted?: string | null,
-  dateFinished?: string | null,
-};
-
-export type DeleteUserBooksInput = {
-  id: string,
-};
-
-export type CreateSuggestionBooksInput = {
-  id?: string | null,
-  isbn?: string | null,
-  title?: string | null,
-  author?: Array< string | null > | null,
-  genre?: Array< string | null > | null,
-  numberInSeries?: string | null,
-  wordCount?: number | null,
-  description?: string | null,
-};
-
-export type ModelSuggestionBooksConditionInput = {
-  isbn?: ModelStringInput | null,
-  title?: ModelStringInput | null,
-  author?: ModelStringInput | null,
-  genre?: ModelStringInput | null,
-  numberInSeries?: ModelStringInput | null,
-  wordCount?: ModelIntInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelSuggestionBooksConditionInput | null > | null,
-  or?: Array< ModelSuggestionBooksConditionInput | null > | null,
-  not?: ModelSuggestionBooksConditionInput | null,
-};
-
-export type SuggestionBooks = {
-  __typename: "SuggestionBooks",
-  id: string,
-  isbn?: string | null,
-  title?: string | null,
-  author?: Array< string | null > | null,
-  genre?: Array< string | null > | null,
-  numberInSeries?: string | null,
-  wordCount?: number | null,
-  description?: string | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateSuggestionBooksInput = {
-  id: string,
-  isbn?: string | null,
-  title?: string | null,
-  author?: Array< string | null > | null,
-  genre?: Array< string | null > | null,
-  numberInSeries?: string | null,
-  wordCount?: number | null,
-  description?: string | null,
-};
-
-export type DeleteSuggestionBooksInput = {
-  id: string,
-};
-
-export type ModelUserBooksFilterInput = {
-  id?: ModelIDInput | null,
-  isbn?: ModelStringInput | null,
-  title?: ModelStringInput | null,
-  author?: ModelStringInput | null,
-  genre?: ModelStringInput | null,
-  numberInSeries?: ModelStringInput | null,
-  wordCount?: ModelIntInput | null,
-  description?: ModelStringInput | null,
-  rating?: ModelIntInput | null,
-  progress?: ModelIntInput | null,
-  dateStarted?: ModelStringInput | null,
-  dateFinished?: ModelStringInput | null,
-  and?: Array< ModelUserBooksFilterInput | null > | null,
-  or?: Array< ModelUserBooksFilterInput | null > | null,
-  not?: ModelUserBooksFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -211,6 +131,133 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type UserBooks = {
+  __typename: "UserBooks",
+  id: string,
+  isbn?: string | null,
+  title?: string | null,
+  author?: Array< string | null > | null,
+  genre?: Array< string | null > | null,
+  numberInSeries?: string | null,
+  wordCount?: number | null,
+  description?: string | null,
+  progress?: number | null,
+  userRating?: BookRating | null,
+  dateStarted?: string | null,
+  dateFinished?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  userBooksUserRatingId?: string | null,
+  owner?: string | null,
+};
+
+export type UpdateUserBooksInput = {
+  id: string,
+  isbn?: string | null,
+  title?: string | null,
+  author?: Array< string | null > | null,
+  genre?: Array< string | null > | null,
+  numberInSeries?: string | null,
+  wordCount?: number | null,
+  description?: string | null,
+  progress?: number | null,
+  dateStarted?: string | null,
+  dateFinished?: string | null,
+  userBooksUserRatingId?: string | null,
+};
+
+export type DeleteUserBooksInput = {
+  id: string,
+};
+
+export type CreateSuggestionBooksInput = {
+  id?: string | null,
+  isbn?: string | null,
+  title?: string | null,
+  author?: Array< string | null > | null,
+  genre?: Array< string | null > | null,
+  numberInSeries?: string | null,
+  rating?: number | null,
+  wordCount?: number | null,
+  description?: string | null,
+};
+
+export type ModelSuggestionBooksConditionInput = {
+  isbn?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  author?: ModelStringInput | null,
+  genre?: ModelStringInput | null,
+  numberInSeries?: ModelStringInput | null,
+  rating?: ModelIntInput | null,
+  wordCount?: ModelIntInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelSuggestionBooksConditionInput | null > | null,
+  or?: Array< ModelSuggestionBooksConditionInput | null > | null,
+  not?: ModelSuggestionBooksConditionInput | null,
+};
+
+export type SuggestionBooks = {
+  __typename: "SuggestionBooks",
+  id: string,
+  isbn?: string | null,
+  title?: string | null,
+  author?: Array< string | null > | null,
+  genre?: Array< string | null > | null,
+  numberInSeries?: string | null,
+  rating?: number | null,
+  wordCount?: number | null,
+  description?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateSuggestionBooksInput = {
+  id: string,
+  isbn?: string | null,
+  title?: string | null,
+  author?: Array< string | null > | null,
+  genre?: Array< string | null > | null,
+  numberInSeries?: string | null,
+  rating?: number | null,
+  wordCount?: number | null,
+  description?: string | null,
+};
+
+export type DeleteSuggestionBooksInput = {
+  id: string,
+};
+
+export type ModelBookRatingFilterInput = {
+  overallEnjoyment?: ModelIntInput | null,
+  and?: Array< ModelBookRatingFilterInput | null > | null,
+  or?: Array< ModelBookRatingFilterInput | null > | null,
+  not?: ModelBookRatingFilterInput | null,
+};
+
+export type ModelBookRatingConnection = {
+  __typename: "ModelBookRatingConnection",
+  items:  Array<BookRating | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUserBooksFilterInput = {
+  id?: ModelIDInput | null,
+  isbn?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  author?: ModelStringInput | null,
+  genre?: ModelStringInput | null,
+  numberInSeries?: ModelStringInput | null,
+  wordCount?: ModelIntInput | null,
+  description?: ModelStringInput | null,
+  progress?: ModelIntInput | null,
+  dateStarted?: ModelStringInput | null,
+  dateFinished?: ModelStringInput | null,
+  and?: Array< ModelUserBooksFilterInput | null > | null,
+  or?: Array< ModelUserBooksFilterInput | null > | null,
+  not?: ModelUserBooksFilterInput | null,
+  userBooksUserRatingId?: ModelIDInput | null,
+};
+
 export type ModelUserBooksConnection = {
   __typename: "ModelUserBooksConnection",
   items:  Array<UserBooks | null >,
@@ -224,6 +271,7 @@ export type ModelSuggestionBooksFilterInput = {
   author?: ModelStringInput | null,
   genre?: ModelStringInput | null,
   numberInSeries?: ModelStringInput | null,
+  rating?: ModelIntInput | null,
   wordCount?: ModelIntInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelSuggestionBooksFilterInput | null > | null,
@@ -237,6 +285,24 @@ export type ModelSuggestionBooksConnection = {
   nextToken?: string | null,
 };
 
+export type ModelSubscriptionBookRatingFilterInput = {
+  overallEnjoyment?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionBookRatingFilterInput | null > | null,
+  or?: Array< ModelSubscriptionBookRatingFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
 export type ModelSubscriptionUserBooksFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   isbn?: ModelSubscriptionStringInput | null,
@@ -246,7 +312,6 @@ export type ModelSubscriptionUserBooksFilterInput = {
   numberInSeries?: ModelSubscriptionStringInput | null,
   wordCount?: ModelSubscriptionIntInput | null,
   description?: ModelSubscriptionStringInput | null,
-  rating?: ModelSubscriptionIntInput | null,
   progress?: ModelSubscriptionIntInput | null,
   dateStarted?: ModelSubscriptionStringInput | null,
   dateFinished?: ModelSubscriptionStringInput | null,
@@ -284,18 +349,6 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
-};
-
 export type ModelSubscriptionSuggestionBooksFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   isbn?: ModelSubscriptionStringInput | null,
@@ -303,10 +356,56 @@ export type ModelSubscriptionSuggestionBooksFilterInput = {
   author?: ModelSubscriptionStringInput | null,
   genre?: ModelSubscriptionStringInput | null,
   numberInSeries?: ModelSubscriptionStringInput | null,
+  rating?: ModelSubscriptionIntInput | null,
   wordCount?: ModelSubscriptionIntInput | null,
   description?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionSuggestionBooksFilterInput | null > | null,
   or?: Array< ModelSubscriptionSuggestionBooksFilterInput | null > | null,
+};
+
+export type CreateBookRatingMutationVariables = {
+  input: CreateBookRatingInput,
+  condition?: ModelBookRatingConditionInput | null,
+};
+
+export type CreateBookRatingMutation = {
+  createBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateBookRatingMutationVariables = {
+  input: UpdateBookRatingInput,
+  condition?: ModelBookRatingConditionInput | null,
+};
+
+export type UpdateBookRatingMutation = {
+  updateBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteBookRatingMutationVariables = {
+  input: DeleteBookRatingInput,
+  condition?: ModelBookRatingConditionInput | null,
+};
+
+export type DeleteBookRatingMutation = {
+  deleteBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateUserBooksMutationVariables = {
@@ -325,12 +424,19 @@ export type CreateUserBooksMutation = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -351,12 +457,19 @@ export type UpdateUserBooksMutation = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -377,12 +490,19 @@ export type DeleteUserBooksMutation = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -401,6 +521,7 @@ export type CreateSuggestionBooksMutation = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,
@@ -422,6 +543,7 @@ export type UpdateSuggestionBooksMutation = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,
@@ -443,10 +565,45 @@ export type DeleteSuggestionBooksMutation = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type GetBookRatingQueryVariables = {
+  id: string,
+};
+
+export type GetBookRatingQuery = {
+  getBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListBookRatingsQueryVariables = {
+  filter?: ModelBookRatingFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBookRatingsQuery = {
+  listBookRatings?:  {
+    __typename: "ModelBookRatingConnection",
+    items:  Array< {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -465,12 +622,19 @@ export type GetUserBooksQuery = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -494,12 +658,12 @@ export type ListUserBooksQuery = {
       numberInSeries?: string | null,
       wordCount?: number | null,
       description?: string | null,
-      rating?: number | null,
       progress?: number | null,
       dateStarted?: string | null,
       dateFinished?: string | null,
       createdAt: string,
       updatedAt: string,
+      userBooksUserRatingId?: string | null,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -519,6 +683,7 @@ export type GetSuggestionBooksQuery = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,
@@ -543,12 +708,55 @@ export type ListSuggestionBooksQuery = {
       author?: Array< string | null > | null,
       genre?: Array< string | null > | null,
       numberInSeries?: string | null,
+      rating?: number | null,
       wordCount?: number | null,
       description?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateBookRatingSubscriptionVariables = {
+  filter?: ModelSubscriptionBookRatingFilterInput | null,
+};
+
+export type OnCreateBookRatingSubscription = {
+  onCreateBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateBookRatingSubscriptionVariables = {
+  filter?: ModelSubscriptionBookRatingFilterInput | null,
+};
+
+export type OnUpdateBookRatingSubscription = {
+  onUpdateBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteBookRatingSubscriptionVariables = {
+  filter?: ModelSubscriptionBookRatingFilterInput | null,
+};
+
+export type OnDeleteBookRatingSubscription = {
+  onDeleteBookRating?:  {
+    __typename: "BookRating",
+    overallEnjoyment?: number | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -568,12 +776,19 @@ export type OnCreateUserBooksSubscription = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -594,12 +809,19 @@ export type OnUpdateUserBooksSubscription = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -620,12 +842,19 @@ export type OnDeleteUserBooksSubscription = {
     numberInSeries?: string | null,
     wordCount?: number | null,
     description?: string | null,
-    rating?: number | null,
     progress?: number | null,
+    userRating?:  {
+      __typename: "BookRating",
+      overallEnjoyment?: number | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     dateStarted?: string | null,
     dateFinished?: string | null,
     createdAt: string,
     updatedAt: string,
+    userBooksUserRatingId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -643,6 +872,7 @@ export type OnCreateSuggestionBooksSubscription = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,
@@ -663,6 +893,7 @@ export type OnUpdateSuggestionBooksSubscription = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,
@@ -683,6 +914,7 @@ export type OnDeleteSuggestionBooksSubscription = {
     author?: Array< string | null > | null,
     genre?: Array< string | null > | null,
     numberInSeries?: string | null,
+    rating?: number | null,
     wordCount?: number | null,
     description?: string | null,
     createdAt: string,

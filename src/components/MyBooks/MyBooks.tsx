@@ -12,6 +12,7 @@ import EditUserBookDetails from "../EditUserBookDetails/EditUserBookDetails";
 import {useRowSelect} from "@table-library/react-table-library/select";
 import {useTheme} from '@table-library/react-table-library/theme';
 import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';
+import {UserBooks} from "../../types/API";
 
 export default function MyBooks(): React.ReactElement | null {
 
@@ -41,14 +42,14 @@ export default function MyBooks(): React.ReactElement | null {
     }
 
     useEffect(() => {
-        fetchBooks();
+        fetchBooks()
+            .then((booksFromAPI: UserBooks[])=>setBooks(booksFromAPI));
     },[]);
 
-    async function fetchBooks() {
-        const apiData: any = await API.graphql({query: listUserBooks});
-        console.log(apiData)
-        const booksFromAPI = apiData.data.listUserBooks.items;
-        setBooks(booksFromAPI);
+    async function fetchBooks():Promise<UserBooks[]> {
+        const apiData = await API.graphql({query: listUserBooks});
+        console.log("fetchBooks() called and returned: %o", apiData)
+        return apiData.data.listUserBooks.items
     }
 
     async function onClick() {
@@ -63,7 +64,6 @@ export default function MyBooks(): React.ReactElement | null {
                     "numberInSeries": "Lorem ipsum dolor sit amet",
                     "wordCount": 1020,
                     "description": "Lorem ipsum dolor sit amet",
-                    "rating": 1020,
                     "progress": 1020,
                     "dateStarted": "1970-01-01Z",
                     "dateFinished": "1970-01-01Z"

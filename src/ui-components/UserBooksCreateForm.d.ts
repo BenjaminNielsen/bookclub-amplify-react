@@ -29,7 +29,6 @@ export declare type UserBooksCreateFormInputValues = {
     numberInSeries?: string;
     wordCount?: number;
     description?: string;
-    rating?: number;
     progress?: number;
     dateStarted?: string;
     dateFinished?: string;
@@ -42,7 +41,6 @@ export declare type UserBooksCreateFormValidationValues = {
     numberInSeries?: ValidationFunction<string>;
     wordCount?: ValidationFunction<number>;
     description?: ValidationFunction<string>;
-    rating?: ValidationFunction<number>;
     progress?: ValidationFunction<number>;
     dateStarted?: ValidationFunction<string>;
     dateFinished?: ValidationFunction<string>;
@@ -57,7 +55,6 @@ export declare type UserBooksCreateFormOverridesProps = {
     numberInSeries?: PrimitiveOverrideProps<TextFieldProps>;
     wordCount?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
-    rating?: PrimitiveOverrideProps<TextFieldProps>;
     progress?: PrimitiveOverrideProps<TextFieldProps>;
     dateStarted?: PrimitiveOverrideProps<TextFieldProps>;
     dateFinished?: PrimitiveOverrideProps<TextFieldProps>;

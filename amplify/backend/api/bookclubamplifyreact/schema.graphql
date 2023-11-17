@@ -7,20 +7,24 @@ type UserBooks @model @auth(rules: [{allow: owner}]) {
   numberInSeries: String
   wordCount: Int
   description: String
-  rating: Int
   progress: Int
+  userRating: BookRating @hasOne
   dateStarted: AWSDate
   dateFinished: AWSDate
 }
 
-type SuggestionBooks @model @auth(rules: [{allow: public}, {allow: private}]) {
+type SuggestionBooks @model @auth(rules: [{allow: private}]) {
   id: ID!
   isbn: String
   title: String
   author: [String]
   genre: [String]
   numberInSeries: String
+  rating: Int
   wordCount: Int
   description: String
 }
- 
+
+type BookRating @model {
+  overallEnjoyment: Int
+}
