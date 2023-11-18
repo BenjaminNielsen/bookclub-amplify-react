@@ -28,6 +28,6 @@ type SuggestionBooks @model @auth(rules: [{allow: private}]) {
   description: String
 }
 
-type BookRating @model {
+type BookRating @model @auth(rules: [{allow: private}]){
   overallEnjoyment: Int
 }
