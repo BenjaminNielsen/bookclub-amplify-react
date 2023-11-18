@@ -1,33 +1,22 @@
 {
   "api": {
-    "bookclubamplifyreact": {
+    "bensbookclubwebapp": {
       "dependsOn": [
         {
           "attributes": [
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "bookclubamplifyreact7fc1a661"
+          "resourceName": "bensbookclubwebapp407d997b"
         }
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            },
-            {
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 30,
-                "description": "api key description"
-              },
-              "authenticationType": "API_KEY"
-            }
-          ],
+          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authbookclubamplifyreact7fc1a661"
+              "userPoolId": "authbensbookclubwebapp407d997b"
             }
           }
         }
@@ -37,7 +26,7 @@
     }
   },
   "auth": {
-    "bookclubamplifyreact7fc1a661": {
+    "bensbookclubwebapp407d997b": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -57,7 +46,9 @@
           "GOOGLE",
           "AMAZON"
         ],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]

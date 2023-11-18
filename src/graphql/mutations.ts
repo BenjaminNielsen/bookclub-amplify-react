@@ -8,54 +8,6 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createBookRating = /* GraphQL */ `mutation CreateBookRating(
-  $input: CreateBookRatingInput!
-  $condition: ModelBookRatingConditionInput
-) {
-  createBookRating(input: $input, condition: $condition) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateBookRatingMutationVariables,
-  APITypes.CreateBookRatingMutation
->;
-export const updateBookRating = /* GraphQL */ `mutation UpdateBookRating(
-  $input: UpdateBookRatingInput!
-  $condition: ModelBookRatingConditionInput
-) {
-  updateBookRating(input: $input, condition: $condition) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateBookRatingMutationVariables,
-  APITypes.UpdateBookRatingMutation
->;
-export const deleteBookRating = /* GraphQL */ `mutation DeleteBookRating(
-  $input: DeleteBookRatingInput!
-  $condition: ModelBookRatingConditionInput
-) {
-  deleteBookRating(input: $input, condition: $condition) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteBookRatingMutationVariables,
-  APITypes.DeleteBookRatingMutation
->;
 export const createUserBooks = /* GraphQL */ `mutation CreateUserBooks(
   $input: CreateUserBooksInput!
   $condition: ModelUserBooksConditionInput
@@ -226,4 +178,52 @@ export const deleteSuggestionBooks = /* GraphQL */ `mutation DeleteSuggestionBoo
 ` as GeneratedMutation<
   APITypes.DeleteSuggestionBooksMutationVariables,
   APITypes.DeleteSuggestionBooksMutation
+>;
+export const createBookRating = /* GraphQL */ `mutation CreateBookRating(
+  $input: CreateBookRatingInput!
+  $condition: ModelBookRatingConditionInput
+) {
+  createBookRating(input: $input, condition: $condition) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateBookRatingMutationVariables,
+  APITypes.CreateBookRatingMutation
+>;
+export const updateBookRating = /* GraphQL */ `mutation UpdateBookRating(
+  $input: UpdateBookRatingInput!
+  $condition: ModelBookRatingConditionInput
+) {
+  updateBookRating(input: $input, condition: $condition) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateBookRatingMutationVariables,
+  APITypes.UpdateBookRatingMutation
+>;
+export const deleteBookRating = /* GraphQL */ `mutation DeleteBookRating(
+  $input: DeleteBookRatingInput!
+  $condition: ModelBookRatingConditionInput
+) {
+  deleteBookRating(input: $input, condition: $condition) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteBookRatingMutationVariables,
+  APITypes.DeleteBookRatingMutation
 >;

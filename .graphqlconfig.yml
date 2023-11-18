@@ -1,19 +1,15 @@
 projects:
-  bookclubamplifyreact:
-    schemaPath: amplify/backend/api/bookclubamplifyreact/build/schema.graphql
+  bensbookclubwebapp:
+    schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.ts
     excludes:
       - ./amplify/**
-      - src/types/API.ts
     extensions:
       amplify:
         codeGenTarget: typescript
         generatedFileName: src/types/API.ts
         docsFilePath: src/graphql
-        region: us-east-1
-        apiId: null
-        maxDepth: 2
 extensions:
   amplify:
     version: 3

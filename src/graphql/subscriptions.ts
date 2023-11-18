@@ -8,51 +8,6 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating(
-  $filter: ModelSubscriptionBookRatingFilterInput
-) {
-  onCreateBookRating(filter: $filter) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateBookRatingSubscriptionVariables,
-  APITypes.OnCreateBookRatingSubscription
->;
-export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating(
-  $filter: ModelSubscriptionBookRatingFilterInput
-) {
-  onUpdateBookRating(filter: $filter) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateBookRatingSubscriptionVariables,
-  APITypes.OnUpdateBookRatingSubscription
->;
-export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating(
-  $filter: ModelSubscriptionBookRatingFilterInput
-) {
-  onDeleteBookRating(filter: $filter) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteBookRatingSubscriptionVariables,
-  APITypes.OnDeleteBookRatingSubscription
->;
 export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
   $filter: ModelSubscriptionUserBooksFilterInput
   $owner: String
@@ -220,4 +175,49 @@ export const onDeleteSuggestionBooks = /* GraphQL */ `subscription OnDeleteSugge
 ` as GeneratedSubscription<
   APITypes.OnDeleteSuggestionBooksSubscriptionVariables,
   APITypes.OnDeleteSuggestionBooksSubscription
+>;
+export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating(
+  $filter: ModelSubscriptionBookRatingFilterInput
+) {
+  onCreateBookRating(filter: $filter) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateBookRatingSubscriptionVariables,
+  APITypes.OnCreateBookRatingSubscription
+>;
+export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating(
+  $filter: ModelSubscriptionBookRatingFilterInput
+) {
+  onUpdateBookRating(filter: $filter) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateBookRatingSubscriptionVariables,
+  APITypes.OnUpdateBookRatingSubscription
+>;
+export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating(
+  $filter: ModelSubscriptionBookRatingFilterInput
+) {
+  onDeleteBookRating(filter: $filter) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteBookRatingSubscriptionVariables,
+  APITypes.OnDeleteBookRatingSubscription
 >;

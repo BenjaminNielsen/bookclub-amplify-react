@@ -8,40 +8,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
-  getBookRating(id: $id) {
-    overallEnjoyment
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetBookRatingQueryVariables,
-  APITypes.GetBookRatingQuery
->;
-export const listBookRatings = /* GraphQL */ `query ListBookRatings(
-  $filter: ModelBookRatingFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listBookRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      overallEnjoyment
-      id
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListBookRatingsQueryVariables,
-  APITypes.ListBookRatingsQuery
->;
 export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
   getUserBooks(id: $id) {
     id
@@ -152,4 +118,38 @@ export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
 ` as GeneratedQuery<
   APITypes.ListSuggestionBooksQueryVariables,
   APITypes.ListSuggestionBooksQuery
+>;
+export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
+  getBookRating(id: $id) {
+    overallEnjoyment
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetBookRatingQueryVariables,
+  APITypes.GetBookRatingQuery
+>;
+export const listBookRatings = /* GraphQL */ `query ListBookRatings(
+  $filter: ModelBookRatingFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBookRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      overallEnjoyment
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListBookRatingsQueryVariables,
+  APITypes.ListBookRatingsQuery
 >;

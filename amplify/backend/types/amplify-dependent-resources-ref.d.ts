@@ -1,13 +1,12 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "bookclubamplifyreact": {
+    "bensbookclubwebapp": {
       "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string",
-      "GraphQLAPIKeyOutput": "string"
+      "GraphQLAPIIdOutput": "string"
     }
   },
   "auth": {
-    "bookclubamplifyreact7fc1a661": {
+    "bensbookclubwebapp407d997b": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "HostedUIDomain": "string",
