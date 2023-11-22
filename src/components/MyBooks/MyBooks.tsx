@@ -1,4 +1,4 @@
-import {Heading, View} from "@aws-amplify/ui-react";
+import {Flex, Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {generateClient} from 'aws-amplify/api';
 import {CompactTable} from "@table-library/react-table-library/compact";
@@ -51,7 +51,7 @@ export default function MyBooks(): React.ReactElement | null {
         setSelectedBook(null)
     }
 
-    const COLUMNS = [
+    const COLUMNS= [
         {label: 'Title', renderCell: (book: UserBook) => book.title, resize: true},
         {label: 'Word Count', renderCell: (book: UserBook) => book.wordCount, resize: true},
         {label: 'Start Date', renderCell: (book: UserBook) => book.dateStarted},
@@ -64,7 +64,9 @@ export default function MyBooks(): React.ReactElement | null {
                 <Heading level={2}>My Books</Heading>
                 <CompactTable theme={theme} columns={COLUMNS} data={data} select={select}/>
             </View>
-            {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDeleteParent={onDeleteClick} onUpdateParent={onUpdateClick}/>}
+            <Flex justifyContent="center">
+                {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDeleteParent={onDeleteClick} onUpdateParent={onUpdateClick}/>}
+            </Flex>
         </div>
     )
 
