@@ -1,6 +1,6 @@
 import React from "react";
 import {generateClient} from "aws-amplify/api";
-import {updateUserBooks} from "../../graphql/mutations";
+import {deleteUserBooks, updateUserBooks} from "../../graphql/mutations";
 import {UserBook} from "../../types/UserBooks";
 
 import {Button, Card, Divider, Heading, View, Image, ButtonGroup} from "@aws-amplify/ui-react";
@@ -8,14 +8,15 @@ import {Button, Card, Divider, Heading, View, Image, ButtonGroup} from "@aws-amp
 
 interface EditUserBookDetailsProps {
     userBook: UserBook
-    onDelete: any
+    onDeleteParent: any
+    onUpdateParent: any
 }
 
-export default function EditUserBookDetails({userBook, onDelete}: EditUserBookDetailsProps): React.ReactElement | null {
+export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateParent}: EditUserBookDetailsProps): React.ReactElement | null {
 
     const API = generateClient()
 
-    async function onSubmit() {
+    async function onUpdateClick() {
         if(!userBook.id){
             console.error("tried to edit details on book with no id")
             return
@@ -38,8 +39,19 @@ export default function EditUserBookDetails({userBook, onDelete}: EditUserBookDe
                 }
             },
         });
+        onUpdateParent()
     }
-
+    async function onDeleteClick() {
+        if(!userBook.id){
+            console.error("tried to delete book with no id")
+            return
+        }
+        await API.graphql({
+            query: deleteUserBooks,
+            variables: {input: {"id": userBook.id,}},
+        });
+        onDeleteParent();
+    }
 
 
     return (
@@ -56,8 +68,8 @@ export default function EditUserBookDetails({userBook, onDelete}: EditUserBookDe
                 <Divider padding="xs" />
                 <Heading padding="medium">{userBook.title}</Heading>
                 <ButtonGroup justifyContent="center" variation="primary">
-                    <Button onClick={() => onDelete(userBook.id)} colorTheme="error"> Delete </Button>
-                    <Button> Update </Button>
+                    <Button onClick={onDeleteClick} colorTheme="error"> Delete </Button>
+                    <Button onClick={onUpdateClick}> Update </Button>
                 </ButtonGroup>
             </View>
         </Card>

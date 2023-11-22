@@ -1,10 +1,6 @@
 import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {generateClient} from 'aws-amplify/api';
-import {deleteUserBooks} from "../../graphql/mutations";
-import {Book} from "../../types/Book";
-import {IconContext} from "react-icons";
-import {BsFillTrashFill} from "react-icons/bs";
 import {CompactTable} from "@table-library/react-table-library/compact";
 import {listUserBooks} from "../../graphql/queries";
 import {UserBook} from "../../types/UserBooks";
@@ -30,20 +26,11 @@ export default function MyBooks(): React.ReactElement | null {
     function onSelectChange(action: any, state: any) {
         if(state.id === null)
             return
-        console.log(action, state);
-        console.log("Finding book with id: %o", state.id)
-        const book = books.find((book) => book.id === state.id)
-        if (book === undefined) {
-            console.error("Error, could not find book from table selection")
-            setSelectedBook(null)
-            return
-        }
-        setSelectedBook(book)
+        setSelectedBook(books.find((book) => book.id === state.id)??null)
     }
 
     useEffect(() => {
-        fetchBooks()
-            .then((booksFromAPI: UserBooks[])=>setBooks(booksFromAPI));
+        fetchBooks().then((booksFromAPI: UserBooks[])=>setBooks(booksFromAPI));
     },[]);
 
     async function fetchBooks():Promise<UserBooks[]> {
@@ -52,22 +39,16 @@ export default function MyBooks(): React.ReactElement | null {
         return apiData.data.listUserBooks.items
     }
 
-    function onDeleteClick(id: string) {
-        deleteBook(id)
+    async function onDeleteClick(id: string) {
+        const updatedBooks: UserBooks[] = await fetchBooks()
+        setBooks(updatedBooks)
+        setSelectedBook(null)
     }
 
-    async function deleteBook(id: string | null) {
+    async function onUpdateClick(){
+        const updatedBooks: UserBooks[] = await fetchBooks()
+        setBooks(updatedBooks)
         setSelectedBook(null)
-        if (id == null) {
-            console.error("null passed into onDeleteBook")
-            return
-        }
-        const newBooks: UserBook[] = books.filter((book: UserBook) => book.id !== id);
-        setBooks(newBooks)
-        await API.graphql({
-            query: deleteUserBooks,
-            variables: {input: {id}},
-        });
     }
 
     const COLUMNS = [
@@ -75,17 +56,6 @@ export default function MyBooks(): React.ReactElement | null {
         {label: 'Word Count', renderCell: (book: UserBook) => book.wordCount, resize: true},
         {label: 'Start Date', renderCell: (book: UserBook) => book.dateStarted},
         {label: 'End Date', renderCell: (book: UserBook) => book.dateFinished},
-        {
-            label: 'Delete', renderCell: (book: Book) => {
-                return (
-                    <IconContext.Provider value={{color: "red"}}>
-                        <div onClick={() => deleteBook(book.id ?? null)}>
-                            <BsFillTrashFill/>
-                        </div>
-                    </IconContext.Provider>
-                )
-            }
-        },
     ];
 
     return (
@@ -94,7 +64,7 @@ export default function MyBooks(): React.ReactElement | null {
                 <Heading level={2}>My Books</Heading>
                 <CompactTable theme={theme} columns={COLUMNS} data={data} select={select}/>
             </View>
-            {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDelete={onDeleteClick}/>}
+            {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDeleteParent={onDeleteClick} onUpdateParent={onUpdateClick}/>}
         </div>
     )
 
