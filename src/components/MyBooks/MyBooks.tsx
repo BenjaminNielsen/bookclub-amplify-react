@@ -1,7 +1,7 @@
-import {Button, Heading, View} from "@aws-amplify/ui-react";
+import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {generateClient} from 'aws-amplify/api';
-import {createUserBooks, deleteUserBooks} from "../../graphql/mutations";
+import {deleteUserBooks} from "../../graphql/mutations";
 import {Book} from "../../types/Book";
 import {IconContext} from "react-icons";
 import {BsFillTrashFill} from "react-icons/bs";
@@ -52,27 +52,12 @@ export default function MyBooks(): React.ReactElement | null {
         return apiData.data.listUserBooks.items
     }
 
-    async function onClick() {
-        const newUserBooks = await API.graphql({
-            query: createUserBooks,
-            variables: {
-                input: {
-                    "isbn": "Lorem ipsum dolor sit amet",
-                    "title": "Lorem ipsum dolor sit amet",
-                    "author": ['Ben'],
-                    "genre": ['Genre'],
-                    "numberInSeries": "Lorem ipsum dolor sit amet",
-                    "wordCount": 1020,
-                    "description": "Lorem ipsum dolor sit amet",
-                    "progress": 1020,
-                    "dateStarted": "1970-01-01Z",
-                    "dateFinished": "1970-01-01Z"
-                }
-            },
-        });
+    function onDeleteClick(id: string) {
+        deleteBook(id)
     }
 
     async function deleteBook(id: string | null) {
+        setSelectedBook(null)
         if (id == null) {
             console.error("null passed into onDeleteBook")
             return
@@ -109,8 +94,7 @@ export default function MyBooks(): React.ReactElement | null {
                 <Heading level={2}>My Books</Heading>
                 <CompactTable theme={theme} columns={COLUMNS} data={data} select={select}/>
             </View>
-            <Button onClick={onClick}>Add Book</Button>
-            {selectedBook != null && <EditUserBookDetails userBook={selectedBook}/>}
+            {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDelete={onDeleteClick}/>}
         </div>
     )
 

@@ -16,6 +16,7 @@ export const createUserBooks = /* GraphQL */ `mutation CreateUserBooks(
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -50,6 +51,7 @@ export const updateUserBooks = /* GraphQL */ `mutation UpdateUserBooks(
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -84,6 +86,7 @@ export const deleteUserBooks = /* GraphQL */ `mutation DeleteUserBooks(
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -118,6 +121,7 @@ export const createSuggestionBooks = /* GraphQL */ `mutation CreateSuggestionBoo
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -141,6 +145,7 @@ export const updateSuggestionBooks = /* GraphQL */ `mutation UpdateSuggestionBoo
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -164,6 +169,7 @@ export const deleteSuggestionBooks = /* GraphQL */ `mutation DeleteSuggestionBoo
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries

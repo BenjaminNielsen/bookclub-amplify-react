@@ -2,6 +2,7 @@ export type UserBook = {
     id: string
     isbn?: string | null
     title?: string | null
+    thumbnailUrl?:string|null
     author?: Array<string | null> | null
     genre?: Array<string | null> | null
     numberInSeries?: string | null

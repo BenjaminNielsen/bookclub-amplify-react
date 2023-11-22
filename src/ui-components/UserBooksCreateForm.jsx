@@ -191,6 +191,7 @@ export default function UserBooksCreateForm(props) {
   const initialValues = {
     isbn: "",
     title: "",
+    thumbnailUrl: "",
     author: [],
     genre: [],
     numberInSeries: "",
@@ -202,6 +203,9 @@ export default function UserBooksCreateForm(props) {
   };
   const [isbn, setIsbn] = React.useState(initialValues.isbn);
   const [title, setTitle] = React.useState(initialValues.title);
+  const [thumbnailUrl, setThumbnailUrl] = React.useState(
+    initialValues.thumbnailUrl
+  );
   const [author, setAuthor] = React.useState(initialValues.author);
   const [genre, setGenre] = React.useState(initialValues.genre);
   const [numberInSeries, setNumberInSeries] = React.useState(
@@ -222,6 +226,7 @@ export default function UserBooksCreateForm(props) {
   const resetStateValues = () => {
     setIsbn(initialValues.isbn);
     setTitle(initialValues.title);
+    setThumbnailUrl(initialValues.thumbnailUrl);
     setAuthor(initialValues.author);
     setCurrentAuthorValue("");
     setGenre(initialValues.genre);
@@ -241,6 +246,7 @@ export default function UserBooksCreateForm(props) {
   const validations = {
     isbn: [],
     title: [],
+    thumbnailUrl: [],
     author: [],
     genre: [],
     numberInSeries: [],
@@ -278,6 +284,7 @@ export default function UserBooksCreateForm(props) {
         let modelFields = {
           isbn,
           title,
+          thumbnailUrl,
           author,
           genre,
           numberInSeries,
@@ -350,6 +357,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn: value,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,
@@ -383,6 +391,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title: value,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,
@@ -405,6 +414,40 @@ export default function UserBooksCreateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
+      <TextField
+        label="Thumbnail url"
+        isRequired={false}
+        isReadOnly={false}
+        value={thumbnailUrl}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              isbn,
+              title,
+              thumbnailUrl: value,
+              author,
+              genre,
+              numberInSeries,
+              wordCount,
+              description,
+              progress,
+              dateStarted,
+              dateFinished,
+            };
+            const result = onChange(modelFields);
+            value = result?.thumbnailUrl ?? value;
+          }
+          if (errors.thumbnailUrl?.hasError) {
+            runValidationTasks("thumbnailUrl", value);
+          }
+          setThumbnailUrl(value);
+        }}
+        onBlur={() => runValidationTasks("thumbnailUrl", thumbnailUrl)}
+        errorMessage={errors.thumbnailUrl?.errorMessage}
+        hasError={errors.thumbnailUrl?.hasError}
+        {...getOverrideProps(overrides, "thumbnailUrl")}
+      ></TextField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
@@ -412,6 +455,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author: values,
               genre,
               numberInSeries,
@@ -466,6 +510,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre: values,
               numberInSeries,
@@ -524,6 +569,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries: value,
@@ -561,6 +607,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,
@@ -594,6 +641,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,
@@ -631,6 +679,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,
@@ -665,6 +714,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,
@@ -699,6 +749,7 @@ export default function UserBooksCreateForm(props) {
             const modelFields = {
               isbn,
               title,
+              thumbnailUrl,
               author,
               genre,
               numberInSeries,

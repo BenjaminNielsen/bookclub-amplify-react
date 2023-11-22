@@ -6,7 +6,7 @@ export async function getBookByIsbn(isbn: string): Promise<GoogleBookInfo | null
         const json = await response.json();
         console.log("Json response: %o", json);
         const book = json.items[0].volumeInfo;
-        return new GoogleBookInfo(book.title, book.subtitle, book.authors, book.publisher, book.publishedDate, book.description, book.pageCount, book.categories, book.averageRating);
+        return new GoogleBookInfo(book.title, book.subtitle, book.imageLinks?.thumbnail??"", book.authors, book.publisher, book.publishedDate, book.description, book.pageCount, book.categories, book.averageRating);
     } catch (error) {
         console.error(error);
         return null;
@@ -19,7 +19,7 @@ export async function getBookByTitle(title: string): Promise<GoogleBookInfo | nu
         const json = await response.json();
         console.log("Json response: %o", json);
         const book = json.items[0].volumeInfo;
-        return new GoogleBookInfo(book.title, book.subtitle, book.authors, book.publisher, book.publishedDate, book.description, book.pageCount, book.categories, book.averageRating);
+        return new GoogleBookInfo(book.title, book.subtitle, book.thumbnail, book.authors, book.publisher, book.publishedDate, book.description, book.pageCount, book.categories, book.averageRating);
     } catch (error) {
         console.error(error);
         return null;

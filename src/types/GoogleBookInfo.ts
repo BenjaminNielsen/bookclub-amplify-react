@@ -1,6 +1,7 @@
 export class GoogleBookInfo {
     title: string;
     subtitle: string;
+    thumbnailUrl: string;
     authors: string[];
     publisher: string;
     publishedDate: string;
@@ -9,9 +10,10 @@ export class GoogleBookInfo {
     categories: string[];
     averageRating: number;
 
-    constructor(title: string, subtitle: string, authors: string[], publisher: string, publishedDate: string, description: string, pageCount: number, categories: string[], averageRating: number) {
+    constructor(title: string, subtitle: string, thumbnailUrl: string, authors: string[], publisher: string, publishedDate: string, description: string, pageCount: number, categories: string[], averageRating: number) {
         this.title = title;
         this.subtitle = subtitle;
+        this.thumbnailUrl = thumbnailUrl;
         this.authors = authors;
         this.publisher = publisher;
         this.publishedDate = publishedDate;

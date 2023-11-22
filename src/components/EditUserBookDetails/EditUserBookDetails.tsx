@@ -1,16 +1,17 @@
 import React from "react";
 import {generateClient} from "aws-amplify/api";
-import {deleteUserBooks, updateUserBooks} from "../../graphql/mutations";
+import {updateUserBooks} from "../../graphql/mutations";
 import {UserBook} from "../../types/UserBooks";
 
-import {Card} from "@aws-amplify/ui-react";
+import {Button, Card, Divider, Heading, View, Image, ButtonGroup} from "@aws-amplify/ui-react";
 
 
 interface EditUserBookDetailsProps {
     userBook: UserBook
+    onDelete: any
 }
 
-export default function EditUserBookDetails({userBook}: EditUserBookDetailsProps): React.ReactElement | null {
+export default function EditUserBookDetails({userBook, onDelete}: EditUserBookDetailsProps): React.ReactElement | null {
 
     const API = generateClient()
 
@@ -39,21 +40,26 @@ export default function EditUserBookDetails({userBook}: EditUserBookDetailsProps
         });
     }
 
-    async function deleteBook() {
-        if(!userBook.id){
-            console.error("tried to delete  book with no id")
-            return
-        }
-        await API.graphql({
-            query: deleteUserBooks,
-            variables: {input: {id:userBook.id}},
-        });
-    }
+
 
     return (
-        <Card>
-            {/*<UserBooksUpdateForm id={userBook.id}></UserBooksUpdateForm>*/}
-            {userBook.title}
+        <Card
+            borderRadius="medium"
+            maxWidth="20rem"
+            variation="outlined"
+        >
+            <Image
+                src={userBook.thumbnailUrl??""}
+                alt={"thumbnail for " + userBook.title}
+            />
+            <View padding="xs">
+                <Divider padding="xs" />
+                <Heading padding="medium">{userBook.title}</Heading>
+                <ButtonGroup justifyContent="center" variation="primary">
+                    <Button onClick={() => onDelete(userBook.id)} colorTheme="error"> Delete </Button>
+                    <Button> Update </Button>
+                </ButtonGroup>
+            </View>
         </Card>
     )
 

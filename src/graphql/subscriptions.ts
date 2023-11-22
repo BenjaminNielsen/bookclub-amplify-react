@@ -16,6 +16,7 @@ export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -50,6 +51,7 @@ export const onUpdateUserBooks = /* GraphQL */ `subscription OnUpdateUserBooks(
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -84,6 +86,7 @@ export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -117,6 +120,7 @@ export const onCreateSuggestionBooks = /* GraphQL */ `subscription OnCreateSugge
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -139,6 +143,7 @@ export const onUpdateSuggestionBooks = /* GraphQL */ `subscription OnUpdateSugge
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -161,6 +166,7 @@ export const onDeleteSuggestionBooks = /* GraphQL */ `subscription OnDeleteSugge
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries

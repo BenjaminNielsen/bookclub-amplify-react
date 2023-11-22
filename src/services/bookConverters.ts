@@ -5,6 +5,7 @@ export default function suggestionBookToUserBook(book :Book):UserBooksCreateForm
     return {
         isbn: book.isbn,
         title: book.title,
+        thumbnailUrl: book.thumbnailUrl,
         author : book.author,
         genre : book.genre,
         description : book.description,

@@ -13,6 +13,7 @@ export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -49,6 +50,7 @@ export const listUserBooks = /* GraphQL */ `query ListUserBooks(
       id
       isbn
       title
+      thumbnailUrl
       author
       genre
       numberInSeries
@@ -76,6 +78,7 @@ export const getSuggestionBooks = /* GraphQL */ `query GetSuggestionBooks($id: I
     id
     isbn
     title
+    thumbnailUrl
     author
     genre
     numberInSeries
@@ -101,6 +104,7 @@ export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
       id
       isbn
       title
+      thumbnailUrl
       author
       genre
       numberInSeries

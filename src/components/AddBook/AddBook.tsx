@@ -20,6 +20,7 @@ export default function AddBook():React.ReactElement | null {
 
     const [givenIsbn, setIsbn] = useState('')
     const [title, setTitle] = useState('')
+    const [thumbnailUrl, setThumbnailUrl] = useState('')
     const [description, setDescription] = useState('')
     const [author, setAuthor] = useState('')
     const [genre, setGenre] = useState('')
@@ -36,6 +37,7 @@ export default function AddBook():React.ReactElement | null {
         const data = {
             isbn: form.get("isbn") as string,
             title: form.get("title") as string,
+            thumbnailUrl: thumbnailUrl,
             description: form.get("description") as string,
             author: (form.get("author") as String)?.split(', '),
             numberInSeries: form.get("numberInSeries") as string,
@@ -57,6 +59,7 @@ export default function AddBook():React.ReactElement | null {
     }
     function setPopulatedFieldsToDefault(){
         setTitle('')
+        setThumbnailUrl('')
         setAuthor('')
         setDescription('')
         setNumberInSeries('Standalone')
@@ -88,6 +91,7 @@ export default function AddBook():React.ReactElement | null {
 
     function populateFieldsFromGoogleBookInfo(bookInfo: GoogleBookInfo):void {
         setTitle(bookInfo.title)
+        setThumbnailUrl(bookInfo.thumbnailUrl)
         setAuthor(bookInfo.authors?.join(', '))
         setDescription(bookInfo.description)
         setGenre(bookInfo.categories?.join(', '))

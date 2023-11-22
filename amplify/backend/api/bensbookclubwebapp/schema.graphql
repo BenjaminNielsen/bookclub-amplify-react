@@ -5,6 +5,7 @@ type UserBooks @model @auth(rules: [{allow: owner}]) {
   id: ID!
   isbn: String
   title: String
+  thumbnailUrl: String
   author: [String]
   genre: [String]
   numberInSeries: String
@@ -20,6 +21,7 @@ type SuggestionBooks @model @auth(rules: [{allow: private}]) {
   id: ID!
   isbn: String
   title: String
+  thumbnailUrl: String
   author: [String]
   genre: [String]
   numberInSeries: String

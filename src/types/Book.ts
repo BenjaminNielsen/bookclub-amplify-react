@@ -4,6 +4,7 @@ export class Book  {
     id?: string
     isbn?: string
     title?: string
+    thumbnailUrl?:string
     author?: [string]
     genre?: [string]
     numberInSeries?: string

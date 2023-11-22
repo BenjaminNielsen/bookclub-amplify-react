@@ -25,6 +25,7 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type SuggestionBooksUpdateFormInputValues = {
     isbn?: string;
     title?: string;
+    thumbnailUrl?: string;
     author?: string[];
     genre?: string[];
     numberInSeries?: string;
@@ -35,6 +36,7 @@ export declare type SuggestionBooksUpdateFormInputValues = {
 export declare type SuggestionBooksUpdateFormValidationValues = {
     isbn?: ValidationFunction<string>;
     title?: ValidationFunction<string>;
+    thumbnailUrl?: ValidationFunction<string>;
     author?: ValidationFunction<string>;
     genre?: ValidationFunction<string>;
     numberInSeries?: ValidationFunction<string>;
@@ -47,6 +49,7 @@ export declare type SuggestionBooksUpdateFormOverridesProps = {
     SuggestionBooksUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     isbn?: PrimitiveOverrideProps<TextFieldProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
+    thumbnailUrl?: PrimitiveOverrideProps<TextFieldProps>;
     author?: PrimitiveOverrideProps<TextFieldProps>;
     genre?: PrimitiveOverrideProps<TextFieldProps>;
     numberInSeries?: PrimitiveOverrideProps<TextFieldProps>;
