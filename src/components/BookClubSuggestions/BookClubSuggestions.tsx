@@ -1,4 +1,3 @@
-import {Heading, View} from "@aws-amplify/ui-react";
 import React, {useEffect, useState} from "react";
 import {generateClient} from 'aws-amplify/api';
 import {listSuggestionBooks} from "../../graphql/queries";
@@ -26,16 +25,16 @@ export default function BookClubSuggestions(): React.ReactElement | null {
 
     useEffect(() => {
         fetchBooks()
-            .then((booksFromAPI:SuggestionBooks[]) => setBooks(booksFromAPI));
-    },[]);
+            .then((booksFromAPI: SuggestionBooks[]) => setBooks(booksFromAPI));
+    }, []);
 
-    async function fetchBooks():Promise<Array<SuggestionBooks>> {
+    async function fetchBooks(): Promise<Array<SuggestionBooks>> {
         const apiData: any = await API.graphql({query: listSuggestionBooks});
         return apiData.data.listSuggestionBooks.items;
     }
 
     async function onDeleteBook(id: string | null) {
-        if(id == null){
+        if (id == null) {
             console.error("null passed into onDeleteBook")
             return
         }
@@ -68,22 +67,23 @@ export default function BookClubSuggestions(): React.ReactElement | null {
         {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
-                    <IconContext.Provider value={{color: "green"}}>
-                        <div onClick={() => onAddToMyBooks(book)}>
-                            <BiSolidBookAdd />
-                        </div>
-                    </IconContext.Provider>
+                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}>
+                        <IconContext.Provider value={{color: "green"}}>
+                            <BiSolidBookAdd/>
+                        </IconContext.Provider>
+                    </Button>
+
                 )
             }
         },
         {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
-                    <IconContext.Provider value={{color: "red"}}>
-                        <div onClick={() => onDeleteBook(book.id??null)}>
+                    <Button gap="0.1rem" size="small" onClick={() => onDeleteBook(book.id ?? null)}>
+                        <IconContext.Provider value={{color: "red"}}>
                             <BsFillTrashFill/>
-                        </div>
-                    </IconContext.Provider>
+                        </IconContext.Provider>
+                    </Button>
                 )
             }
         },
