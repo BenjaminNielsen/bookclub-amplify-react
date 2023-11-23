@@ -24,17 +24,65 @@ export default function BookRatingCreateForm(props) {
   } = props;
   const initialValues = {
     overallEnjoyment: "",
+    pacing: "",
+    prose: "",
+    qualityOfDiscussion: "",
+    storytelling: "",
+    complexity: "",
+    characterDevelopment: "",
+    teaching: "",
+    depthOfKnowledge: "",
+    relevance: "",
+    notes: "",
   };
   const [overallEnjoyment, setOverallEnjoyment] = React.useState(
     initialValues.overallEnjoyment
   );
+  const [pacing, setPacing] = React.useState(initialValues.pacing);
+  const [prose, setProse] = React.useState(initialValues.prose);
+  const [qualityOfDiscussion, setQualityOfDiscussion] = React.useState(
+    initialValues.qualityOfDiscussion
+  );
+  const [storytelling, setStorytelling] = React.useState(
+    initialValues.storytelling
+  );
+  const [complexity, setComplexity] = React.useState(initialValues.complexity);
+  const [characterDevelopment, setCharacterDevelopment] = React.useState(
+    initialValues.characterDevelopment
+  );
+  const [teaching, setTeaching] = React.useState(initialValues.teaching);
+  const [depthOfKnowledge, setDepthOfKnowledge] = React.useState(
+    initialValues.depthOfKnowledge
+  );
+  const [relevance, setRelevance] = React.useState(initialValues.relevance);
+  const [notes, setNotes] = React.useState(initialValues.notes);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setOverallEnjoyment(initialValues.overallEnjoyment);
+    setPacing(initialValues.pacing);
+    setProse(initialValues.prose);
+    setQualityOfDiscussion(initialValues.qualityOfDiscussion);
+    setStorytelling(initialValues.storytelling);
+    setComplexity(initialValues.complexity);
+    setCharacterDevelopment(initialValues.characterDevelopment);
+    setTeaching(initialValues.teaching);
+    setDepthOfKnowledge(initialValues.depthOfKnowledge);
+    setRelevance(initialValues.relevance);
+    setNotes(initialValues.notes);
     setErrors({});
   };
   const validations = {
     overallEnjoyment: [],
+    pacing: [],
+    prose: [],
+    qualityOfDiscussion: [],
+    storytelling: [],
+    complexity: [],
+    characterDevelopment: [],
+    teaching: [],
+    depthOfKnowledge: [],
+    relevance: [],
+    notes: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -63,6 +111,16 @@ export default function BookRatingCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           overallEnjoyment,
+          pacing,
+          prose,
+          qualityOfDiscussion,
+          storytelling,
+          complexity,
+          characterDevelopment,
+          teaching,
+          depthOfKnowledge,
+          relevance,
+          notes,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -130,6 +188,16 @@ export default function BookRatingCreateForm(props) {
           if (onChange) {
             const modelFields = {
               overallEnjoyment: value,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
             };
             const result = onChange(modelFields);
             value = result?.overallEnjoyment ?? value;
@@ -143,6 +211,386 @@ export default function BookRatingCreateForm(props) {
         errorMessage={errors.overallEnjoyment?.errorMessage}
         hasError={errors.overallEnjoyment?.hasError}
         {...getOverrideProps(overrides, "overallEnjoyment")}
+      ></TextField>
+      <TextField
+        label="Pacing"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={pacing}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing: value,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.pacing ?? value;
+          }
+          if (errors.pacing?.hasError) {
+            runValidationTasks("pacing", value);
+          }
+          setPacing(value);
+        }}
+        onBlur={() => runValidationTasks("pacing", pacing)}
+        errorMessage={errors.pacing?.errorMessage}
+        hasError={errors.pacing?.hasError}
+        {...getOverrideProps(overrides, "pacing")}
+      ></TextField>
+      <TextField
+        label="Prose"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={prose}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose: value,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.prose ?? value;
+          }
+          if (errors.prose?.hasError) {
+            runValidationTasks("prose", value);
+          }
+          setProse(value);
+        }}
+        onBlur={() => runValidationTasks("prose", prose)}
+        errorMessage={errors.prose?.errorMessage}
+        hasError={errors.prose?.hasError}
+        {...getOverrideProps(overrides, "prose")}
+      ></TextField>
+      <TextField
+        label="Quality of discussion"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={qualityOfDiscussion}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion: value,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.qualityOfDiscussion ?? value;
+          }
+          if (errors.qualityOfDiscussion?.hasError) {
+            runValidationTasks("qualityOfDiscussion", value);
+          }
+          setQualityOfDiscussion(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("qualityOfDiscussion", qualityOfDiscussion)
+        }
+        errorMessage={errors.qualityOfDiscussion?.errorMessage}
+        hasError={errors.qualityOfDiscussion?.hasError}
+        {...getOverrideProps(overrides, "qualityOfDiscussion")}
+      ></TextField>
+      <TextField
+        label="Storytelling"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={storytelling}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling: value,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.storytelling ?? value;
+          }
+          if (errors.storytelling?.hasError) {
+            runValidationTasks("storytelling", value);
+          }
+          setStorytelling(value);
+        }}
+        onBlur={() => runValidationTasks("storytelling", storytelling)}
+        errorMessage={errors.storytelling?.errorMessage}
+        hasError={errors.storytelling?.hasError}
+        {...getOverrideProps(overrides, "storytelling")}
+      ></TextField>
+      <TextField
+        label="Complexity"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={complexity}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity: value,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.complexity ?? value;
+          }
+          if (errors.complexity?.hasError) {
+            runValidationTasks("complexity", value);
+          }
+          setComplexity(value);
+        }}
+        onBlur={() => runValidationTasks("complexity", complexity)}
+        errorMessage={errors.complexity?.errorMessage}
+        hasError={errors.complexity?.hasError}
+        {...getOverrideProps(overrides, "complexity")}
+      ></TextField>
+      <TextField
+        label="Character development"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={characterDevelopment}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment: value,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.characterDevelopment ?? value;
+          }
+          if (errors.characterDevelopment?.hasError) {
+            runValidationTasks("characterDevelopment", value);
+          }
+          setCharacterDevelopment(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("characterDevelopment", characterDevelopment)
+        }
+        errorMessage={errors.characterDevelopment?.errorMessage}
+        hasError={errors.characterDevelopment?.hasError}
+        {...getOverrideProps(overrides, "characterDevelopment")}
+      ></TextField>
+      <TextField
+        label="Teaching"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={teaching}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching: value,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.teaching ?? value;
+          }
+          if (errors.teaching?.hasError) {
+            runValidationTasks("teaching", value);
+          }
+          setTeaching(value);
+        }}
+        onBlur={() => runValidationTasks("teaching", teaching)}
+        errorMessage={errors.teaching?.errorMessage}
+        hasError={errors.teaching?.hasError}
+        {...getOverrideProps(overrides, "teaching")}
+      ></TextField>
+      <TextField
+        label="Depth of knowledge"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={depthOfKnowledge}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge: value,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.depthOfKnowledge ?? value;
+          }
+          if (errors.depthOfKnowledge?.hasError) {
+            runValidationTasks("depthOfKnowledge", value);
+          }
+          setDepthOfKnowledge(value);
+        }}
+        onBlur={() => runValidationTasks("depthOfKnowledge", depthOfKnowledge)}
+        errorMessage={errors.depthOfKnowledge?.errorMessage}
+        hasError={errors.depthOfKnowledge?.hasError}
+        {...getOverrideProps(overrides, "depthOfKnowledge")}
+      ></TextField>
+      <TextField
+        label="Relevance"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={relevance}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance: value,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.relevance ?? value;
+          }
+          if (errors.relevance?.hasError) {
+            runValidationTasks("relevance", value);
+          }
+          setRelevance(value);
+        }}
+        onBlur={() => runValidationTasks("relevance", relevance)}
+        errorMessage={errors.relevance?.errorMessage}
+        hasError={errors.relevance?.hasError}
+        {...getOverrideProps(overrides, "relevance")}
+      ></TextField>
+      <TextField
+        label="Notes"
+        isRequired={false}
+        isReadOnly={false}
+        value={notes}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.notes ?? value;
+          }
+          if (errors.notes?.hasError) {
+            runValidationTasks("notes", value);
+          }
+          setNotes(value);
+        }}
+        onBlur={() => runValidationTasks("notes", notes)}
+        errorMessage={errors.notes?.errorMessage}
+        hasError={errors.notes?.hasError}
+        {...getOverrideProps(overrides, "notes")}
       ></TextField>
       <Flex
         justifyContent="space-between"

@@ -25,6 +25,16 @@ export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -60,6 +70,16 @@ export const onUpdateUserBooks = /* GraphQL */ `subscription OnUpdateUserBooks(
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -95,6 +115,16 @@ export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -187,6 +217,16 @@ export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating
 ) {
   onCreateBookRating(filter: $filter) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt
@@ -202,6 +242,16 @@ export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating
 ) {
   onUpdateBookRating(filter: $filter) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt
@@ -217,6 +267,16 @@ export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating
 ) {
   onDeleteBookRating(filter: $filter) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt

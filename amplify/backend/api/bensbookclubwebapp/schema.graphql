@@ -32,4 +32,16 @@ type SuggestionBooks @model @auth(rules: [{allow: private}]) {
 
 type BookRating @model @auth(rules: [{allow: private}]){
   overallEnjoyment: Int
+  pacing: Int
+  prose: Int
+  qualityOfDiscussion: Int
+
+  storytelling: Int
+  complexity: Int
+  characterDevelopment: Int
+
+  teaching: Int
+  depthOfKnowledge: Int
+  relevance: Int
+  notes: String
 }

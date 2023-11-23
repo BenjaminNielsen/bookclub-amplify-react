@@ -22,6 +22,16 @@ export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -126,6 +136,16 @@ export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
 export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
   getBookRating(id: $id) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt
@@ -144,6 +164,16 @@ export const listBookRatings = /* GraphQL */ `query ListBookRatings(
   listBookRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt

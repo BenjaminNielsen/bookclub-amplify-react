@@ -8,8 +8,8 @@ import {Button, Card, Divider, Heading, View, Image, ButtonGroup, TextField} fro
 
 interface EditUserBookDetailsProps {
     userBook: UserBook
-    onDeleteParent: any
-    onUpdateParent: any
+    onDeleteParent: Function
+    onUpdateParent: Function
 }
 
 export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateParent}: EditUserBookDetailsProps): React.ReactElement | null {

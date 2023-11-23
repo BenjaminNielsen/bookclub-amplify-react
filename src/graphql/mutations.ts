@@ -25,6 +25,16 @@ export const createUserBooks = /* GraphQL */ `mutation CreateUserBooks(
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -60,6 +70,16 @@ export const updateUserBooks = /* GraphQL */ `mutation UpdateUserBooks(
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -95,6 +115,16 @@ export const deleteUserBooks = /* GraphQL */ `mutation DeleteUserBooks(
     progress
     userRating {
       overallEnjoyment
+      pacing
+      prose
+      qualityOfDiscussion
+      storytelling
+      complexity
+      characterDevelopment
+      teaching
+      depthOfKnowledge
+      relevance
+      notes
       id
       createdAt
       updatedAt
@@ -191,6 +221,16 @@ export const createBookRating = /* GraphQL */ `mutation CreateBookRating(
 ) {
   createBookRating(input: $input, condition: $condition) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt
@@ -207,6 +247,16 @@ export const updateBookRating = /* GraphQL */ `mutation UpdateBookRating(
 ) {
   updateBookRating(input: $input, condition: $condition) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt
@@ -223,6 +273,16 @@ export const deleteBookRating = /* GraphQL */ `mutation DeleteBookRating(
 ) {
   deleteBookRating(input: $input, condition: $condition) {
     overallEnjoyment
+    pacing
+    prose
+    qualityOfDiscussion
+    storytelling
+    complexity
+    characterDevelopment
+    teaching
+    depthOfKnowledge
+    relevance
+    notes
     id
     createdAt
     updatedAt
