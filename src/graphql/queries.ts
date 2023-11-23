@@ -25,6 +25,7 @@ export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -139,6 +140,7 @@ export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment
@@ -167,6 +169,7 @@ export const listBookRatings = /* GraphQL */ `query ListBookRatings(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment

@@ -28,6 +28,7 @@ export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -73,6 +74,7 @@ export const onUpdateUserBooks = /* GraphQL */ `subscription OnUpdateUserBooks(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -118,6 +120,7 @@ export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -220,6 +223,7 @@ export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment
@@ -245,6 +249,7 @@ export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment
@@ -270,6 +275,7 @@ export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment

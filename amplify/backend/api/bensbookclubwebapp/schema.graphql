@@ -35,7 +35,7 @@ type BookRating @model @auth(rules: [{allow: private}]){
   pacing: Int
   prose: Int
   qualityOfDiscussion: Int
-
+  isFiction: Boolean
   storytelling: Int
   complexity: Int
   characterDevelopment: Int
