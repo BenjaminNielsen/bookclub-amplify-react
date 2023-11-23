@@ -28,6 +28,7 @@ export const createUserBooks = /* GraphQL */ `mutation CreateUserBooks(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -73,6 +74,7 @@ export const updateUserBooks = /* GraphQL */ `mutation UpdateUserBooks(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -118,6 +120,7 @@ export const deleteUserBooks = /* GraphQL */ `mutation DeleteUserBooks(
       pacing
       prose
       qualityOfDiscussion
+      isFiction
       storytelling
       complexity
       characterDevelopment
@@ -224,6 +227,7 @@ export const createBookRating = /* GraphQL */ `mutation CreateBookRating(
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment
@@ -250,6 +254,7 @@ export const updateBookRating = /* GraphQL */ `mutation UpdateBookRating(
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment
@@ -276,6 +281,7 @@ export const deleteBookRating = /* GraphQL */ `mutation DeleteBookRating(
     pacing
     prose
     qualityOfDiscussion
+    isFiction
     storytelling
     complexity
     characterDevelopment

@@ -12,12 +12,11 @@ import {IconContext} from "react-icons";
 import {BiSolidBookAdd} from "react-icons/bi";
 import {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreateForm";
 import suggestionBookToUserBook from "../../services/bookConverters";
-import {SuggestionBooks} from "../../types/API";
+import {SuggestionBooks, UserBooks} from "../../types/API";
 import {Button, Heading, View} from "@aws-amplify/ui-react";
-import {UserBook} from "../../types/UserBooks";
 
 interface SuggestionBooksProps {
-    userBooks: UserBook[]
+    userBooks: UserBooks[]
     suggestionBooks: SuggestionBooks[],
     callUpdateBooks: Function
 }

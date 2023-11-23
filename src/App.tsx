@@ -16,7 +16,6 @@ import {
     Routes,
     Route,
 } from 'react-router-dom';
-import {UserBook} from "./types/UserBooks";
 import {SuggestionBooks, UserBooks} from "./types/API";
 import {listSuggestionBooks, listUserBooks} from "./graphql/queries";
 import {generateClient} from 'aws-amplify/api';
@@ -24,7 +23,7 @@ import {generateClient} from 'aws-amplify/api';
 
 export function App({signOut, user}: WithAuthenticatorProps) {
     const API = generateClient({authMode: 'userPool'})
-    const [userBooks, setUserBooks] = useState<Array<UserBook>>(() => [])
+    const [userBooks, setUserBooks] = useState<Array<UserBooks>>(() => [])
     const [suggestionBooks, setSuggestionBooks] = useState<Array<SuggestionBooks>>(() => [])
 
 

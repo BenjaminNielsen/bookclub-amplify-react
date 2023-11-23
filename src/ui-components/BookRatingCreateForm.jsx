@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SwitchField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createBookRating } from "../graphql/mutations";
@@ -27,6 +33,7 @@ export default function BookRatingCreateForm(props) {
     pacing: "",
     prose: "",
     qualityOfDiscussion: "",
+    isFiction: false,
     storytelling: "",
     complexity: "",
     characterDevelopment: "",
@@ -43,6 +50,7 @@ export default function BookRatingCreateForm(props) {
   const [qualityOfDiscussion, setQualityOfDiscussion] = React.useState(
     initialValues.qualityOfDiscussion
   );
+  const [isFiction, setIsFiction] = React.useState(initialValues.isFiction);
   const [storytelling, setStorytelling] = React.useState(
     initialValues.storytelling
   );
@@ -62,6 +70,7 @@ export default function BookRatingCreateForm(props) {
     setPacing(initialValues.pacing);
     setProse(initialValues.prose);
     setQualityOfDiscussion(initialValues.qualityOfDiscussion);
+    setIsFiction(initialValues.isFiction);
     setStorytelling(initialValues.storytelling);
     setComplexity(initialValues.complexity);
     setCharacterDevelopment(initialValues.characterDevelopment);
@@ -76,6 +85,7 @@ export default function BookRatingCreateForm(props) {
     pacing: [],
     prose: [],
     qualityOfDiscussion: [],
+    isFiction: [],
     storytelling: [],
     complexity: [],
     characterDevelopment: [],
@@ -114,6 +124,7 @@ export default function BookRatingCreateForm(props) {
           pacing,
           prose,
           qualityOfDiscussion,
+          isFiction,
           storytelling,
           complexity,
           characterDevelopment,
@@ -191,6 +202,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -229,6 +241,7 @@ export default function BookRatingCreateForm(props) {
               pacing: value,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -267,6 +280,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose: value,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -305,6 +319,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion: value,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -328,6 +343,41 @@ export default function BookRatingCreateForm(props) {
         hasError={errors.qualityOfDiscussion?.hasError}
         {...getOverrideProps(overrides, "qualityOfDiscussion")}
       ></TextField>
+      <SwitchField
+        label="Is fiction"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isFiction}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              overallEnjoyment,
+              pacing,
+              prose,
+              qualityOfDiscussion,
+              isFiction: value,
+              storytelling,
+              complexity,
+              characterDevelopment,
+              teaching,
+              depthOfKnowledge,
+              relevance,
+              notes,
+            };
+            const result = onChange(modelFields);
+            value = result?.isFiction ?? value;
+          }
+          if (errors.isFiction?.hasError) {
+            runValidationTasks("isFiction", value);
+          }
+          setIsFiction(value);
+        }}
+        onBlur={() => runValidationTasks("isFiction", isFiction)}
+        errorMessage={errors.isFiction?.errorMessage}
+        hasError={errors.isFiction?.hasError}
+        {...getOverrideProps(overrides, "isFiction")}
+      ></SwitchField>
       <TextField
         label="Storytelling"
         isRequired={false}
@@ -345,6 +395,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling: value,
               complexity,
               characterDevelopment,
@@ -383,6 +434,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity: value,
               characterDevelopment,
@@ -421,6 +473,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment: value,
@@ -461,6 +514,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -499,6 +553,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -537,6 +592,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,
@@ -571,6 +627,7 @@ export default function BookRatingCreateForm(props) {
               pacing,
               prose,
               qualityOfDiscussion,
+              isFiction,
               storytelling,
               complexity,
               characterDevelopment,

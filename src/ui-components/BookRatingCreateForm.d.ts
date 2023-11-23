@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -26,6 +26,7 @@ export declare type BookRatingCreateFormInputValues = {
     pacing?: number;
     prose?: number;
     qualityOfDiscussion?: number;
+    isFiction?: boolean;
     storytelling?: number;
     complexity?: number;
     characterDevelopment?: number;
@@ -39,6 +40,7 @@ export declare type BookRatingCreateFormValidationValues = {
     pacing?: ValidationFunction<number>;
     prose?: ValidationFunction<number>;
     qualityOfDiscussion?: ValidationFunction<number>;
+    isFiction?: ValidationFunction<boolean>;
     storytelling?: ValidationFunction<number>;
     complexity?: ValidationFunction<number>;
     characterDevelopment?: ValidationFunction<number>;
@@ -54,6 +56,7 @@ export declare type BookRatingCreateFormOverridesProps = {
     pacing?: PrimitiveOverrideProps<TextFieldProps>;
     prose?: PrimitiveOverrideProps<TextFieldProps>;
     qualityOfDiscussion?: PrimitiveOverrideProps<TextFieldProps>;
+    isFiction?: PrimitiveOverrideProps<SwitchFieldProps>;
     storytelling?: PrimitiveOverrideProps<TextFieldProps>;
     complexity?: PrimitiveOverrideProps<TextFieldProps>;
     characterDevelopment?: PrimitiveOverrideProps<TextFieldProps>;
