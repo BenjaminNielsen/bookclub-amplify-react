@@ -83,6 +83,7 @@ export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateP
 
                 <TextField name="dateStarted" label={"Date Started"} type="date" value={dateStarted??""} onChange={onDateStartedChanged}/>
                 <TextField name="dateFinished"  label={"Date Finished"} type="date" value={dateFinished??""} onChange={onDateFinishedChanged}/>
+                {dateFinished && <Button>Rating</Button>}
                 <ButtonGroup justifyContent="center" variation="primary">
                     <Button onClick={onDeleteClick} colorTheme="error"> Delete </Button>
                     <Button onClick={onUpdateClick}> Update </Button>
