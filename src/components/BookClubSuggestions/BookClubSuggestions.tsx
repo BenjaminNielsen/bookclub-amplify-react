@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {generateClient} from 'aws-amplify/api';
-import {listSuggestionBooks} from "../../graphql/queries";
 import {createUserBooks, deleteSuggestionBooks} from "../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
@@ -15,36 +14,31 @@ import {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreat
 import suggestionBookToUserBook from "../../services/bookConverters";
 import {SuggestionBooks} from "../../types/API";
 import {Button, Heading, View} from "@aws-amplify/ui-react";
+import {UserBook} from "../../types/UserBooks";
 
-export default function BookClubSuggestions(): React.ReactElement | null {
+interface SuggestionBooksProps {
+    userBooks: UserBook[]
+    suggestionBooks: SuggestionBooks[],
+    callUpdateBooks: Function
+}
+
+export default function BookClubSuggestions({userBooks, suggestionBooks, callUpdateBooks}: SuggestionBooksProps): React.ReactElement | null {
 
     const API = generateClient({authMode: 'userPool'});
-    const [books, setBooks] = useState<Array<SuggestionBooks>>(() => [])
     DEFAULT_OPTIONS.highlightOnHover = true;
     const materialTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(materialTheme);
-
-    useEffect(() => {
-        fetchBooks()
-            .then((booksFromAPI: SuggestionBooks[]) => setBooks(booksFromAPI));
-    }, []);
-
-    async function fetchBooks(): Promise<Array<SuggestionBooks>> {
-        const apiData: any = await API.graphql({query: listSuggestionBooks});
-        return apiData.data.listSuggestionBooks.items;
-    }
 
     async function onDeleteBook(id: string | null) {
         if (id == null) {
             console.error("null passed into onDeleteBook")
             return
         }
-        const newBooks = books.filter((book: SuggestionBooks) => book.id !== id);
-        setBooks(newBooks);
         await API.graphql({
             query: deleteSuggestionBooks,
             variables: {input: {id}},
         });
+        callUpdateBooks()
     }
 
     async function onAddToMyBooks(book: Book): Promise<void> {
@@ -58,6 +52,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
                 input: newUserBook
             },
         });
+        callUpdateBooks()
     }
 
     const COLUMNS = [
@@ -68,12 +63,12 @@ export default function BookClubSuggestions(): React.ReactElement | null {
         {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
-                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}>
-                        <IconContext.Provider value={{color: "green"}}>
+                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)} isDisabled={userBooks.some(userBook => userBook.isbn === book.isbn)}>
+                        <IconContext.Provider
+                            value={{color: userBooks.some(userBook => userBook.isbn === book.isbn) ? "grey" : "green"}}>
                             <BiSolidBookAdd/>
                         </IconContext.Provider>
                     </Button>
-
                 )
             }
         },
@@ -93,7 +88,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
     return (
         <View>
             <Heading level={2}>Current Book Suggestions</Heading>
-            <CompactTable columns={COLUMNS} data={{nodes: books}} theme={theme}/>
+            <CompactTable columns={COLUMNS} data={{nodes: suggestionBooks}} theme={theme}/>
         </View>
     )
 }
