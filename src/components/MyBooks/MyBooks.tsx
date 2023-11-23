@@ -4,7 +4,7 @@ import {generateClient} from 'aws-amplify/api';
 import {CompactTable} from "@table-library/react-table-library/compact";
 import {listUserBooks} from "../../graphql/queries";
 import {UserBook} from "../../types/UserBooks";
-import EditUserBookDetails from "../EditUserBookDetails/EditUserBookDetails";
+import EditUserBookDetails from "./EditUserBookDetails/EditUserBookDetails";
 import {useRowSelect} from "@table-library/react-table-library/select";
 import {useTheme} from '@table-library/react-table-library/theme';
 import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';

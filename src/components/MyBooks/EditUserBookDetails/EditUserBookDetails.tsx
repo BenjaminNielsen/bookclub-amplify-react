@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {generateClient} from "aws-amplify/api";
-import {deleteUserBooks, updateUserBooks} from "../../graphql/mutations";
-import {UserBook} from "../../types/UserBooks";
+import {deleteUserBooks, updateUserBooks} from "../../../graphql/mutations";
+import {UserBook} from "../../../types/UserBooks";
 
 import {Button, Card, Divider, Heading, View, Image, ButtonGroup, TextField} from "@aws-amplify/ui-react";
 
