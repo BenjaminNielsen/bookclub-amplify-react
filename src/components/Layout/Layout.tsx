@@ -1,9 +1,8 @@
-import {NavLink, Outlet} from "react-router-dom";
-import Hamburger from "./Navbar/Hamburger";
-import "./Navbar/Hamburger.scss";
-import {Button, View} from "@aws-amplify/ui-react";
+import { Outlet} from "react-router-dom";
+import { View} from "@aws-amplify/ui-react";
 import React from "react";
 import {AuthUser} from "aws-amplify/src/auth";
+import {Navbar} from "./Navbar/Navbar";
 /* A "layout route" is a good place to put markup you want to
           share across all the pages on your site, like navigation. */
 interface LayoutProps {
@@ -14,11 +13,7 @@ export default function Layout({user, signOut}: LayoutProps) {
     return (
         <div>
 
-            <NavLink to="/myBooks">My Books</NavLink>
-            <NavLink to="/suggestions">Suggestions</NavLink>
-            <NavLink to="/addBooks">Add Books</NavLink>
-            <NavLink to="/events">Events</NavLink>
-            <Button onClick={signOut}>Sign out</Button>
+            <Navbar user={user} signOut={signOut}></Navbar>
             {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
