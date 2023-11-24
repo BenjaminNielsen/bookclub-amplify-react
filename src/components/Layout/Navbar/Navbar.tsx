@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-
-import "./Navbar.css";
-import { Link, NavLink } from "react-router-dom";
-import {Button} from "@aws-amplify/ui-react";
+import React, {useState} from "react";
+import "./Navbar.scss";
+import {Link, NavLink} from "react-router-dom";
 import {AuthUser} from "aws-amplify/src/auth";
-
+import {SignOutButton} from "./SignoutButton/SignOutButton";
 
 interface NavbarProps {
     user: AuthUser | undefined
     signOut: any
 }
-export const Navbar = ({user, signOut}:NavbarProps) => {
+
+export const Navbar = ({user, signOut}: NavbarProps) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
@@ -37,7 +36,7 @@ export const Navbar = ({user, signOut}:NavbarProps) => {
                     <NavLink to="/events">Events</NavLink>
                 </li>
                 <li>
-                    <Button onClick={signOut}>Sign out</Button>
+                    <SignOutButton signOut={signOut}></SignOutButton>
                 </li>
             </ul>
         </nav>

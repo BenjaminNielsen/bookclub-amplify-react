@@ -1,18 +1,11 @@
 import React, {useEffect, useState} from "react";
 import "@aws-amplify/ui-react/styles.css";
-import {
-    View, withAuthenticator, WithAuthenticatorProps,
-} from "@aws-amplify/ui-react";
+import {View, withAuthenticator, WithAuthenticatorProps,} from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
 import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
 import MyBooks from "./components/MyBooks/MyBooks";
-import Header from "./components/Header/Header";
 import Events from "./components/Events/Events";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
 import {SuggestionBooks, UserBooks} from "./types/API";
 import {listSuggestionBooks, listUserBooks} from "./graphql/queries";
 import {generateClient} from 'aws-amplify/api';
@@ -56,14 +49,15 @@ export function App({signOut, user}: WithAuthenticatorProps) {
                 <Routes>
                     <Route path="/" element={<Layout user={user} signOut={signOut}/>}>
                         <Route index element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
-                        <Route path="myBooks" element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
-                        <Route path="suggestions" element={<BookClubSuggestions userBooks={userBooks} suggestionBooks={suggestionBooks} callUpdateBooks={updateSuggestionBooks}/>}/>
+                        <Route path="myBooks"
+                               element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
+                        <Route path="suggestions"
+                               element={<BookClubSuggestions userBooks={userBooks} suggestionBooks={suggestionBooks}
+                                                             callUpdateBooks={updateSuggestionBooks}/>}/>
                         <Route path="addBooks" element={<AddBook/>}/>
                         <Route path="events" element={<Events/>}/>
 
-                        {/* Using path="*"" means "match anything", so this route
-                acts like a catch-all for URLs that we don't have explicit
-                routes for. */}
+                        {/* catch-all for URLs that we don't have routes for. */}
                         <Route path="*" element={<ErrorPage/>}/>
                     </Route>
                 </Routes>

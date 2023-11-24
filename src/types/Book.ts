@@ -1,10 +1,10 @@
 import {UserBooksCreateFormInputValues} from "../ui-components/UserBooksCreateForm";
 
-export class Book  {
+export class Book {
     id?: string
     isbn?: string
     title?: string
-    thumbnailUrl?:string
+    thumbnailUrl?: string
     author?: [string]
     genre?: [string]
     numberInSeries?: string
@@ -12,15 +12,15 @@ export class Book  {
     description?: string
     createdAt?: Date
 
-    toUserBook():UserBooksCreateFormInputValues {
+    toUserBook(): UserBooksCreateFormInputValues {
 
         return {
             isbn: this.isbn,
             title: this.title,
-            author : this.author,
-            genre : this.genre,
-            description : this.description,
-            wordCount : this.wordCount
+            author: this.author,
+            genre: this.genre,
+            description: this.description,
+            wordCount: this.wordCount
         }
 
     }

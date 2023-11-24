@@ -62,7 +62,8 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
         {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
-                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)} isDisabled={userBooks.some(userBook => userBook.isbn === book.isbn)}>
+                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}
+                            isDisabled={userBooks.some(userBook => userBook.isbn === book.isbn)}>
                         <IconContext.Provider
                             value={{color: userBooks.some(userBook => userBook.isbn === book.isbn) ? "grey" : "green"}}>
                             <BiSolidBookAdd/>

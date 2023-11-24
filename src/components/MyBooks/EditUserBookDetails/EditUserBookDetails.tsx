@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {generateClient} from "aws-amplify/api";
 import {deleteUserBooks, updateUserBooks} from "../../../graphql/mutations";
 
-import {Button, Card, Divider, Heading, View, Image, ButtonGroup, TextField} from "@aws-amplify/ui-react";
+import {Button, ButtonGroup, Card, Divider, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
 import {UserBooks} from "../../../types/API";
 
 
@@ -19,18 +19,18 @@ export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateP
     const [dateStarted, setDateStarted] = useState(userBook.dateStarted)
     const [dateFinished, setDateFinished] = useState(userBook.dateFinished)
 
-    function onDateStartedChanged(e: React.ChangeEvent<HTMLInputElement>):void {
-        const newDate:string = e.target.value
+    function onDateStartedChanged(e: React.ChangeEvent<HTMLInputElement>): void {
+        const newDate: string = e.target.value
         setDateStarted(newDate)
     }
 
-    function onDateFinishedChanged(e: React.ChangeEvent<HTMLInputElement>):void {
-        const newDate:string = e.target.value
+    function onDateFinishedChanged(e: React.ChangeEvent<HTMLInputElement>): void {
+        const newDate: string = e.target.value
         setDateFinished(newDate)
     }
 
     async function onUpdateClick() {
-        if(!userBook.id){
+        if (!userBook.id) {
             console.error("tried to edit details on book with no id")
             return
         }
@@ -54,8 +54,9 @@ export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateP
         });
         onUpdateParent()
     }
+
     async function onDeleteClick() {
-        if(!userBook.id){
+        if (!userBook.id) {
             console.error("tried to delete book with no id")
             return
         }
@@ -74,15 +75,17 @@ export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateP
             variation="outlined"
         >
             <Image
-                src={userBook.thumbnailUrl??""}
+                src={userBook.thumbnailUrl ?? ""}
                 alt={"thumbnail for " + userBook.title}
             />
             <View padding="xs">
-                <Divider padding="xs" />
+                <Divider padding="xs"/>
                 <Heading padding="medium">{userBook.title}</Heading>
 
-                <TextField name="dateStarted" label={"Date Started"} type="date" value={dateStarted??""} onChange={onDateStartedChanged}/>
-                <TextField name="dateFinished"  label={"Date Finished"} type="date" value={dateFinished??""} onChange={onDateFinishedChanged}/>
+                <TextField name="dateStarted" label={"Date Started"} type="date" value={dateStarted ?? ""}
+                           onChange={onDateStartedChanged}/>
+                <TextField name="dateFinished" label={"Date Finished"} type="date" value={dateFinished ?? ""}
+                           onChange={onDateFinishedChanged}/>
                 {dateFinished && <Button>Rating</Button>}
                 <ButtonGroup justifyContent="center" variation="primary">
                     <Button onClick={onDeleteClick} colorTheme="error"> Delete </Button>

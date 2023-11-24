@@ -2,7 +2,7 @@ import {TextField} from "@aws-amplify/ui-react";
 import React from "react";
 import {FieldProps} from "./FieldProps";
 
-export default function TitleField({value, hasError, onChange}: FieldProps): React.ReactElement | null{
+export default function TitleField({value, hasError, onChange}: FieldProps): React.ReactElement | null {
 
     return (
         <TextField

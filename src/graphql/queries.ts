@@ -3,9 +3,10 @@
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "../types/API";
+
 type GeneratedQuery<InputType, OutputType> = string & {
-  __generatedQueryInput: InputType;
-  __generatedQueryOutput: OutputType;
+    __generatedQueryInput: InputType;
+    __generatedQueryOutput: OutputType;
 };
 
 export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
@@ -48,8 +49,8 @@ export const getUserBooks = /* GraphQL */ `query GetUserBooks($id: ID!) {
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetUserBooksQueryVariables,
-  APITypes.GetUserBooksQuery
+    APITypes.GetUserBooksQueryVariables,
+    APITypes.GetUserBooksQuery
 >;
 export const listUserBooks = /* GraphQL */ `query ListUserBooks(
   $filter: ModelUserBooksFilterInput
@@ -81,8 +82,8 @@ export const listUserBooks = /* GraphQL */ `query ListUserBooks(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListUserBooksQueryVariables,
-  APITypes.ListUserBooksQuery
+    APITypes.ListUserBooksQueryVariables,
+    APITypes.ListUserBooksQuery
 >;
 export const getSuggestionBooks = /* GraphQL */ `query GetSuggestionBooks($id: ID!) {
   getSuggestionBooks(id: $id) {
@@ -102,8 +103,8 @@ export const getSuggestionBooks = /* GraphQL */ `query GetSuggestionBooks($id: I
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetSuggestionBooksQueryVariables,
-  APITypes.GetSuggestionBooksQuery
+    APITypes.GetSuggestionBooksQueryVariables,
+    APITypes.GetSuggestionBooksQuery
 >;
 export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
   $filter: ModelSuggestionBooksFilterInput
@@ -131,8 +132,8 @@ export const listSuggestionBooks = /* GraphQL */ `query ListSuggestionBooks(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListSuggestionBooksQueryVariables,
-  APITypes.ListSuggestionBooksQuery
+    APITypes.ListSuggestionBooksQueryVariables,
+    APITypes.ListSuggestionBooksQuery
 >;
 export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
   getBookRating(id: $id) {
@@ -155,8 +156,8 @@ export const getBookRating = /* GraphQL */ `query GetBookRating($id: ID!) {
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetBookRatingQueryVariables,
-  APITypes.GetBookRatingQuery
+    APITypes.GetBookRatingQueryVariables,
+    APITypes.GetBookRatingQuery
 >;
 export const listBookRatings = /* GraphQL */ `query ListBookRatings(
   $filter: ModelBookRatingFilterInput
@@ -187,6 +188,6 @@ export const listBookRatings = /* GraphQL */ `query ListBookRatings(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListBookRatingsQueryVariables,
-  APITypes.ListBookRatingsQuery
+    APITypes.ListBookRatingsQueryVariables,
+    APITypes.ListBookRatingsQuery
 >;

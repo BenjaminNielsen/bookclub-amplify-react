@@ -54,17 +54,20 @@ export default function MyBooks({userBooks, callUpdateBooks}: MyBooksProps): Rea
                 <Heading level={2}>My Books</Heading>
                 <Autocomplete
                     label="Autocomplete Search"
-                    options={userBooks.map((book)=> {return {"id":book.id, "label":book.title??""}})}
+                    options={userBooks.map((book) => {
+                        return {"id": book.id, "label": book.title ?? ""}
+                    })}
                     placeholder="Search Titles"
                     variation="quiet"
-                    />
+                />
                 <CompactTable theme={theme} columns={COLUMNS} data={data} select={select}/>
             </View>
             <Flex justifyContent="center">
                 {selectedBook != null && <Ratings userBook={selectedBook}></Ratings>}
             </Flex>
             <Flex justifyContent="center">
-                {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDeleteParent={onDeleteClick} onUpdateParent={onUpdateClick}/>}
+                {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDeleteParent={onDeleteClick}
+                                                              onUpdateParent={onUpdateClick}/>}
             </Flex>
         </div>
     )

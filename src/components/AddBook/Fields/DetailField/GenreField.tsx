@@ -2,8 +2,8 @@ import {TextField} from "@aws-amplify/ui-react";
 import React from "react";
 import {DetailFieldProps} from "./DetailFieldProps";
 
-export default function GenresField({value, hasError, onChange, isVisible}: DetailFieldProps): React.ReactElement | null{
-    if(isVisible) {
+export default function GenresField({value, hasError, onChange, isVisible}: DetailFieldProps): React.ReactElement | null {
+    if (isVisible) {
         return (
             <TextField
                 name="genre"

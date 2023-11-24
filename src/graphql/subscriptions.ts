@@ -3,9 +3,10 @@
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "../types/API";
+
 type GeneratedSubscription<InputType, OutputType> = string & {
-  __generatedSubscriptionInput: InputType;
-  __generatedSubscriptionOutput: OutputType;
+    __generatedSubscriptionInput: InputType;
+    __generatedSubscriptionOutput: OutputType;
 };
 
 export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
@@ -51,8 +52,8 @@ export const onCreateUserBooks = /* GraphQL */ `subscription OnCreateUserBooks(
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateUserBooksSubscriptionVariables,
-  APITypes.OnCreateUserBooksSubscription
+    APITypes.OnCreateUserBooksSubscriptionVariables,
+    APITypes.OnCreateUserBooksSubscription
 >;
 export const onUpdateUserBooks = /* GraphQL */ `subscription OnUpdateUserBooks(
   $filter: ModelSubscriptionUserBooksFilterInput
@@ -97,8 +98,8 @@ export const onUpdateUserBooks = /* GraphQL */ `subscription OnUpdateUserBooks(
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateUserBooksSubscriptionVariables,
-  APITypes.OnUpdateUserBooksSubscription
+    APITypes.OnUpdateUserBooksSubscriptionVariables,
+    APITypes.OnUpdateUserBooksSubscription
 >;
 export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
   $filter: ModelSubscriptionUserBooksFilterInput
@@ -143,8 +144,8 @@ export const onDeleteUserBooks = /* GraphQL */ `subscription OnDeleteUserBooks(
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteUserBooksSubscriptionVariables,
-  APITypes.OnDeleteUserBooksSubscription
+    APITypes.OnDeleteUserBooksSubscriptionVariables,
+    APITypes.OnDeleteUserBooksSubscription
 >;
 export const onCreateSuggestionBooks = /* GraphQL */ `subscription OnCreateSuggestionBooks(
   $filter: ModelSubscriptionSuggestionBooksFilterInput
@@ -166,8 +167,8 @@ export const onCreateSuggestionBooks = /* GraphQL */ `subscription OnCreateSugge
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateSuggestionBooksSubscriptionVariables,
-  APITypes.OnCreateSuggestionBooksSubscription
+    APITypes.OnCreateSuggestionBooksSubscriptionVariables,
+    APITypes.OnCreateSuggestionBooksSubscription
 >;
 export const onUpdateSuggestionBooks = /* GraphQL */ `subscription OnUpdateSuggestionBooks(
   $filter: ModelSubscriptionSuggestionBooksFilterInput
@@ -189,8 +190,8 @@ export const onUpdateSuggestionBooks = /* GraphQL */ `subscription OnUpdateSugge
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateSuggestionBooksSubscriptionVariables,
-  APITypes.OnUpdateSuggestionBooksSubscription
+    APITypes.OnUpdateSuggestionBooksSubscriptionVariables,
+    APITypes.OnUpdateSuggestionBooksSubscription
 >;
 export const onDeleteSuggestionBooks = /* GraphQL */ `subscription OnDeleteSuggestionBooks(
   $filter: ModelSubscriptionSuggestionBooksFilterInput
@@ -212,8 +213,8 @@ export const onDeleteSuggestionBooks = /* GraphQL */ `subscription OnDeleteSugge
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteSuggestionBooksSubscriptionVariables,
-  APITypes.OnDeleteSuggestionBooksSubscription
+    APITypes.OnDeleteSuggestionBooksSubscriptionVariables,
+    APITypes.OnDeleteSuggestionBooksSubscription
 >;
 export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating(
   $filter: ModelSubscriptionBookRatingFilterInput
@@ -238,8 +239,8 @@ export const onCreateBookRating = /* GraphQL */ `subscription OnCreateBookRating
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateBookRatingSubscriptionVariables,
-  APITypes.OnCreateBookRatingSubscription
+    APITypes.OnCreateBookRatingSubscriptionVariables,
+    APITypes.OnCreateBookRatingSubscription
 >;
 export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating(
   $filter: ModelSubscriptionBookRatingFilterInput
@@ -264,8 +265,8 @@ export const onUpdateBookRating = /* GraphQL */ `subscription OnUpdateBookRating
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateBookRatingSubscriptionVariables,
-  APITypes.OnUpdateBookRatingSubscription
+    APITypes.OnUpdateBookRatingSubscriptionVariables,
+    APITypes.OnUpdateBookRatingSubscription
 >;
 export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating(
   $filter: ModelSubscriptionBookRatingFilterInput
@@ -290,6 +291,6 @@ export const onDeleteBookRating = /* GraphQL */ `subscription OnDeleteBookRating
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteBookRatingSubscriptionVariables,
-  APITypes.OnDeleteBookRatingSubscription
+    APITypes.OnDeleteBookRatingSubscriptionVariables,
+    APITypes.OnDeleteBookRatingSubscription
 >;
