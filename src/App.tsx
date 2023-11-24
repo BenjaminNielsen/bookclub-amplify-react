@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 import {
     View, withAuthenticator, WithAuthenticatorProps,
@@ -52,11 +51,10 @@ export function App({signOut, user}: WithAuthenticatorProps) {
 
 
     return (
-        <View className="App">
-            <Header user={user} signOut={signOut}></Header>
+        <View>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
+                    <Route path="/" element={<Layout user={user} signOut={signOut}/>}>
                         <Route index element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
                         <Route path="myBooks" element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
                         <Route path="suggestions" element={<BookClubSuggestions userBooks={userBooks} suggestionBooks={suggestionBooks} callUpdateBooks={updateSuggestionBooks}/>}/>
