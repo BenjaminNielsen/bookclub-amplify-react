@@ -14,19 +14,15 @@ import {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreat
 import suggestionBookToUserBook from "../../services/bookConverters";
 import {SuggestionBooks, UserBooks} from "../../types/API";
 import {Button, Heading, View} from "@aws-amplify/ui-react";
+import {useLoaderData} from "react-router-dom";
 
-interface SuggestionBooksProps {
-    userBooks: UserBooks[]
-    suggestionBooks: SuggestionBooks[],
-    callUpdateBooks: Function
-}
-
-export default function BookClubSuggestions({userBooks, suggestionBooks, callUpdateBooks}: SuggestionBooksProps): React.ReactElement | null {
+export default function BookClubSuggestions(): React.ReactElement | null {
 
     const API = generateClient({authMode: 'userPool'});
     DEFAULT_OPTIONS.highlightOnHover = true;
     const materialTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(materialTheme);
+    const suggestionBooks = useLoaderData() as SuggestionBooks[]
 
     async function onDeleteBook(id: string | null) {
         if (id == null) {
@@ -37,7 +33,6 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
             query: deleteSuggestionBooks,
             variables: {input: {id}},
         });
-        callUpdateBooks()
     }
 
     async function onAddToMyBooks(book: Book): Promise<void> {
@@ -51,7 +46,6 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
                 input: newUserBook
             },
         });
-        callUpdateBooks()
     }
 
     const COLUMNS = [
@@ -62,12 +56,8 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
         {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
-                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}
-                            isDisabled={userBooks.some(userBook => userBook.isbn === book.isbn)}>
-                        <IconContext.Provider
-                            value={{color: userBooks.some(userBook => userBook.isbn === book.isbn) ? "grey" : "green"}}>
+                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}>
                             <BiSolidBookAdd/>
-                        </IconContext.Provider>
                     </Button>
                 )
             }

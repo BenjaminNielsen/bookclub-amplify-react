@@ -1,4 +1,4 @@
-import {Autocomplete, Flex, Heading, View} from "@aws-amplify/ui-react";
+import {Autocomplete, Heading, View} from "@aws-amplify/ui-react";
 import React, {useState} from "react";
 import {CompactTable} from "@table-library/react-table-library/compact";
 import EditUserBookDetails from "./EditUserBookDetails/EditUserBookDetails";
@@ -7,18 +7,16 @@ import {useTheme} from '@table-library/react-table-library/theme';
 import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';
 import Ratings from "./Ratings/Ratings";
 import {UserBooks} from "../../types/API";
+import {Outlet, redirect, Route, Routes, useLoaderData, useNavigate} from "react-router-dom";
 
 
-interface MyBooksProps {
-    userBooks: UserBooks[],
-    callUpdateBooks: Function
-}
-
-export default function MyBooks({userBooks, callUpdateBooks}: MyBooksProps): React.ReactElement | null {
+export default function MyBooks(): React.ReactElement | null {
 
     const [selectedBook, setSelectedBook] = useState<UserBooks | null>(null)
     const materialTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(materialTheme);
+    const navigate = useNavigate()
+    let userBooks:UserBooks[] = useLoaderData() as UserBooks[]
     const data: { nodes: Array<UserBooks> } = {nodes: userBooks}
 
     const select = useRowSelect(data, {
@@ -29,15 +27,16 @@ export default function MyBooks({userBooks, callUpdateBooks}: MyBooksProps): Rea
         if (state.id === null)
             return
         setSelectedBook(userBooks.find((book) => book.id === state.id) ?? null)
+        navigate(`edit/${state.id}`,{relative:"path"})
     }
 
     async function onDeleteClick() {
-        callUpdateBooks()
+        //callUpdateBooks()
         setSelectedBook(null)
     }
 
     async function onUpdateClick() {
-        callUpdateBooks()
+        //callUpdateBooks()
         setSelectedBook(null)
     }
 
@@ -50,8 +49,9 @@ export default function MyBooks({userBooks, callUpdateBooks}: MyBooksProps): Rea
 
     return (
         <div>
-            <View>
-                <Heading level={2}>My Books</Heading>
+            <Heading level={2}>My Books</Heading>
+            {!selectedBook &&
+           <View>
                 <Autocomplete
                     label="Autocomplete Search"
                     options={userBooks.map((book) => {
@@ -62,13 +62,8 @@ export default function MyBooks({userBooks, callUpdateBooks}: MyBooksProps): Rea
                 />
                 <CompactTable theme={theme} columns={COLUMNS} data={data} select={select}/>
             </View>
-            <Flex justifyContent="center">
-                {selectedBook != null && <Ratings userBook={selectedBook}></Ratings>}
-            </Flex>
-            <Flex justifyContent="center">
-                {selectedBook != null && <EditUserBookDetails userBook={selectedBook} onDeleteParent={onDeleteClick}
-                                                              onUpdateParent={onUpdateClick}/>}
-            </Flex>
+            }
+            <Outlet/>
         </div>
     )
 

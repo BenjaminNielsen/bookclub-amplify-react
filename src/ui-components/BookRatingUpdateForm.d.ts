@@ -5,9 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import {GridProps, SwitchFieldProps, TextFieldProps} from "@aws-amplify/ui-react";
-import {BookRating} from "../types/API.ts";
-
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { BookRating } from "../types/API.ts";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;

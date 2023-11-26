@@ -2,20 +2,15 @@ import React, {useState} from "react";
 import {generateClient} from "aws-amplify/api";
 import {deleteUserBooks, updateUserBooks} from "../../../graphql/mutations";
 
-import {Button, ButtonGroup, Card, Divider, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
+import {Button, ButtonGroup, Card, Divider, Flex, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
 import {UserBooks} from "../../../types/API";
+import {useLoaderData} from "react-router-dom";
 
 
-interface EditUserBookDetailsProps {
-    userBook: UserBooks
-    onDeleteParent: Function
-    onUpdateParent: Function
-}
 
-export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateParent}: EditUserBookDetailsProps): React.ReactElement | null {
+export default function EditUserBookDetails(): React.ReactElement | null {
 
-    const API = generateClient()
-
+    const userBook:UserBooks  = useLoaderData() as UserBooks;
     const [dateStarted, setDateStarted] = useState(userBook.dateStarted)
     const [dateFinished, setDateFinished] = useState(userBook.dateFinished)
 
@@ -29,70 +24,71 @@ export default function EditUserBookDetails({userBook, onDeleteParent, onUpdateP
         setDateFinished(newDate)
     }
 
-    async function onUpdateClick() {
-        if (!userBook.id) {
-            console.error("tried to edit details on book with no id")
-            return
-        }
-        await API.graphql({
-            query: updateUserBooks,
-            variables: {
-                input: {
-                    "id": userBook.id,
-                    "isbn": userBook.isbn,
-                    "title": userBook.title,
-                    "author": ['Ben'],
-                    "genre": ['Genre'],
-                    "numberInSeries": userBook.numberInSeries,
-                    "wordCount": userBook.wordCount,
-                    "description": userBook.description,
-                    "progress": 1020,
-                    "dateStarted": dateStarted,
-                    "dateFinished": dateFinished
-                }
-            },
-        });
-        onUpdateParent()
-    }
+    // async function onUpdateClick() {
+    //     if (!userBook.id) {
+    //         console.error("tried to edit details on book with no id")
+    //         return
+    //     }
+    //     await API.graphql({
+    //         query: updateUserBooks,
+    //         variables: {
+    //             input: {
+    //                 "id": userBook.id,
+    //                 "isbn": userBook.isbn,
+    //                 "title": userBook.title,
+    //                 "author": ['Ben'],
+    //                 "genre": ['Genre'],
+    //                 "numberInSeries": userBook.numberInSeries,
+    //                 "wordCount": userBook.wordCount,
+    //                 "description": userBook.description,
+    //                 "progress": 1020,
+    //                 "dateStarted": dateStarted,
+    //                 "dateFinished": dateFinished
+    //             }
+    //         },
+    //     });
+    //     onUpdateParent()
+    // }
 
-    async function onDeleteClick() {
-        if (!userBook.id) {
-            console.error("tried to delete book with no id")
-            return
-        }
-        await API.graphql({
-            query: deleteUserBooks,
-            variables: {input: {"id": userBook.id,}},
-        });
-        onDeleteParent();
-    }
-
+    // async function onDeleteClick() {
+    //     if (!userBook.id) {
+    //         console.error("tried to delete book with no id")
+    //         return
+    //     }
+    //     await API.graphql({
+    //         query: deleteUserBooks,
+    //         variables: {input: {"id": userBook.id,}},
+    //     });
+    //     onDeleteParent();
+    // }
 
     return (
-        <Card
-            borderRadius="medium"
-            maxWidth="20rem"
-            variation="outlined"
-        >
-            <Image
-                src={userBook.thumbnailUrl ?? ""}
-                alt={"thumbnail for " + userBook.title}
-            />
-            <View padding="xs">
-                <Divider padding="xs"/>
-                <Heading padding="medium">{userBook.title}</Heading>
+        <Flex justifyContent="center">
+            <Card
+                borderRadius="medium"
+                maxWidth="20rem"
+                variation="outlined"
+            >
+                <Image
+                    src={userBook.thumbnailUrl ?? ""}
+                    alt={"thumbnail for " + userBook.title}
+                />
+                <View padding="xs">
+                    <Divider padding="xs"/>
+                    <Heading padding="medium">{userBook.title}</Heading>
 
-                <TextField name="dateStarted" label={"Date Started"} type="date" value={dateStarted ?? ""}
-                           onChange={onDateStartedChanged}/>
-                <TextField name="dateFinished" label={"Date Finished"} type="date" value={dateFinished ?? ""}
-                           onChange={onDateFinishedChanged}/>
-                {dateFinished && <Button>Rating</Button>}
-                <ButtonGroup justifyContent="center" variation="primary">
-                    <Button onClick={onDeleteClick} colorTheme="error"> Delete </Button>
-                    <Button onClick={onUpdateClick}> Update </Button>
-                </ButtonGroup>
-            </View>
-        </Card>
+                    <TextField name="dateStarted" label={"Date Started"} type="date" value={dateStarted ?? ""}
+                               onChange={onDateStartedChanged}/>
+                    <TextField name="dateFinished" label={"Date Finished"} type="date" value={dateFinished ?? ""}
+                               onChange={onDateFinishedChanged}/>
+                    {dateFinished && <Button>Rating</Button>}
+                    <ButtonGroup justifyContent="center" variation="primary">
+                        <Button colorTheme="error"> Delete </Button>
+                        <Button> Update </Button>
+                    </ButtonGroup>
+                </View>
+            </Card>
+        </Flex>
     )
 
 }
