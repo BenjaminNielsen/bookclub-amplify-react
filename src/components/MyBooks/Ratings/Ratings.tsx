@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
 import {BookRating, UserBooks} from "../../../types/API";
+import './RatingsDesign.scss'
 
 interface RatingsProps {
     userBook: UserBooks | undefined
@@ -38,16 +39,20 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
     const [isFiction, setIsFiction] = useState(userBook?.userRating?.isFiction ?? true);
 
     return <Card variation="elevated">
-        <Heading level={3}>Rating</Heading>
-        <Heading level={5}>{userBook?.title}</Heading>
-        <SwitchField
+        <Heading className="RatingHeading" level={3}>Rating</Heading>
+        <Heading className="bookTitle" level={5}>{userBook?.title}</Heading>
+        <div className="switchField">
+        <SwitchField 
             label={isFiction ? "Fiction" : "Non-Fiction"}
             labelPosition="start"
             isChecked={isFiction}
             onChange={e => setIsFiction(e.target.checked)}
         />
+        </div>
+
         <Divider/>
         <StepperField
+            className="enjoymentLabel"
             max={10}
             min={0}
             step={1}
@@ -57,6 +62,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
             label="Overall Enjoyment"
         />
         <StepperField
+            className="pacingLabel"
             max={10}
             min={0}
             step={1}
@@ -66,6 +72,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
             label="Pacing"
         />
         <StepperField
+            className="proseLabel"
             max={10}
             min={0}
             step={1}
@@ -75,6 +82,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
             label="Prose"
         />
         <StepperField
+            className="qualityLabel"
             max={10}
             min={0}
             step={1}
@@ -85,6 +93,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
         />
         {isFiction &&
         <StepperField
+            className="storyTellingLabel"
             max={10}
             min={0}
             step={1}
@@ -96,6 +105,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
         
         {isFiction &&
         <StepperField
+            className="complexityLabel"
             max={10}
             min={0}
             step={1}
@@ -107,6 +117,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
 
         {isFiction &&
         <StepperField
+            className="characterDevelopmentLabel"
             max={10}
             min={0}
             step={1}
@@ -118,6 +129,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
 
         {!isFiction &&
         <StepperField
+            className="teachingLabel"
             max={10}
             min={0}
             step={1}
@@ -129,6 +141,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
 
         {!isFiction &&
          <StepperField
+            className="depthLabel"
             max={10}
             min={0}
             step={1}
@@ -140,6 +153,7 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
 
         {!isFiction && 
          <StepperField
+            className="relevanceLabel"
             max={10}
             min={0}
             step={1}
@@ -151,7 +165,8 @@ export default function Ratings({userBook}: RatingsProps): React.ReactElement | 
         />}
 
 
-        <TextAreaField label="Notes" id="notes" name="notes" value={notes} onChange={onNotesChange}/>
+
+        <TextAreaField className="notesLabel" label="Notes" id="notes" name="notes" value={notes} onChange={onNotesChange}/>
     </Card>
 
 }
