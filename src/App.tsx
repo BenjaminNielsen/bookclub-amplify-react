@@ -3,7 +3,7 @@ import "@aws-amplify/ui-react/styles.css";
 import {withAuthenticator, WithAuthenticatorProps,} from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
 import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
-import MyBooks from "./components/MyBooks/MyBooks";
+import BookSelection from "./components/MyBooks/BookSelection/BookSelection";
 import Events from "./components/Events/Events";
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import ErrorPage from "./components/ErrorPage/ErrorPage";
@@ -11,6 +11,9 @@ import Layout from "./components/Layout/Layout";
 import {fetchUserBooks, getUserBookById} from "./services/userBookLoader";
 import {fetchSuggestionBooks} from "./services/suggestionBookLoader";
 import EditUserBookDetails from "./components/MyBooks/EditUserBookDetails/EditUserBookDetails";
+import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
+import Ratings from "./components/MyBooks/Ratings/Ratings";
+import {getBookRatingsId} from "./services/ratingsLoader";
 
 
 export function App({signOut, user}: WithAuthenticatorProps) {
@@ -22,14 +25,27 @@ export function App({signOut, user}: WithAuthenticatorProps) {
             errorElement: <ErrorPage />,
             children: [
                 {
-                    path: "my-books",
-                    loader: fetchUserBooks,
-                    element: <MyBooks/>,
+                    path:"my-books/*",
+                    element: <MyBooksLayout/>,
                     children:[
+                        {
+                            path:"",
+                            loader: fetchUserBooks,
+                            element: <BookSelection/>,
+                        },
                         {
                             path:"edit/:id",
                             loader: getUserBookById,
-                            element: <EditUserBookDetails />
+                            element: <EditUserBookDetails />,
+                        },
+                        {
+                            path:"rating/:id",
+                            loader:getBookRatingsId,
+                            element: <Ratings/>
+                        },
+                        {
+                            path: "add",
+                            element: <AddBook/>
                         }
                     ]
                 },

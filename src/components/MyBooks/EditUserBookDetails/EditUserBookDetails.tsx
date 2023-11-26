@@ -4,7 +4,7 @@ import {deleteUserBooks, updateUserBooks} from "../../../graphql/mutations";
 
 import {Button, ButtonGroup, Card, Divider, Flex, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
 import {UserBooks} from "../../../types/API";
-import {useLoaderData} from "react-router-dom";
+import {Link, redirect, useLoaderData, useNavigate} from "react-router-dom";
 
 
 
@@ -23,6 +23,11 @@ export default function EditUserBookDetails(): React.ReactElement | null {
         const newDate: string = e.target.value
         setDateFinished(newDate)
     }
+
+    // function onRatingsClick(): void {
+    //     const navigate = useNavigate();
+    //     navigate(`ratings/${userBook.id}`, {relative: "path"})
+    // }
 
     // async function onUpdateClick() {
     //     if (!userBook.id) {
@@ -66,7 +71,6 @@ export default function EditUserBookDetails(): React.ReactElement | null {
         <Flex justifyContent="center">
             <Card
                 borderRadius="medium"
-                maxWidth="20rem"
                 variation="outlined"
             >
                 <Image
@@ -77,11 +81,17 @@ export default function EditUserBookDetails(): React.ReactElement | null {
                     <Divider padding="xs"/>
                     <Heading padding="medium">{userBook.title}</Heading>
 
-                    <TextField name="dateStarted" label={"Date Started"} type="date" value={dateStarted ?? ""}
+                    <TextField name="dateStarted"
+                               label={"Date Started"}
+                               type="date"
+                               value={dateStarted ?? ""}
                                onChange={onDateStartedChanged}/>
-                    <TextField name="dateFinished" label={"Date Finished"} type="date" value={dateFinished ?? ""}
+                    <TextField name="dateFinished"
+                               label={"Date Finished"}
+                               type="date"
+                               value={dateFinished ?? ""}
                                onChange={onDateFinishedChanged}/>
-                    {dateFinished && <Button>Rating</Button>}
+                    {dateFinished && <Link to={`../rating/${userBook.id}`}>Ratings</Link>}
                     <ButtonGroup justifyContent="center" variation="primary">
                         <Button colorTheme="error"> Delete </Button>
                         <Button> Update </Button>

@@ -36,7 +36,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
     }
 
     async function onAddToMyBooks(book: Book): Promise<void> {
-        console.log("adding the following book to MyBooks: %o", book)
+        console.log("adding the following book to BookSelection: %o", book)
         //turn Book into UserBooks
         const newUserBook: UserBooksCreateFormInputValues = suggestionBookToUserBook(book)
         //call add in for user books api
