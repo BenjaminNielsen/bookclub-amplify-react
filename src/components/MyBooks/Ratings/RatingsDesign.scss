@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,500;1,100&family=Roboto:wght@100&display=swap');
+@import '../../../styles/colors';
 
 .RatingHeading{
     font-family: 'Raleway', sans-serif;
@@ -30,7 +31,7 @@
     border-top: solid 1px midnightblue;
     border-width: 1px;
     color: midnightblue;
-    font-family: 'Raleyway', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     font-size: large;
 }
@@ -86,4 +87,32 @@
     padding-top: 5px;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
+}
+
+.addBookButton{
+    background-color:#1B998B;
+    text-align: center;
+    color:  #EFF9F0;
+    border-color: blanchedalmond;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300px;
+    font-size: large;
+    padding: 5px;
+    border-color: #1B998B;
+    border-radius: 6px;
+    border-style:outset;
+    
+    &:not(.active) {
+        &:hover {
+          background-color: #3777FF;
+          border-color: #3777FF;
+        }
+    }
+}
+
+.myBooksHeader{
+    font-family: 'Raleway', sans-serif;
+    font-size:xxx-large;
+    font-weight: 300;
+
 }

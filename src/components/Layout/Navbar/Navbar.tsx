@@ -4,6 +4,7 @@ import {Link, NavLink} from "react-router-dom";
 import {AuthUser} from "aws-amplify/src/auth";
 import {SignOutButton} from "./SignoutButton/SignOutButton";
 
+
 interface NavbarProps {
     user: AuthUser | undefined
     signOut: any

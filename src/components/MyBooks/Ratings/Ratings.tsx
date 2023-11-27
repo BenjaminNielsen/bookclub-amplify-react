@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
 import {BookRating, UserBooks} from "../../../types/API";
-import './RatingsDesign.scss'
+import './RatingsDesign.scss';
 import {useLoaderData} from "react-router-dom";
 
 
