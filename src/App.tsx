@@ -2,18 +2,19 @@ import React from "react";
 import "@aws-amplify/ui-react/styles.css";
 import {withAuthenticator, WithAuthenticatorProps,} from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
-import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
+import BookClubSuggestions from "./components/Suggestions/Suggestions/BookClubSuggestions";
 import BookSelection from "./components/MyBooks/BookSelection/BookSelection";
 import Events from "./components/Events/Events";
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Layout from "./components/Layout/Layout";
-import {fetchUserBooks, getUserBookById} from "./services/userBookLoader";
-import {fetchSuggestionBooks} from "./services/suggestionBookLoader";
-import EditUserBookDetails from "./components/MyBooks/EditUserBookDetails/EditUserBookDetails";
+import {addUserBook, deleteUserBookById, fetchUserBooks, getUserBookById} from "./services/userBookLoader";
+import {addSuggestionBook, fetchSuggestionBooks} from "./services/suggestionBookLoader";
+import UserBookDetails from "./components/MyBooks/EditUserBookDetails/UserBookDetails";
 import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
 import Ratings from "./components/MyBooks/Ratings/Ratings";
 import {getBookRatingsId} from "./services/ratingsLoader";
+import SuggestionsLayout from "./components/Suggestions/SuggestionsLayout";
 
 
 export function App({signOut, user}: WithAuthenticatorProps) {
@@ -34,31 +35,42 @@ export function App({signOut, user}: WithAuthenticatorProps) {
                             element: <BookSelection/>,
                         },
                         {
-                            path:"edit/:id",
+                            path:":id",
                             loader: getUserBookById,
-                            element: <EditUserBookDetails />,
+                            element: <UserBookDetails />,
                         },
                         {
-                            path:"rating/:id",
+                            path:":bookId/rating/:id",
                             loader:getBookRatingsId,
                             element: <Ratings/>
                         },
                         {
+                            path: ":id/destroy",
+                            action: deleteUserBookById,
+                        },
+                        {
                             path: "add",
-                            element: <AddBook/>
+                            element: <AddBook/>,
+                            action: addUserBook
                         }
                     ]
                 },
                 {
-                    path: "suggestions",
-                    loader: fetchSuggestionBooks,
-                    element: <BookClubSuggestions/>,
+                    path: "suggestions/*",
+                    element: <SuggestionsLayout/>,
                     children: [
                         {
+                            path:"",
+                            loader: fetchSuggestionBooks,
+                            element: <BookClubSuggestions/>
+                        },
+                        {
                             path: "add",
-                            element: <AddBook/>
+                            element: <AddBook/>,
+                            action: addSuggestionBook
                         }
                     ]
+
                 },
                 {
                     path: "events",

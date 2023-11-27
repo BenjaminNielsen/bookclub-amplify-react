@@ -1,20 +1,20 @@
 import React from "react";
 import {generateClient} from 'aws-amplify/api';
-import {createUserBooks, deleteSuggestionBooks} from "../../graphql/mutations";
+import {createUserBooks, deleteSuggestionBooks} from "../../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
 import {useTheme} from '@table-library/react-table-library/theme';
 import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';
 
-import {Book} from "../../types/Book";
+import {Book} from "../../../types/Book";
 import {BsFillTrashFill} from "react-icons/bs";
 import {IconContext} from "react-icons";
 import {BiSolidBookAdd} from "react-icons/bi";
-import {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreateForm";
-import suggestionBookToUserBook from "../../services/bookConverters";
-import {SuggestionBooks, UserBooks} from "../../types/API";
-import {Button, Heading, View} from "@aws-amplify/ui-react";
-import {useLoaderData} from "react-router-dom";
+import {UserBooksCreateFormInputValues} from "../../../ui-components/UserBooksCreateForm";
+import suggestionBookToUserBook from "../../../services/bookConverters";
+import {SuggestionBooks} from "../../../types/API";
+import {Button, View} from "@aws-amplify/ui-react";
+import {Form, useLoaderData} from "react-router-dom";
 
 export default function BookClubSuggestions(): React.ReactElement | null {
 
@@ -57,7 +57,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
                     <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}>
-                            <BiSolidBookAdd/>
+                        <BiSolidBookAdd/>
                     </Button>
                 )
             }
@@ -65,7 +65,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
         {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
-                    <Button gap="0.1rem" size="small" onClick={() => onDeleteBook(book.id ?? null)}>
+                    <Button gap="0.1rem" size="small" colorTheme="error" onClick={() => onDeleteBook(book.id?? null)}>
                         <IconContext.Provider value={{color: "red"}}>
                             <BsFillTrashFill/>
                         </IconContext.Provider>
@@ -77,7 +77,6 @@ export default function BookClubSuggestions(): React.ReactElement | null {
 
     return (
         <View>
-            <Heading level={2}>Current Book Suggestions</Heading>
             <CompactTable columns={COLUMNS} data={{nodes: suggestionBooks}} theme={theme}/>
         </View>
     )

@@ -1,14 +1,13 @@
 import React, {useState} from "react";
-import {generateClient} from "aws-amplify/api";
-import {deleteUserBooks, updateUserBooks} from "../../../graphql/mutations";
+
 
 import {Button, ButtonGroup, Card, Divider, Flex, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
 import {UserBooks} from "../../../types/API";
-import {Link, redirect, useLoaderData, useNavigate} from "react-router-dom";
+import {Form, Link, redirect, useLoaderData, useNavigate} from "react-router-dom";
 
 
 
-export default function EditUserBookDetails(): React.ReactElement | null {
+export default function UserBookDetails(): React.ReactElement | null {
 
     const userBook:UserBooks  = useLoaderData() as UserBooks;
     const [dateStarted, setDateStarted] = useState(userBook.dateStarted)
@@ -55,17 +54,6 @@ export default function EditUserBookDetails(): React.ReactElement | null {
     //     onUpdateParent()
     // }
 
-    // async function onDeleteClick() {
-    //     if (!userBook.id) {
-    //         console.error("tried to delete book with no id")
-    //         return
-    //     }
-    //     await API.graphql({
-    //         query: deleteUserBooks,
-    //         variables: {input: {"id": userBook.id,}},
-    //     });
-    //     onDeleteParent();
-    // }
 
     return (
         <Flex justifyContent="center">
@@ -91,11 +79,29 @@ export default function EditUserBookDetails(): React.ReactElement | null {
                                type="date"
                                value={dateFinished ?? ""}
                                onChange={onDateFinishedChanged}/>
+
                     {dateFinished && <Link to={`../rating/${userBook.id}`}>Ratings</Link>}
+
                     <ButtonGroup justifyContent="center" variation="primary">
-                        <Button colorTheme="error"> Delete </Button>
+                        <Form
+                            method="post"
+                            action="destroy"
+                            onSubmit={(event) => {
+                                if (
+                                    !window.confirm(
+                                        "Please confirm you want to delete this record."
+                                    )
+                                ) {
+                                    event.preventDefault();
+                                }
+                            }}
+                        >
+                            <Button type="submit" colorTheme="error">Delete</Button>
+                        </Form>
                         <Button> Update </Button>
                     </ButtonGroup>
+
+
                 </View>
             </Card>
         </Flex>

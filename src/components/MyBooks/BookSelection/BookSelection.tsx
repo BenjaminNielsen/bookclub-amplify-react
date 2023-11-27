@@ -24,7 +24,7 @@ export default function BookSelection(): React.ReactElement | null {
         if (state.id === null)
             return
         setSelectedBook(userBooks.find((book) => book.id === state.id) ?? null)
-        navigate(`edit/${state.id}`, {relative: "path"})
+        navigate(`${state.id}`, {relative: "path"})
     }
 
     async function onDeleteClick() {
