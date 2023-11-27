@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,500;1,100&family=Roboto:wght@100&display=swap');
+
+.RatingHeading{
+    font-family: 'Raleway', sans-serif;
+    color: midnightblue;
+    font-weight:thin;
+    text-align: center;
+}
+
+.bookTitle{
+    font-family: 'Raleway', sans-serif;
+    color:darkslategrey;
+    font-size: larger;
+    font-weight: thin;
+    border-bottom: solid 2px midnightblue;
+    text-align: center;
+}
+
+.switchField{
+    float: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+}
+
+.amplify-stepperfield__input{
+    border-color: midnightblue;
+    border-top: solid 1px midnightblue;
+    border-width: 1px;
+    color: midnightblue;
+    font-family: 'Raleyway', sans-serif;
+    font-weight: 500;
+    font-size: large;
+}
+
+.amplify-stepperfield__button--increase{
+    border-radius: 8px;
+    color: midnightblue;
+    border-color: midnightblue;
+    border-width: 1px;
+}
+
+.amplify-stepperfield__button--decrease{
+    border-radius: 8px;
+    background-color:cadetblue;
+    color: antiquewhite;
+    border-color: midnightblue;
+    border-width: 1px;
+}
+
+.enjoymentLabel, .pacingLabel {
+   
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.proseLabel, .qualityLabel{
+    
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.storyTellingLabel, .complexityLabel{
+   
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.characterDevelopmentLabel, .teachingLabel{
+    
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.depthLabel, .relevanceLabel{
+    
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+.notesLabel{
+    display: inline-block;
+    padding-top: 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+}
