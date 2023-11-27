@@ -1,32 +1,28 @@
 import React from "react";
 import {generateClient} from 'aws-amplify/api';
-import {createUserBooks, deleteSuggestionBooks} from "../../graphql/mutations";
+import {createUserBooks, deleteSuggestionBooks} from "../../../graphql/mutations";
 
 import {CompactTable} from '@table-library/react-table-library/compact';
 import {useTheme} from '@table-library/react-table-library/theme';
 import {DEFAULT_OPTIONS, getTheme} from '@table-library/react-table-library/material-ui';
 
-import {Book} from "../../types/Book";
+import {Book} from "../../../types/Book";
 import {BsFillTrashFill} from "react-icons/bs";
 import {IconContext} from "react-icons";
 import {BiSolidBookAdd} from "react-icons/bi";
-import {UserBooksCreateFormInputValues} from "../../ui-components/UserBooksCreateForm";
-import suggestionBookToUserBook from "../../services/bookConverters";
-import {SuggestionBooks, UserBooks} from "../../types/API";
-import {Button, Heading, View} from "@aws-amplify/ui-react";
+import {UserBooksCreateFormInputValues} from "../../../ui-components/UserBooksCreateForm";
+import suggestionBookToUserBook from "../../../services/bookConverters";
+import {SuggestionBooks} from "../../../types/API";
+import {Button, View} from "@aws-amplify/ui-react";
+import {Form, useLoaderData} from "react-router-dom";
 
-interface SuggestionBooksProps {
-    userBooks: UserBooks[]
-    suggestionBooks: SuggestionBooks[],
-    callUpdateBooks: Function
-}
-
-export default function BookClubSuggestions({userBooks, suggestionBooks, callUpdateBooks}: SuggestionBooksProps): React.ReactElement | null {
+export default function BookClubSuggestions(): React.ReactElement | null {
 
     const API = generateClient({authMode: 'userPool'});
     DEFAULT_OPTIONS.highlightOnHover = true;
     const materialTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(materialTheme);
+    const suggestionBooks = useLoaderData() as SuggestionBooks[]
 
     async function onDeleteBook(id: string | null) {
         if (id == null) {
@@ -37,11 +33,10 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
             query: deleteSuggestionBooks,
             variables: {input: {id}},
         });
-        callUpdateBooks()
     }
 
     async function onAddToMyBooks(book: Book): Promise<void> {
-        console.log("adding the following book to MyBooks: %o", book)
+        console.log("adding the following book to BookSelection: %o", book)
         //turn Book into UserBooks
         const newUserBook: UserBooksCreateFormInputValues = suggestionBookToUserBook(book)
         //call add in for user books api
@@ -51,7 +46,6 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
                 input: newUserBook
             },
         });
-        callUpdateBooks()
     }
 
     const COLUMNS = [
@@ -62,12 +56,8 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
         {
             label: 'Add to My Books', renderCell: (book: Book) => {
                 return (
-                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}
-                            isDisabled={userBooks.some(userBook => userBook.isbn === book.isbn)}>
-                        <IconContext.Provider
-                            value={{color: userBooks.some(userBook => userBook.isbn === book.isbn) ? "grey" : "green"}}>
-                            <BiSolidBookAdd/>
-                        </IconContext.Provider>
+                    <Button gap="0.1rem" size="small" onClick={() => onAddToMyBooks(book)}>
+                        <BiSolidBookAdd/>
                     </Button>
                 )
             }
@@ -75,7 +65,7 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
         {
             label: 'Delete', renderCell: (book: Book) => {
                 return (
-                    <Button gap="0.1rem" size="small" onClick={() => onDeleteBook(book.id ?? null)}>
+                    <Button gap="0.1rem" size="small" colorTheme="error" onClick={() => onDeleteBook(book.id?? null)}>
                         <IconContext.Provider value={{color: "red"}}>
                             <BsFillTrashFill/>
                         </IconContext.Provider>
@@ -87,7 +77,6 @@ export default function BookClubSuggestions({userBooks, suggestionBooks, callUpd
 
     return (
         <View>
-            <Heading level={2}>Current Book Suggestions</Heading>
             <CompactTable columns={COLUMNS} data={{nodes: suggestionBooks}} theme={theme}/>
         </View>
     )

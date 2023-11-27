@@ -24,13 +24,10 @@ export const Navbar = ({user, signOut}: NavbarProps) => {
             </div>
             <ul className={menuOpen ? "open" : ""}>
                 <li>
-                    <NavLink to="/myBooks">My Books</NavLink>
+                    <NavLink to="/my-books">My Books</NavLink>
                 </li>
                 <li>
                     <NavLink to="/suggestions">Suggestions</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/addBooks">Add Books</NavLink>
                 </li>
                 <li>
                     <NavLink to="/events">Events</NavLink>

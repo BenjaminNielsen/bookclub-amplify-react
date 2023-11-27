@@ -1,6 +1,4 @@
-import {generateClient} from 'aws-amplify/api';
-import {createSuggestionBooks} from "../../graphql/mutations";
-import {Button, Card, Grid} from "@aws-amplify/ui-react";
+import {Button, Card} from "@aws-amplify/ui-react";
 import React, {useState} from "react";
 import ISBN from 'isbn3';
 import IsbnField from "./Fields/IsbnField";
@@ -14,6 +12,7 @@ import {GoogleBookInfo} from "../../types/GoogleBookInfo";
 import WordCountField from "./Fields/DetailField/WordCount";
 import {getBookByIsbn} from "../../services/GoogleBookAPI";
 import BookCreationAlert from "./Alerts/BookCreationAlert";
+import {Form} from "react-router-dom";
 
 
 export default function AddBook(): React.ReactElement | null {
@@ -29,34 +28,6 @@ export default function AddBook(): React.ReactElement | null {
     const [hasIsbnError, setHasIsbnError] = React.useState(false);
     const [detailsVisible, setDetailsVisible] = React.useState(false);
     const [hasBookCreateError, setHasBookCreateError] = React.useState(false);
-    const client = generateClient()
-
-    async function createBook(event: any) {
-        event.preventDefault();
-        const form = new FormData(event.target);
-        const data = {
-            isbn: form.get("isbn") as string,
-            title: form.get("title") as string,
-            thumbnailUrl: thumbnailUrl,
-            description: form.get("description") as string,
-            author: (form.get("author") as String)?.split(', '),
-            numberInSeries: form.get("numberInSeries") as string,
-            wordCount: parseInt(form.get("wordCount") as string),
-            genre: (form.get("genre") as String)?.split(', ')
-        };
-        try {
-            await client.graphql({
-                query: createSuggestionBooks,
-                variables: {input: data},
-            });
-            setAllFieldsToDefault()
-            event.target.reset();
-        } catch (e) {
-            console.error("Caught error creating book: %o", e)
-            setHasBookCreateError(true)
-        }
-
-    }
 
     function setPopulatedFieldsToDefault() {
         setTitle('')
@@ -145,29 +116,19 @@ export default function AddBook(): React.ReactElement | null {
 
     return (
         <Card variation="outlined">
-            <Grid
-                as="form"
-                rowGap="20px"
-                columnGap="15px"
-                padding="20px"
-                onSubmit={createBook}
-            >
+            <Form method="post">
                 <BookCreationAlert isVisible={hasBookCreateError} onDismiss={onErrorDismiss}/>
                 <IsbnField value={givenIsbn} hasError={hasIsbnError} onChange={onIsbnChange}/>
                 <TitleField value={title} hasError={false} onChange={onTitleChange}/>
-                <DescriptionField value={description} hasError={false} onChange={onDescriptionChange}
-                                  isVisible={detailsVisible}/>
+                <DescriptionField value={description} hasError={false} onChange={onDescriptionChange} isVisible={detailsVisible}/>
                 <AuthorField value={author} hasError={false} onChange={onAuthorChange} isVisible={detailsVisible}/>
                 <GenreField value={genre} hasError={false} onChange={onGenreChange} isVisible={detailsVisible}/>
-                <NumberInSeriesField value={numberInSeries} hasError={false} onChange={onNumberInSeriesChange}
-                                     isVisible={detailsVisible}/>
-                <WordCountField value={wordCount} hasError={false} onChange={onWordCountChange}
-                                isVisible={detailsVisible}/>
+                <NumberInSeriesField value={numberInSeries} hasError={false} onChange={onNumberInSeriesChange} isVisible={detailsVisible}/>
+                <WordCountField value={wordCount} hasError={false} onChange={onWordCountChange} isVisible={detailsVisible}/>
                 <Button type="submit" variation="primary" isDisabled={!detailsVisible}>
                     Create Book
                 </Button>
-
-            </Grid>
+            </Form>
         </Card>
     )
 }

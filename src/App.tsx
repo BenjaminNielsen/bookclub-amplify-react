@@ -1,69 +1,87 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "@aws-amplify/ui-react/styles.css";
-import {View, withAuthenticator, WithAuthenticatorProps,} from "@aws-amplify/ui-react";
+import {withAuthenticator, WithAuthenticatorProps,} from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
-import BookClubSuggestions from "./components/BookClubSuggestions/BookClubSuggestions";
-import MyBooks from "./components/MyBooks/MyBooks";
+import BookClubSuggestions from "./components/Suggestions/Suggestions/BookClubSuggestions";
+import BookSelection from "./components/MyBooks/BookSelection/BookSelection";
 import Events from "./components/Events/Events";
-import {BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
-import {SuggestionBooks, UserBooks} from "./types/API";
-import {listSuggestionBooks, listUserBooks} from "./graphql/queries";
-import {generateClient} from 'aws-amplify/api';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Layout from "./components/Layout/Layout";
+import {addUserBook, deleteUserBookById, fetchUserBooks, getUserBookById} from "./services/userBookLoader";
+import {addSuggestionBook, fetchSuggestionBooks} from "./services/suggestionBookLoader";
+import UserBookDetails from "./components/MyBooks/EditUserBookDetails/UserBookDetails";
+import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
+import Ratings from "./components/MyBooks/Ratings/Ratings";
+import {getBookRatingsId} from "./services/ratingsLoader";
+import SuggestionsLayout from "./components/Suggestions/SuggestionsLayout";
+
 
 export function App({signOut, user}: WithAuthenticatorProps) {
-    const API = generateClient({authMode: 'userPool'})
-    const [userBooks, setUserBooks] = useState<Array<UserBooks>>(() => [])
-    const [suggestionBooks, setSuggestionBooks] = useState<Array<SuggestionBooks>>(() => [])
 
+    const router = createBrowserRouter([
+        {
+            path: "/*",
+            element: <Layout user={user} signOut={signOut}/>,
+            errorElement: <ErrorPage />,
+            children: [
+                {
+                    path:"my-books/*",
+                    element: <MyBooksLayout/>,
+                    children:[
+                        {
+                            path:"",
+                            loader: fetchUserBooks,
+                            element: <BookSelection/>,
+                        },
+                        {
+                            path:":id",
+                            loader: getUserBookById,
+                            element: <UserBookDetails />,
+                        },
+                        {
+                            path:":bookId/rating/:id",
+                            loader:getBookRatingsId,
+                            element: <Ratings/>
+                        },
+                        {
+                            path: ":id/destroy",
+                            action: deleteUserBookById,
+                        },
+                        {
+                            path: "add",
+                            element: <AddBook/>,
+                            action: addUserBook
+                        }
+                    ]
+                },
+                {
+                    path: "suggestions/*",
+                    element: <SuggestionsLayout/>,
+                    children: [
+                        {
+                            path:"",
+                            loader: fetchSuggestionBooks,
+                            element: <BookClubSuggestions/>
+                        },
+                        {
+                            path: "add",
+                            element: <AddBook/>,
+                            action: addSuggestionBook
+                        }
+                    ]
 
-    useEffect(() => {
-        updateUserBooks()
-        updateSuggestionBooks()
-    }, []);
+                },
+                {
+                    path: "events",
+                    element: <Events/>
+                }
+            ]
+        },
+    ]);
 
-    function updateUserBooks() {
-        fetchUserBooks().then((booksFromAPI: UserBooks[]) => setUserBooks(booksFromAPI));
-    }
+    return <RouterProvider router={router}/>
 
-    async function fetchUserBooks(): Promise<UserBooks[]> {
-        const apiData = await API.graphql({query: listUserBooks});
-        return apiData.data.listUserBooks.items
-    }
-
-    function updateSuggestionBooks() {
-        fetchSuggestionBooks().then((booksFromAPI: SuggestionBooks[]) => setSuggestionBooks(booksFromAPI));
-        updateUserBooks()
-    }
-
-    async function fetchSuggestionBooks(): Promise<SuggestionBooks[]> {
-        const apiData: any = await API.graphql({query: listSuggestionBooks});
-        return apiData.data.listSuggestionBooks.items;
-    }
-
-
-    return (
-        <View>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Layout user={user} signOut={signOut}/>}>
-                        <Route index element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
-                        <Route path="myBooks"
-                               element={<MyBooks userBooks={userBooks} callUpdateBooks={updateUserBooks}/>}/>
-                        <Route path="suggestions"
-                               element={<BookClubSuggestions userBooks={userBooks} suggestionBooks={suggestionBooks}
-                                                             callUpdateBooks={updateSuggestionBooks}/>}/>
-                        <Route path="addBooks" element={<AddBook/>}/>
-                        <Route path="events" element={<Events/>}/>
-
-                        {/* catch-all for URLs that we don't have routes for. */}
-                        <Route path="*" element={<ErrorPage/>}/>
-                    </Route>
-                </Routes>
-            </Router>
-        </View>
-    )
 }
 
 export default withAuthenticator(App);

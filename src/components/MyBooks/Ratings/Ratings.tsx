@@ -1,31 +1,29 @@
 import React, {useState} from "react";
 import {Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
 import {BookRating, UserBooks} from "../../../types/API";
+import {useLoaderData} from "react-router-dom";
 
-interface RatingsProps {
-    userBook: UserBooks
-}
 
-export default function Ratings({userBook}: RatingsProps): React.ReactElement | null {
-    const bookRating: BookRating | null = null
+export default function Ratings(): React.ReactElement | null {
+    const bookRating:BookRating | null = useLoaderData() as BookRating
 
-    const [overallEnjoyment, setOverallEnjoyment] = useState(userBook.userRating?.overallEnjoyment ?? 0)
+
+    const [overallEnjoyment, setOverallEnjoyment] = useState(bookRating?.overallEnjoyment ?? 0)
     const handleOnOverallEnjoymentChange = (newValue: number) => setOverallEnjoyment(newValue);
-    const [pacing, setPacing] = useState(userBook.userRating?.pacing ?? 0)
+    const [pacing, setPacing] = useState(bookRating?.pacing ?? 0)
     const handleOnPacingChange = (newValue: number) => setPacing(newValue);
-    const [prose, setProse] = useState(userBook.userRating?.prose ?? 0)
+    const [prose, setProse] = useState(bookRating?.prose ?? 0)
     const handleOnProseChange = (newValue: number) => setProse(newValue);
-    const [qualityOfDiscussion, setQualityOfDiscussion] = useState(userBook.userRating?.qualityOfDiscussion ?? 0)
+    const [qualityOfDiscussion, setQualityOfDiscussion] = useState(bookRating?.qualityOfDiscussion ?? 0)
     const handleOnQualityOfDiscussionChange = (newValue: number) => setQualityOfDiscussion(newValue);
 
-    const [notes, setNotes] = useState(userBook.userRating?.notes ?? "")
+    const [notes, setNotes] = useState(bookRating?.notes ?? "")
     const onNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setNotes(e.target.value);
-    const [isFiction, setIsFiction] = useState(userBook.userRating?.isFiction ?? true);
+    const [isFiction, setIsFiction] = useState(bookRating?.isFiction ?? true);
 
 
     return <Card variation="elevated">
         <Heading level={3}>Rating</Heading>
-        <Heading level={5}>{userBook.title}</Heading>
         <SwitchField
             label={isFiction ? "Fiction" : "Non-Fiction"}
             labelPosition="start"
