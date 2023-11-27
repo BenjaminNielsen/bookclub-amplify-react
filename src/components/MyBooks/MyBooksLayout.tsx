@@ -9,9 +9,9 @@ export default function MyBooksLayout(): React.ReactElement  {
     return (
         <View>
             <Heading className="myBooksHeader" level={2}>My Books</Heading>
-            <button type="button" className="addBookButton" onClick={(e) => {
-                e.preventDefault();window.location.href=
-                'https://www.bens-book-club.com/my-books';}}>Add Book</button>
+            <Link to={"add"}>
+                <button type="button" className="addBookButton">Add Book</button>
+            </Link>
             <Outlet/>
         </View>
     )
