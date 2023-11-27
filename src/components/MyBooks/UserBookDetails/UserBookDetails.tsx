@@ -80,7 +80,7 @@ export default function UserBookDetails(): React.ReactElement | null {
                                value={dateFinished ?? ""}
                                onChange={onDateFinishedChanged}/>
 
-                    {dateFinished && <Link to={`../rating/${userBook.id}`}>Ratings</Link>}
+                    {dateFinished && <Link to={`rating/${userBook.id}`}>Ratings</Link>}
 
                     <ButtonGroup justifyContent="center" variation="primary">
                         <Form

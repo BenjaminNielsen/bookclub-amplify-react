@@ -10,7 +10,7 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Layout from "./components/Layout/Layout";
 import {addUserBook, deleteUserBookById, fetchUserBooks, getUserBookById} from "./services/userBookLoader";
 import {addSuggestionBook, fetchSuggestionBooks} from "./services/suggestionBookLoader";
-import UserBookDetails from "./components/MyBooks/EditUserBookDetails/UserBookDetails";
+import UserBookDetails from "./components/MyBooks/UserBookDetails/UserBookDetails";
 import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
 import Ratings from "./components/MyBooks/Ratings/Ratings";
 import {getBookRatingsId} from "./services/ratingsLoader";
