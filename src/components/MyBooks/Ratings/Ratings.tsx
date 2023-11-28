@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import {Button, Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
-import {BookRating, UserBooks} from "../../../types/API";
+import {BookRating} from "../../../types/API";
 import './RatingsDesign.scss';
-import {useLoaderData, Link} from "react-router-dom";
-import UserBookDetails from "../UserBookDetails/UserBookDetails";
+import {useLoaderData, Link, useNavigate} from "react-router-dom";
 
 
 export default function Ratings(): React.ReactElement | null {
-    const bookRating:BookRating | null = useLoaderData() as BookRating
+    const bookRating: BookRating | null = useLoaderData() as BookRating
 
     const [overallEnjoyment, setOverallEnjoyment] = useState(bookRating?.overallEnjoyment ?? 0)
     const handleOnOverallEnjoymentChange = (newValue: number) => setOverallEnjoyment(newValue);
@@ -34,18 +33,19 @@ export default function Ratings(): React.ReactElement | null {
     const [notes, setNotes] = useState(bookRating?.notes ?? "")
     const onNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setNotes(e.target.value);
     const [isFiction, setIsFiction] = useState(bookRating?.isFiction ?? true);
+    const navigate = useNavigate();
 
 
     return <Card variation="elevated">
         <Heading className="RatingHeading" level={3}>Rating</Heading>
         <Heading className="bookTitle" level={5}>"Title?"</Heading>
         <div className="switchField">
-        <SwitchField
-            label={isFiction ? "Fiction" : "Non-Fiction"}
-            labelPosition="start"
-            isChecked={isFiction}
-            onChange={e => setIsFiction(e.target.checked)}
-        />
+            <SwitchField
+                label={isFiction ? "Fiction" : "Non-Fiction"}
+                labelPosition="start"
+                isChecked={isFiction}
+                onChange={e => setIsFiction(e.target.checked)}
+            />
         </div>
 
         <Divider/>
@@ -90,88 +90,88 @@ export default function Ratings(): React.ReactElement | null {
             label="Quality Of Discussion"
         />
         {isFiction &&
-        <StepperField
-            className="storyTellingLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={storyTelling}
-            variation="quiet"
-            onStepChange={handleOnStoryTellingChange}
-            label="Story Telling"
-        />}
+            <StepperField
+                className="storyTellingLabel"
+                max={10}
+                min={0}
+                step={1}
+                value={storyTelling}
+                variation="quiet"
+                onStepChange={handleOnStoryTellingChange}
+                label="Story Telling"
+            />}
 
         {isFiction &&
-        <StepperField
-            className="complexityLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={complexity}
-            variation="quiet"
-            onStepChange={handleOnComplexityChange}
-            label="Complexity"
-        />}
+            <StepperField
+                className="complexityLabel"
+                max={10}
+                min={0}
+                step={1}
+                value={complexity}
+                variation="quiet"
+                onStepChange={handleOnComplexityChange}
+                label="Complexity"
+            />}
 
         {isFiction &&
-        <StepperField
-            className="characterDevelopmentLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={characterDevelopment}
-            variation="quiet"
-            onStepChange={handleOnCharacterDevelopmentChange}
-            label="Character Development"
-        />}
+            <StepperField
+                className="characterDevelopmentLabel"
+                max={10}
+                min={0}
+                step={1}
+                value={characterDevelopment}
+                variation="quiet"
+                onStepChange={handleOnCharacterDevelopmentChange}
+                label="Character Development"
+            />}
 
         {!isFiction &&
-        <StepperField
-            className="teachingLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={teaching}
-            variation="quiet"
-            onStepChange={handleOnTeachingChange}
-            label="Teaching"
-        />}
+            <StepperField
+                className="teachingLabel"
+                max={10}
+                min={0}
+                step={1}
+                value={teaching}
+                variation="quiet"
+                onStepChange={handleOnTeachingChange}
+                label="Teaching"
+            />}
 
         {!isFiction &&
-         <StepperField
-            className="depthLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={depthOfKnowledge}
-            variation="quiet"
-            onStepChange={handleOnDepthOfKnowledgeChange}
-            label="Depth of Knowledge"
-        />}
+            <StepperField
+                className="depthLabel"
+                max={10}
+                min={0}
+                step={1}
+                value={depthOfKnowledge}
+                variation="quiet"
+                onStepChange={handleOnDepthOfKnowledgeChange}
+                label="Depth of Knowledge"
+            />}
 
         {!isFiction &&
-         <StepperField
-            className="relevanceLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={relevance}
-            variation="quiet"
-            onStepChange={handleOnRelevanceChange}
-            label="Relevance"
+            <StepperField
+                className="relevanceLabel"
+                max={10}
+                min={0}
+                step={1}
+                value={relevance}
+                variation="quiet"
+                onStepChange={handleOnRelevanceChange}
+                label="Relevance"
 
-        />}
+            />}
         <div>
-        <Link to="http://localhost:3000/my-books">
-                <Button type="button" colorTheme="error" className="cancelButton">Cancel</Button>
-                </Link>
 
-                <Link to="http://localhost:3000/my-books">
-                <Button type="submit" variation="primary" className="submitButton" >Submit</Button>
-                </Link>
+            <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
+
+            <Link to="../">
+                <Button variation="primary" className="submitButton">Submit</Button>
+            </Link>
         </div>
 
-        <TextAreaField className="notesLabel" label="Notes" id="notes" name="notes" value={notes} onChange={onNotesChange}/>
+        <TextAreaField className="notesLabel" label="Notes" id="notes" name="notes" value={notes}
+                       onChange={onNotesChange}/>
     </Card>
 
 
