@@ -37,6 +37,7 @@
 }
 
 .amplify-stepperfield__button--increase{
+    border: 50%;
     border-radius: 8px;
     color: midnightblue;
     border-color: midnightblue;
@@ -44,6 +45,7 @@
 }
 
 .amplify-stepperfield__button--decrease{
+    border: 50%;
     border-radius: 8px;
     background-color:cadetblue;
     color: antiquewhite;
@@ -52,31 +54,31 @@
 }
 
 .enjoymentLabel, .pacingLabel {
-   
+    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .proseLabel, .qualityLabel{
-    
+    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .storyTellingLabel, .complexityLabel{
-   
+    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .characterDevelopmentLabel, .teachingLabel{
-    
+    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .depthLabel, .relevanceLabel{
-    
+    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
@@ -90,29 +92,68 @@
 }
 
 .addBookButton{
-    background-color:#1B998B;
-    text-align: center;
-    color:  #EFF9F0;
-    border-color: blanchedalmond;
     font-family: 'Roboto', sans-serif;
     font-weight: 300px;
     font-size: large;
-    padding: 5px;
-    border-color: #1B998B;
-    border-radius: 6px;
-    border-style:outset;
-    
-    &:not(.active) {
-        &:hover {
-          background-color: #3777FF;
-          border-color: #3777FF;
-        }
-    }
+    margin-top: 5px;
+    margin-left: 50px;   
 }
-
 .myBooksHeader{
+    margin-top: 10px;
+    margin-left: 5px;
     font-family: 'Raleway', sans-serif;
     font-size:xxx-large;
     font-weight: 300;
 
+}
+
+.imageThumbnail{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ratingsButton{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300px;
+    font-size: large;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    width: 50%;
+    height: 50%;
+    text-decoration: none;
+}
+
+.updateButton{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300px;
+    font-size: large;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.deleteButton{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300px;
+    font-size: large;
+    margin-top: 5px;
+    margin-bottom: 5px;   
+}
+
+.cancelButton{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300px;
+    font-size: large;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.submitButton{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300px;
+    font-size: large;
+    margin-top: 10px;
+    float: right;
 }

@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import {Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
+import {Button, Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
 import {BookRating, UserBooks} from "../../../types/API";
 import './RatingsDesign.scss';
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, Link} from "react-router-dom";
+import UserBookDetails from "../UserBookDetails/UserBookDetails";
 
 
 export default function Ratings(): React.ReactElement | null {
@@ -160,10 +161,18 @@ export default function Ratings(): React.ReactElement | null {
             label="Relevance"
 
         />}
+        <div>
+        <Link to="http://localhost:3000/my-books">
+                <Button type="button" colorTheme="error" className="cancelButton">Cancel</Button>
+                </Link>
 
-
+                <Link to="http://localhost:3000/my-books">
+                <Button type="submit" variation="primary" className="submitButton" >Submit</Button>
+                </Link>
+        </div>
 
         <TextAreaField className="notesLabel" label="Notes" id="notes" name="notes" value={notes} onChange={onNotesChange}/>
     </Card>
+
 
 }

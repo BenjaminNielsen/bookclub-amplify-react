@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-
+import "../Ratings/RatingsDesign.scss";
 import {Button, ButtonGroup, Card, Divider, Flex, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
 import {UserBooks} from "../../../types/API";
 import {Form, Link, redirect, useLoaderData, useNavigate} from "react-router-dom";
@@ -61,13 +61,13 @@ export default function UserBookDetails(): React.ReactElement | null {
                 borderRadius="medium"
                 variation="outlined"
             >
-                <Image
+                <Image className="imageThumbnail"
                     src={userBook.thumbnailUrl ?? ""}
                     alt={"thumbnail for " + userBook.title}
                 />
                 <View padding="xs">
                     <Divider padding="xs"/>
-                    <Heading padding="medium">{userBook.title}</Heading>
+                    <Heading className="bookTitle" padding="medium">{userBook.title}</Heading>
 
                     <TextField name="dateStarted"
                                label={"Date Started"}
@@ -80,7 +80,9 @@ export default function UserBookDetails(): React.ReactElement | null {
                                value={dateFinished ?? ""}
                                onChange={onDateFinishedChanged}/>
 
-                    {dateFinished && <Link to={`rating/${userBook.id}`}>Ratings</Link>}
+                    {dateFinished && <Link to={`rating/${userBook.id}`}>
+                        <Button type="button" variation="primary" className="ratingsButton">Ratings</Button>
+                        </Link>}
 
                     <ButtonGroup justifyContent="center" variation="primary">
                         <Form
@@ -96,9 +98,9 @@ export default function UserBookDetails(): React.ReactElement | null {
                                 }
                             }}
                         >
-                            <Button type="submit" colorTheme="error">Delete</Button>
+                            <Button className="deleteButton" type="submit" colorTheme="error">Delete</Button>
                         </Form>
-                        <Button> Update </Button>
+                        <Button variation="primary" className="updateButton"> Update </Button>
                     </ButtonGroup>
 
 

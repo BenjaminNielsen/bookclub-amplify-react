@@ -1,4 +1,4 @@
-import {Heading, View} from "@aws-amplify/ui-react";
+import {Heading, View, Button} from "@aws-amplify/ui-react";
 import {Link, Outlet} from "react-router-dom";
 import React from "react";
 import './Ratings/RatingsDesign.scss';
@@ -10,7 +10,7 @@ export default function MyBooksLayout(): React.ReactElement  {
         <View>
             <Heading className="myBooksHeader" level={2}>My Books</Heading>
             <Link to={"add"}>
-                <button type="button" className="addBookButton">Add Book</button>
+                <Button type="button" variation="primary" className="addBookButton">Add Book</Button>
             </Link>
             <Outlet/>
         </View>
