@@ -1,10 +1,19 @@
 import React, {useState} from "react";
 
 import "../Ratings/RatingsDesign.scss";
-import {Button, ButtonGroup, Card, Divider, Flex, Heading, Image, TextField, View} from "@aws-amplify/ui-react";
-import {UserBooks} from "../../../types/API";
-import {Form, Link, redirect, useLoaderData, useNavigate} from "react-router-dom";
-
+import {
+    Button,
+    Card,
+    Divider,
+    Flex,
+    Heading,
+    Image,
+    SliderField,
+    TextField,
+    View
+} from "@aws-amplify/ui-react";
+import { UserBooks} from "../../../types/API";
+import {Form, Link, useLoaderData} from "react-router-dom";
 
 
 export default function UserBookDetails(): React.ReactElement | null {
@@ -61,28 +70,44 @@ export default function UserBookDetails(): React.ReactElement | null {
                 borderRadius="medium"
                 variation="outlined"
             >
-                <Image className="imageThumbnail"
+                <Image
                     src={userBook.thumbnailUrl ?? ""}
                     alt={"thumbnail for " + userBook.title}
                 />
                 <View padding="xs">
-                    <Divider padding="xs"/>
-                    <Heading className="bookTitle" padding="medium">{userBook.title}</Heading>
+                    <Form
+                        method="post"
+                    >
+                        <Divider padding="xs"/>
+                        <Heading className="bookTitle" padding="medium">{userBook.title}</Heading>
+                        <input type="hidden" name="id" value={userBook?.id??""}/>
+                        <input type="hidden" name="isbn" value={userBook?.isbn??""}/>
+                        <input type="hidden" name="title" value={userBook?.title??""}/>
+                        <input type="hidden" name="thumbnailUrl" value={userBook?.thumbnailUrl??""}/>
+                        <input type="hidden" name="author" value={userBook?.author?.map((author)=>author??"")}/>
+                        <input type="hidden" name="genre" value={userBook?.genre?.map(genre => genre??"")}/>
+                        <input type="hidden" name="numberInSeries" value={userBook?.numberInSeries??""}/>
+                        <input type="hidden" name="wordCount" value={userBook?.wordCount??""}/>
+                        <input type="hidden" name="description" value={userBook?.description??""}/>
 
-                    <TextField name="dateStarted"
-                               label={"Date Started"}
-                               type="date"
-                               value={dateStarted ?? ""}
-                               onChange={onDateStartedChanged}/>
-                    <TextField name="dateFinished"
-                               label={"Date Finished"}
-                               type="date"
-                               value={dateFinished ?? ""}
-                               onChange={onDateFinishedChanged}/>
+                        <SliderField name="progress" label="Percent Complete" value={percentComplete} onChange={setPercentComplete} min={0} max={100} step={1}/>
 
-                    {dateFinished && <Link to={`rating/${userBook.id}`}>
+                        <TextField name="dateStarted"
+                                   label={"Date Started"}
+                                   type="date"
+                                   value={dateStarted ?? ""}
+                                   onChange={onDateStartedChanged}/>
+                        <TextField name="dateFinished"
+                                   label={"Date Finished"}
+                                   type="date"
+                                   value={dateFinished ?? ""}
+                                   onChange={onDateFinishedChanged}/>
+                        <div>
+                            {dateFinished && <Link to={`rating/${userBook.id}`}>
                         <Button type="button" variation="primary" className="ratingsButton">Ratings</Button>
                         </Link>}
+                        </div>
+                            <Button type="submit" colorTheme="info">Update</Button>
 
                     <ButtonGroup justifyContent="center" variation="primary">
                         <Form

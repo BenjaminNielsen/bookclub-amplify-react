@@ -8,7 +8,13 @@ import Events from "./components/Events/Events";
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Layout from "./components/Layout/Layout";
-import {addUserBook, deleteUserBookById, fetchUserBooks, getUserBookById} from "./services/userBookLoader";
+import {
+    addUserBook,
+    deleteUserBookById,
+    fetchUserBooks,
+    getUserBookById,
+    updateUserBook
+} from "./services/userBookLoader";
 import {addSuggestionBook, fetchSuggestionBooks} from "./services/suggestionBookLoader";
 import UserBookDetails from "./components/MyBooks/UserBookDetails/UserBookDetails";
 import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
@@ -23,36 +29,47 @@ export function App({signOut, user}: WithAuthenticatorProps) {
         {
             path: "/*",
             element: <Layout user={user} signOut={signOut}/>,
-            errorElement: <ErrorPage />,
+            errorElement: <ErrorPage/>,
             children: [
                 {
-                    path:"my-books/*",
+                    path: "my-books/*",
                     element: <MyBooksLayout/>,
-                    children:[
+                    children: [
                         {
-                            path:"",
+                            path: "",
                             loader: fetchUserBooks,
                             element: <BookSelection/>,
                         },
                         {
-                            path:":id",
-                            loader: getUserBookById,
-                            element: <UserBookDetails />,
+                            path: "add",
+                            element: <AddBook/>,
+                            action: addUserBook
                         },
                         {
-                            path:":bookId/rating/:id",
-                            loader:getBookRatingsId,
-                            element: <Ratings/>
+                            path: ":id",
+                            loader: getUserBookById,
+                            element: <UserBookDetails/>,
+                            action: updateUserBook
                         },
                         {
                             path: ":id/destroy",
                             action: deleteUserBookById,
                         },
                         {
-                            path: "add",
-                            element: <AddBook/>,
-                            action: addUserBook
-                        }
+                            path: ":bookId/rating/:id",
+                            loader: getBookRatingsId,
+                            element: <Ratings/>
+                        },
+                        {
+                            path: ":bookId/rating/:id/add",
+                        },
+                        {
+                            path: ":bookId/rating/:id/edit",
+                        },
+                        {
+                            path: ":bookId/rating/:id/destroy",
+                        },
+
                     ]
                 },
                 {
@@ -60,7 +77,7 @@ export function App({signOut, user}: WithAuthenticatorProps) {
                     element: <SuggestionsLayout/>,
                     children: [
                         {
-                            path:"",
+                            path: "",
                             loader: fetchSuggestionBooks,
                             element: <BookClubSuggestions/>
                         },
