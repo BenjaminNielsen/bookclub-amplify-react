@@ -24,13 +24,13 @@ export const Navbar = ({user, signOut}: NavbarProps) => {
                 <span></span>
             </div>
             <ul className={menuOpen ? "open" : ""}>
-                <li>
+                <li onClick={()=>setMenuOpen(!menuOpen)}>
                     <NavLink to="/my-books">My Books</NavLink>
                 </li>
-                <li>
+                <li onClick={()=>setMenuOpen(!menuOpen)}>
                     <NavLink to="/suggestions">Suggestions</NavLink>
                 </li>
-                <li>
+                <li onClick={()=>setMenuOpen(!menuOpen)}>
                     <NavLink to="/events">Events</NavLink>
                 </li>
                 <li>
