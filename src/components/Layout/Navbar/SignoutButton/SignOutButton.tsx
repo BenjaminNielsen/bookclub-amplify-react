@@ -1,11 +1,10 @@
-import {Button} from "@aws-amplify/ui-react";
+import {Button, useAuthenticator} from "@aws-amplify/ui-react";
 import React from "react";
 import './SignOutButton.scss'
 
-interface SignoutButtonProps {
-    signOut: any
-}
 
-export const SignOutButton = ({signOut}: SignoutButtonProps) => {
+export const SignOutButton = () => {
+    const { signOut } = useAuthenticator();
+
     return <Button className="SignOutButton" onClick={signOut}>Sign out</Button>
 }

@@ -31,6 +31,8 @@ export declare type SuggestionBooksCreateFormInputValues = {
     rating?: number;
     wordCount?: number;
     description?: string;
+    likedBy?: string[];
+    dislikedBy?: string[];
 };
 export declare type SuggestionBooksCreateFormValidationValues = {
     isbn?: ValidationFunction<string>;
@@ -42,6 +44,8 @@ export declare type SuggestionBooksCreateFormValidationValues = {
     rating?: ValidationFunction<number>;
     wordCount?: ValidationFunction<number>;
     description?: ValidationFunction<string>;
+    likedBy?: ValidationFunction<string>;
+    dislikedBy?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SuggestionBooksCreateFormOverridesProps = {
@@ -55,6 +59,8 @@ export declare type SuggestionBooksCreateFormOverridesProps = {
     rating?: PrimitiveOverrideProps<TextFieldProps>;
     wordCount?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
+    likedBy?: PrimitiveOverrideProps<TextFieldProps>;
+    dislikedBy?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type SuggestionBooksCreateFormProps = React.PropsWithChildren<{
     overrides?: SuggestionBooksCreateFormOverridesProps | undefined | null;

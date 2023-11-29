@@ -20,7 +20,7 @@ type UserBooks @model @auth(rules: [{allow: owner}]) {
 type SuggestionBooks @model @auth(rules: [{allow: private}]) {
   id: ID!
   isbn: String
-  title: String
+  title: String!
   thumbnailUrl: String
   author: [String]
   genre: [String]
@@ -28,6 +28,8 @@ type SuggestionBooks @model @auth(rules: [{allow: private}]) {
   rating: Int
   wordCount: Int
   description: String
+  likedBy: [String]
+  dislikedBy: [String!]
 }
 
 type BookRating @model @auth(rules: [{allow: private}]){

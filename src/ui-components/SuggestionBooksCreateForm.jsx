@@ -198,6 +198,8 @@ export default function SuggestionBooksCreateForm(props) {
     rating: "",
     wordCount: "",
     description: "",
+    likedBy: [],
+    dislikedBy: [],
   };
   const [isbn, setIsbn] = React.useState(initialValues.isbn);
   const [title, setTitle] = React.useState(initialValues.title);
@@ -214,6 +216,8 @@ export default function SuggestionBooksCreateForm(props) {
   const [description, setDescription] = React.useState(
     initialValues.description
   );
+  const [likedBy, setLikedBy] = React.useState(initialValues.likedBy);
+  const [dislikedBy, setDislikedBy] = React.useState(initialValues.dislikedBy);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setIsbn(initialValues.isbn);
@@ -227,15 +231,24 @@ export default function SuggestionBooksCreateForm(props) {
     setRating(initialValues.rating);
     setWordCount(initialValues.wordCount);
     setDescription(initialValues.description);
+    setLikedBy(initialValues.likedBy);
+    setCurrentLikedByValue("");
+    setDislikedBy(initialValues.dislikedBy);
+    setCurrentDislikedByValue("");
     setErrors({});
   };
   const [currentAuthorValue, setCurrentAuthorValue] = React.useState("");
   const authorRef = React.createRef();
   const [currentGenreValue, setCurrentGenreValue] = React.useState("");
   const genreRef = React.createRef();
+  const [currentLikedByValue, setCurrentLikedByValue] = React.useState("");
+  const likedByRef = React.createRef();
+  const [currentDislikedByValue, setCurrentDislikedByValue] =
+    React.useState("");
+  const dislikedByRef = React.createRef();
   const validations = {
     isbn: [],
-    title: [],
+    title: [{ type: "Required" }],
     thumbnailUrl: [],
     author: [],
     genre: [],
@@ -243,6 +256,8 @@ export default function SuggestionBooksCreateForm(props) {
     rating: [],
     wordCount: [],
     description: [],
+    likedBy: [],
+    dislikedBy: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -279,6 +294,8 @@ export default function SuggestionBooksCreateForm(props) {
           rating,
           wordCount,
           description,
+          likedBy,
+          dislikedBy,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -350,6 +367,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.isbn ?? value;
@@ -365,8 +384,13 @@ export default function SuggestionBooksCreateForm(props) {
         {...getOverrideProps(overrides, "isbn")}
       ></TextField>
       <TextField
-        label="Title"
-        isRequired={false}
+        label={
+          <span style={{ display: "inline-flex" }}>
+            <span>Title</span>
+            <span style={{ color: "red" }}>*</span>
+          </span>
+        }
+        isRequired={true}
         isReadOnly={false}
         value={title}
         onChange={(e) => {
@@ -382,6 +406,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -414,6 +440,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.thumbnailUrl ?? value;
@@ -442,6 +470,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             values = result?.author ?? values;
@@ -495,6 +525,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             values = result?.genre ?? values;
@@ -552,6 +584,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.numberInSeries ?? value;
@@ -588,6 +622,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating: value,
               wordCount,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.rating ?? value;
@@ -624,6 +660,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount: value,
               description,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.wordCount ?? value;
@@ -656,6 +694,8 @@ export default function SuggestionBooksCreateForm(props) {
               rating,
               wordCount,
               description: value,
+              likedBy,
+              dislikedBy,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -670,6 +710,123 @@ export default function SuggestionBooksCreateForm(props) {
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
       ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              isbn,
+              title,
+              thumbnailUrl,
+              author,
+              genre,
+              numberInSeries,
+              rating,
+              wordCount,
+              description,
+              likedBy: values,
+              dislikedBy,
+            };
+            const result = onChange(modelFields);
+            values = result?.likedBy ?? values;
+          }
+          setLikedBy(values);
+          setCurrentLikedByValue("");
+        }}
+        currentFieldValue={currentLikedByValue}
+        label={"Liked by"}
+        items={likedBy}
+        hasError={errors?.likedBy?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("likedBy", currentLikedByValue)
+        }
+        errorMessage={errors?.likedBy?.errorMessage}
+        setFieldValue={setCurrentLikedByValue}
+        inputFieldRef={likedByRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Liked by"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentLikedByValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.likedBy?.hasError) {
+              runValidationTasks("likedBy", value);
+            }
+            setCurrentLikedByValue(value);
+          }}
+          onBlur={() => runValidationTasks("likedBy", currentLikedByValue)}
+          errorMessage={errors.likedBy?.errorMessage}
+          hasError={errors.likedBy?.hasError}
+          ref={likedByRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "likedBy")}
+        ></TextField>
+      </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              isbn,
+              title,
+              thumbnailUrl,
+              author,
+              genre,
+              numberInSeries,
+              rating,
+              wordCount,
+              description,
+              likedBy,
+              dislikedBy: values,
+            };
+            const result = onChange(modelFields);
+            values = result?.dislikedBy ?? values;
+          }
+          setDislikedBy(values);
+          setCurrentDislikedByValue("");
+        }}
+        currentFieldValue={currentDislikedByValue}
+        label={
+          <span style={{ display: "inline-flex" }}>
+            <span>Disliked by</span>
+            <span style={{ color: "red" }}>*</span>
+          </span>
+        }
+        items={dislikedBy}
+        hasError={errors?.dislikedBy?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("dislikedBy", currentDislikedByValue)
+        }
+        errorMessage={errors?.dislikedBy?.errorMessage}
+        setFieldValue={setCurrentDislikedByValue}
+        inputFieldRef={dislikedByRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Disliked by"
+          isRequired={true}
+          isReadOnly={false}
+          value={currentDislikedByValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.dislikedBy?.hasError) {
+              runValidationTasks("dislikedBy", value);
+            }
+            setCurrentDislikedByValue(value);
+          }}
+          onBlur={() =>
+            runValidationTasks("dislikedBy", currentDislikedByValue)
+          }
+          errorMessage={errors.dislikedBy?.errorMessage}
+          hasError={errors.dislikedBy?.hasError}
+          ref={dislikedByRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "dislikedBy")}
+        ></TextField>
+      </ArrayField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
