@@ -119,6 +119,7 @@ export default function AddBook(): React.ReactElement | null {
             <Form method="post">
                 <BookCreationAlert isVisible={hasBookCreateError} onDismiss={onErrorDismiss}/>
                 <IsbnField value={givenIsbn} hasError={hasIsbnError} onChange={onIsbnChange}/>
+                <input name="thumbnailUrl" type="hidden" value={thumbnailUrl} />
                 <TitleField value={title} hasError={false} onChange={onTitleChange}/>
                 <DescriptionField value={description} hasError={false} onChange={onDescriptionChange} isVisible={detailsVisible}/>
                 <AuthorField value={author} hasError={false} onChange={onAuthorChange} isVisible={detailsVisible}/>

@@ -1,11 +1,10 @@
+@use '../../../styles/colors';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,500;1,100&family=Roboto:wght@100&display=swap');
-@import '../../../styles/colors';
 
 .RatingHeading{
     font-family: 'Raleway', sans-serif;
-    color: midnightblue;
-    font-weight:thin;
+    color: colors.$dark_color;
     text-align: center;
 }
 
@@ -13,8 +12,7 @@
     font-family: 'Raleway', sans-serif;
     color:darkslategrey;
     font-size: larger;
-    font-weight: thin;
-    border-bottom: solid 2px midnightblue;
+    border-bottom: solid 2px colors.$dark_color;
     text-align: center;
 }
 
@@ -27,58 +25,50 @@
 }
 
 .amplify-stepperfield__input{
-    border-color: midnightblue;
-    border-top: solid 1px midnightblue;
-    border-width: 1px;
-    color: midnightblue;
+    border-color: colors.$dark_color;
+    border-top: solid 1px colors.$dark_color;
+    color: colors.$dark_color;
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
     font-size: large;
 }
 
 .amplify-stepperfield__button--increase{
-    border: 50%;
     border-radius: 8px;
-    color: midnightblue;
-    border-color: midnightblue;
+    color: colors.$dark_color;
+    border-color: colors.$dark_color;
     border-width: 1px;
 }
 
 .amplify-stepperfield__button--decrease{
-    border: 50%;
     border-radius: 8px;
-    background-color:cadetblue;
+    background-color: colors.$primary_color1;
     color: antiquewhite;
-    border-color: midnightblue;
+    border-color: colors.$dark_color;
     border-width: 1px;
 }
 
 .enjoymentLabel, .pacingLabel {
-    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .proseLabel, .qualityLabel{
-    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .storyTellingLabel, .complexityLabel{
-    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .characterDevelopmentLabel, .teachingLabel{
-    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
 .depthLabel, .relevanceLabel{
-    border: 50%;
     padding-top: 5px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
@@ -93,7 +83,6 @@
 
 .addBookButton{
     font-family: 'Roboto', sans-serif;
-    font-weight: 300px;
     font-size: large;
     margin-top: 5px;
     margin-left: 50px;   
@@ -115,7 +104,6 @@
 
 .ratingsButton{
     font-family: 'Roboto', sans-serif;
-    font-weight: 300px;
     font-size: large;
     display: block;
     margin-left: auto;
@@ -128,7 +116,6 @@
 
 .updateButton{
     font-family: 'Roboto', sans-serif;
-    font-weight: 300px;
     font-size: large;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -136,7 +123,6 @@
 
 .deleteButton{
     font-family: 'Roboto', sans-serif;
-    font-weight: 300px;
     font-size: large;
     margin-top: 5px;
     margin-bottom: 5px;   
@@ -144,7 +130,6 @@
 
 .cancelButton{
     font-family: 'Roboto', sans-serif;
-    font-weight: 300px;
     font-size: large;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -152,7 +137,6 @@
 
 .submitButton{
     font-family: 'Roboto', sans-serif;
-    font-weight: 300px;
     font-size: large;
     margin-top: 10px;
     float: right;

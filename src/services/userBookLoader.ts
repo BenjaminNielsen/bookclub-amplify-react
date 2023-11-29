@@ -38,7 +38,7 @@ export async function addUserBook({request}: any){
     const data = {
         isbn: form.get("isbn") as string,
         title: form.get("title") as string,
-        //thumbnailUrl: thumbnailUrl,
+        thumbnailUrl: form.get("thumbnailUrl") as string,
         description: form.get("description") as string,
         author: (form.get("author") as String)?.split(', '),
         numberInSeries: form.get("numberInSeries") as string,
