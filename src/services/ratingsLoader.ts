@@ -1,6 +1,6 @@
 import {generateClient} from "aws-amplify/api";
 import {BookRating} from "../types/API";
-import {getBookRating, getUserBooks, listUserBooks} from "../graphql/queries";
+import {getBookRating} from "../graphql/queries";
 
 const API = generateClient({authMode: 'userPool'})
 

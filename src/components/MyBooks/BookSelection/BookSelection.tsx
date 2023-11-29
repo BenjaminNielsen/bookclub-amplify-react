@@ -1,5 +1,5 @@
-import {Autocomplete, Heading, View} from "@aws-amplify/ui-react";
-import React, {useState} from "react";
+import {Autocomplete, View} from "@aws-amplify/ui-react";
+import React from "react";
 import {CompactTable} from "@table-library/react-table-library/compact";
 import {useRowSelect} from "@table-library/react-table-library/select";
 import {useTheme} from '@table-library/react-table-library/theme';
@@ -9,7 +9,6 @@ import {useLoaderData, useNavigate} from "react-router-dom";
 
 export default function BookSelection(): React.ReactElement | null {
 
-    const [selectedBook, setSelectedBook] = useState<UserBooks | null>(null)
     const materialTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(materialTheme);
     const navigate = useNavigate()
@@ -23,18 +22,7 @@ export default function BookSelection(): React.ReactElement | null {
     function onSelectChange(action: any, state: any) {
         if (state.id === null)
             return
-        setSelectedBook(userBooks.find((book) => book.id === state.id) ?? null)
         navigate(`${state.id}`, {relative: "path"})
-    }
-
-    async function onDeleteClick() {
-        //callUpdateBooks()
-        setSelectedBook(null)
-    }
-
-    async function onUpdateClick() {
-        //callUpdateBooks()
-        setSelectedBook(null)
     }
 
     const COLUMNS = [

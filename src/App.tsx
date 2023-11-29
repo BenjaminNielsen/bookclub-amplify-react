@@ -1,6 +1,6 @@
 import React from "react";
 import "@aws-amplify/ui-react/styles.css";
-import {withAuthenticator, WithAuthenticatorProps,} from "@aws-amplify/ui-react";
+import {withAuthenticator} from "@aws-amplify/ui-react";
 import AddBook from "./components/AddBook/AddBook";
 import BookClubSuggestions from "./components/Suggestions/Suggestions/BookClubSuggestions";
 import BookSelection from "./components/MyBooks/BookSelection/BookSelection";
@@ -23,12 +23,12 @@ import {getBookRatingsId} from "./services/ratingsLoader";
 import SuggestionsLayout from "./components/Suggestions/SuggestionsLayout";
 
 
-export function App({signOut, user}: WithAuthenticatorProps) {
+export function App() {
 
     const router = createBrowserRouter([
         {
             path: "/*",
-            element: <Layout user={user} signOut={signOut}/>,
+            element: <Layout/>,
             errorElement: <ErrorPage/>,
             children: [
                 {
