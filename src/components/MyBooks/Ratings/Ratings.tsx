@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
+import {Button,Grid, useTheme, Card, Divider, Heading, StepperField, SwitchField, TextAreaField, View, Flex} from "@aws-amplify/ui-react";
 import {BookRating} from "../../../types/API";
 import './RatingsDesign.scss';
 import {useLoaderData, Link, useNavigate} from "react-router-dom";
@@ -7,6 +7,8 @@ import {useLoaderData, Link, useNavigate} from "react-router-dom";
 
 export default function Ratings(): React.ReactElement | null {
     const bookRating: BookRating | null = useLoaderData() as BookRating
+    const { tokens } = useTheme();
+
 
     const [overallEnjoyment, setOverallEnjoyment] = useState(bookRating?.overallEnjoyment ?? 0)
     const handleOnOverallEnjoymentChange = (newValue: number) => setOverallEnjoyment(newValue);
@@ -36,20 +38,26 @@ export default function Ratings(): React.ReactElement | null {
     const navigate = useNavigate();
 
 
-    return <Card variation="elevated">
-        <Heading className="RatingHeading" level={3}>Rating</Heading>
-        <Heading className="bookTitle" level={5}>"Title?"</Heading>
-        <div className="switchField">
-            <SwitchField
-                label={isFiction ? "Fiction" : "Non-Fiction"}
-                labelPosition="start"
-                isChecked={isFiction}
-                onChange={e => setIsFiction(e.target.checked)}
-            />
-        </div>
+    return <Card className="card" variation="elevated">
+    <Grid
+      templateColumns={{base:"1fr", medium:'1fr 1fr 1fr'}}
+      gap={tokens.space.small}
+    >
+        <View columnSpan={{base: 1, medium:3}} >
+            <Heading className="RatingHeading" level={3}>Rating</Heading>
+            <Heading className="bookTitle" level={5}>"Title?"</Heading>
+            <div className="switchField">
+                <SwitchField
+                    label={isFiction ? "Fiction" : "Non-Fiction"}
+                    labelPosition="start"
+                    isChecked={isFiction}
+                    onChange={e => setIsFiction(e.target.checked)}
+                />
+            </div>
+            <Divider/>
+        </View>
 
-        <Divider/>
-        <StepperField
+        <StepperField 
             className="enjoymentLabel"
             max={10}
             min={0}
@@ -59,7 +67,7 @@ export default function Ratings(): React.ReactElement | null {
             onStepChange={handleOnOverallEnjoymentChange}
             label="Overall Enjoyment"
         />
-        <StepperField
+        <StepperField 
             className="pacingLabel"
             max={10}
             min={0}
@@ -69,7 +77,7 @@ export default function Ratings(): React.ReactElement | null {
             onStepChange={handleOnPacingChange}
             label="Pacing"
         />
-        <StepperField
+        <StepperField 
             className="proseLabel"
             max={10}
             min={0}
@@ -79,7 +87,7 @@ export default function Ratings(): React.ReactElement | null {
             onStepChange={handleOnProseChange}
             label="Prose"
         />
-        <StepperField
+        <StepperField 
             className="qualityLabel"
             max={10}
             min={0}
@@ -90,7 +98,7 @@ export default function Ratings(): React.ReactElement | null {
             label="Quality Of Discussion"
         />
         {isFiction &&
-            <StepperField
+            <StepperField 
                 className="storyTellingLabel"
                 max={10}
                 min={0}
@@ -102,7 +110,7 @@ export default function Ratings(): React.ReactElement | null {
             />}
 
         {isFiction &&
-            <StepperField
+            <StepperField 
                 className="complexityLabel"
                 max={10}
                 min={0}
@@ -114,7 +122,7 @@ export default function Ratings(): React.ReactElement | null {
             />}
 
         {isFiction &&
-            <StepperField
+            <StepperField columnStart={2} columnEnd={3}
                 className="characterDevelopmentLabel"
                 max={10}
                 min={0}
@@ -124,8 +132,7 @@ export default function Ratings(): React.ReactElement | null {
                 onStepChange={handleOnCharacterDevelopmentChange}
                 label="Character Development"
             />}
-
-        {!isFiction &&
+             {!isFiction &&
             <StepperField
                 className="teachingLabel"
                 max={10}
@@ -150,7 +157,7 @@ export default function Ratings(): React.ReactElement | null {
             />}
 
         {!isFiction &&
-            <StepperField
+            <StepperField columnStart={2} columnEnd={3}
                 className="relevanceLabel"
                 max={10}
                 min={0}
@@ -161,17 +168,18 @@ export default function Ratings(): React.ReactElement | null {
                 label="Relevance"
 
             />}
-        <div>
-
-            <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
-
-            <Link to="../">
-                <Button variation="primary" className="submitButton">Submit</Button>
-            </Link>
-        </div>
-
-        <TextAreaField className="notesLabel" label="Notes" id="notes" name="notes" value={notes}
+        <TextAreaField columnSpan={3} className="notesLabel" label="Notes" id="notes" name="notes" value={notes}
                        onChange={onNotesChange}/>
+        <View>          
+            <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
+            </View>
+        <View columnStart={3} columnEnd={3}>
+            <Link to="../">
+            <Button variation="primary" className="submitButton">Submit</Button>
+        </Link>
+        </View>
+    </Grid>
+
     </Card>
 
 

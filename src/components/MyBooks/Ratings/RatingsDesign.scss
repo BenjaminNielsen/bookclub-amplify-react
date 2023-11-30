@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,500;1,100&family=Roboto:wght@100&display=swap');
 
+
 .RatingHeading{
     font-family: 'Raleway', sans-serif;
     color: colors.$dark_color;
@@ -18,11 +19,24 @@
 
 .switchField{
     float: right;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin: 1%;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
 }
+
+.card{
+    // flex: flex;
+    // flex-wrap: wrap;
+    // gap: 1rem;
+    border: solid 1px midnightblue;
+    border-radius: 2%;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+// .card{
+//     flex: 1;
+// }
 
 .amplify-stepperfield__input{
     border-color: colors.$dark_color;
@@ -48,96 +62,76 @@
     border-width: 1px;
 }
 
-.enjoymentLabel, .pacingLabel {
-    padding-top: 5px;
+.enjoymentLabel, .pacingLabel, .proseLabel, .qualityLabel,
+.storyTellingLabel, .complexityLabel, .depthLabel, .teachingLabel, 
+.characterDevelopmentLabel, .relevanceLabel {
     font-family: 'Roboto', sans-serif;
+    text-align: center;
     font-weight: 600;
-}
-.proseLabel, .qualityLabel{
-    padding-top: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-}
-.storyTellingLabel, .complexityLabel{
-    padding-top: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-}
-.characterDevelopmentLabel, .teachingLabel{
-    padding-top: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-}
-.depthLabel, .relevanceLabel{
-    padding-top: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    width: 100%;
 }
 
 .notesLabel{
-    display: inline-block;
     padding-top: 5px;
     font-family: "Roboto", sans-serif;
+    text-align: center;
     font-weight: 600;
 }
 
-.addBookButton{
+.cancelButton {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+}
+
+ .submitButton {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    float: right;
+ }
+
+ .addBookButton{
     font-family: 'Roboto', sans-serif;
     font-size: large;
     margin-top: 5px;
     margin-left: 50px;   
-}
-.myBooksHeader{
+ }
+ .myBooksHeader{
     margin-top: 10px;
     margin-left: 5px;
     font-family: 'Raleway', sans-serif;
     font-size:xxx-large;
     font-weight: 300;
 
-}
+ }
 
-.imageThumbnail{
+.imageThumbnail {
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
+    width: 30%;
+ }
 
-.ratingsButton{
+ .ratingsButton{
     font-family: 'Roboto', sans-serif;
     font-size: large;
+    text-align: center;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5px;
-    width: 50%;
-    height: 50%;
+    margin-top: 2%;
+    width: 20%;
     text-decoration: none;
-}
+ }
 
-.updateButton{
+ .updateButton {
     font-family: 'Roboto', sans-serif;
     font-size: large;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.deleteButton{
-    font-family: 'Roboto', sans-serif;
-    font-size: large;
-    margin-top: 5px;
-    margin-bottom: 5px;   
-}
-
-.cancelButton{
-    font-family: 'Roboto', sans-serif;
-    font-size: large;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.submitButton{
-    font-family: 'Roboto', sans-serif;
-    font-size: large;
-    margin-top: 10px;
+    margin-top: 2%;
     float: right;
-}
+ }
+
+ .deleteButton {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    margin-top: 2%;
+ }

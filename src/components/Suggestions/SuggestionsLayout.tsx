@@ -10,6 +10,7 @@ export default function SuggestionsLayout(): React.ReactElement {
             <Heading level={2}>Current Book Suggestions</Heading>
 
             <Link to={"add"}>Add Book</Link>
+            
             <Outlet/>
         </View>
     )
