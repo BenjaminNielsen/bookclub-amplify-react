@@ -19,7 +19,7 @@ import {addSuggestionBook, fetchSuggestionBooks} from "./services/suggestionBook
 import UserBookDetails from "./components/MyBooks/UserBookDetails/UserBookDetails";
 import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
 import Ratings from "./components/MyBooks/Ratings/Ratings";
-import {getBookRatingsId} from "./services/ratingsLoader";
+import {createBookRatingsId, getBookRatingsId} from "./services/ratingsLoader";
 import SuggestionsLayout from "./components/Suggestions/SuggestionsLayout";
 
 
@@ -58,10 +58,8 @@ export function App() {
                         {
                             path: ":bookId/rating/:id",
                             loader: getBookRatingsId,
-                            element: <Ratings/>
-                        },
-                        {
-                            path: ":bookId/rating/:id/add",
+                            element: <Ratings/>,
+                            action: createBookRatingsId
                         },
                         {
                             path: ":bookId/rating/:id/edit",

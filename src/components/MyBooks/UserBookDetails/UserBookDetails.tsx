@@ -6,13 +6,14 @@ import {
     Card,
     Divider,
     Heading,
-    Image,
+    Image, Rating,
     SliderField,
     TextField,
     View
 } from "@aws-amplify/ui-react";
-import {UserBooks} from "../../../types/API";
+import {BookRating, UserBooks} from "../../../types/API";
 import {Form, Link, useLoaderData} from "react-router-dom";
+import RatingConfig from "../../../types/RatingConfig";
 
 
 export default function UserBookDetails(): React.ReactElement | null {
@@ -32,6 +33,10 @@ export default function UserBookDetails(): React.ReactElement | null {
         setDateFinished(newDate)
     }
 
+    function getRating(bookRating: BookRating|null|undefined):number{
+        return bookRating?RatingConfig.getDefaultConfig().getRating(bookRating):0
+    }
+
     return (
             <Card
                 borderRadius="medium"
@@ -47,6 +52,12 @@ export default function UserBookDetails(): React.ReactElement | null {
                     >
                         <Divider padding="xs"/>
                         <Heading className="bookTitle" padding="medium">{userBook.title}</Heading>
+                        <Rating
+                            value={getRating(userBook.userRating)*5}
+                            maxValue={5}
+                            fillColor="hsl(300, 95%, 30%)"
+                            emptyColor="hsl(210, 5%, 94%)"
+                        />
                         <input type="hidden" name="id" value={userBook?.id ?? ""}/>
                         <input type="hidden" name="isbn" value={userBook?.isbn ?? ""}/>
                         <input type="hidden" name="title" value={userBook?.title ?? ""}/>
