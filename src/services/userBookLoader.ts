@@ -15,6 +15,7 @@ export async function fetchUserBooks(): Promise<UserBooks[]> {
 
 export async function getUserBookById({params}:any):Promise<UserBooks> {
     console.log("calling getUserBookById")
+    console.log("params: %o", params)
 
     const response = await API.graphql({query: getUserBooks, variables: {id: params.id}});
     console.log("returning: %o", response.data.getUserBooks)

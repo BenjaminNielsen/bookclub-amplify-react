@@ -1,45 +1,45 @@
 import React, {useState} from "react";
 import {Button, Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
-import {BookRating} from "../../../types/API";
+import {UserBooks} from "../../../types/API";
 import './RatingsDesign.scss';
 import {useLoaderData, useNavigate, Form} from "react-router-dom";
+import RatingConfig from "../../../types/RatingConfig";
 
 
 export default function Ratings(): React.ReactElement | null {
-    const bookRating: BookRating | null = useLoaderData() as BookRating
+    const userBook:UserBooks| null =useLoaderData() as UserBooks
 
-    const [overallEnjoyment, setOverallEnjoyment] = useState<number>(bookRating?.overallEnjoyment ?? 0)
+    const [overallEnjoyment, setOverallEnjoyment] = useState<number>(userBook?.userRating?.overallEnjoyment ?? 0)
     const handleOnOverallEnjoymentChange = (newValue: number) => setOverallEnjoyment(newValue);
-    const [pacing, setPacing] = useState<number>(bookRating?.pacing ?? 0)
+    const [pacing, setPacing] = useState<number>(userBook?.userRating?.pacing ?? 0)
     const handleOnPacingChange = (newValue: number) => setPacing(newValue);
-    const [prose, setProse] = useState<number>(bookRating?.prose ?? 0)
+    const [prose, setProse] = useState<number>(userBook?.userRating?.prose ?? 0)
     const handleOnProseChange = (newValue: number) => setProse(newValue);
-    const [qualityOfDiscussion, setQualityOfDiscussion] = useState<number>(bookRating?.qualityOfDiscussion ?? 0)
+    const [qualityOfDiscussion, setQualityOfDiscussion] = useState<number>(userBook?.userRating?.qualityOfDiscussion ?? 0)
     const handleOnQualityOfDiscussionChange = (newValue: number) => setQualityOfDiscussion(newValue);
-    const [storyTelling, setStoryTelling] = useState<number>(bookRating?.storytelling ?? 0)
+    const [storyTelling, setStoryTelling] = useState<number>(userBook?.userRating?.storytelling ?? 0)
     const handleOnStoryTellingChange = (newValue: number) => setStoryTelling(newValue);
-    const [complexity, setComplexity] = useState<number>(bookRating?.complexity ?? 0)
+    const [complexity, setComplexity] = useState<number>(userBook?.userRating?.complexity ?? 0)
     const handleOnComplexityChange = (newValue: number) => setComplexity(newValue);
-    const [characterDevelopment, setCharacterDevelopment] = useState<number>(bookRating?.characterDevelopment ?? 0)
+    const [characterDevelopment, setCharacterDevelopment] = useState<number>(userBook?.userRating?.characterDevelopment ?? 0)
     const handleOnCharacterDevelopmentChange = (newValue: number) => setCharacterDevelopment(newValue);
-    const [teaching, setTeaching] = useState<number>(bookRating?.teaching ?? 0)
+    const [teaching, setTeaching] = useState<number>(userBook?.userRating?.teaching ?? 0)
     const handleOnTeachingChange = (newValue: number) => setTeaching(newValue);
-    const [depthOfKnowledge, setDepthOfKnowledge] = useState<number>(bookRating?.depthOfKnowledge ?? 0)
+    const [depthOfKnowledge, setDepthOfKnowledge] = useState<number>(userBook?.userRating?.depthOfKnowledge ?? 0)
     const handleOnDepthOfKnowledgeChange = (newValue: number) => setDepthOfKnowledge(newValue);
-    const [relevance, setRelevance] = useState<number>(bookRating?.relevance ?? 0)
+    const [relevance, setRelevance] = useState<number>(userBook?.userRating?.relevance ?? 0)
     const handleOnRelevanceChange = (newValue: number) => setRelevance(newValue);
 
 
-    const [notes, setNotes] = useState<string>(bookRating?.notes ?? "")
+    const [notes, setNotes] = useState<string>(userBook?.userRating?.notes ?? "")
     const onNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setNotes(e.target.value);
-    const [isFiction, setIsFiction] = useState<boolean>(bookRating?.isFiction ?? true);
+    const [isFiction, setIsFiction] = useState<boolean>(userBook?.userRating?.isFiction ?? true);
     const navigate = useNavigate();
-
 
     return <Card variation="elevated">
         <Form method="post">
         <Heading className="RatingHeading" level={3}>Rating</Heading>
-        <Heading className="bookTitle" level={5}>"Title?"</Heading>
+        <Heading className="bookTitle" level={5}>{userBook?.title}</Heading>
         <div className="switchField">
             <SwitchField
                 name="isFiction"
@@ -50,12 +50,14 @@ export default function Ratings(): React.ReactElement | null {
                 onChange={e => setIsFiction(e.target.checked)}
             />
         </div>
-        <input name="id" type="hidden" value={bookRating?.id??''}/>
+            <input name="bookId" type="hidden" value={userBook?.id??""}/>
+
+            <input name="ratingId" type="hidden" value={userBook?.userBooksUserRatingId??""}/>
         <Divider/>
         <StepperField
             className="enjoymentLabel"
             name = "overallEnjoyment"
-            max={10}
+            max={RatingConfig.MAX_RATING}
             min={0}
             step={1}
             value={overallEnjoyment}
@@ -66,7 +68,7 @@ export default function Ratings(): React.ReactElement | null {
         <StepperField
             className="pacingLabel"
             name = "pacing"
-            max={10}
+            max={RatingConfig.MAX_RATING}
             min={0}
             step={1}
             value={pacing}
@@ -77,7 +79,7 @@ export default function Ratings(): React.ReactElement | null {
         <StepperField
             className="proseLabel"
             name = "prose"
-            max={10}
+            max={RatingConfig.MAX_RATING}
             min={0}
             step={1}
             value={prose}
@@ -88,7 +90,7 @@ export default function Ratings(): React.ReactElement | null {
         <StepperField
             className="qualityLabel"
             name="qualityOfDiscussion"
-            max={10}
+            max={RatingConfig.MAX_RATING}
             min={0}
             step={1}
             value={qualityOfDiscussion}
@@ -99,8 +101,8 @@ export default function Ratings(): React.ReactElement | null {
         {isFiction &&
             <StepperField
                 className="storyTellingLabel"
-                name = "storyTelling"
-                max={10}
+                name = "storytelling"
+                max={RatingConfig.MAX_RATING}
                 min={0}
                 step={1}
                 value={storyTelling}
@@ -113,7 +115,7 @@ export default function Ratings(): React.ReactElement | null {
             <StepperField
                 className="complexityLabel"
                 name="complexity"
-                max={10}
+                max={RatingConfig.MAX_RATING}
                 min={0}
                 step={1}
                 value={complexity}
@@ -126,7 +128,7 @@ export default function Ratings(): React.ReactElement | null {
             <StepperField
                 className="characterDevelopmentLabel"
                 name="characterDevelopment"
-                max={10}
+                max={RatingConfig.MAX_RATING}
                 min={0}
                 step={1}
                 value={characterDevelopment}
@@ -139,7 +141,7 @@ export default function Ratings(): React.ReactElement | null {
             <StepperField
                 className="teachingLabel"
                 name="teaching"
-                max={10}
+                max={RatingConfig.MAX_RATING}
                 min={0}
                 step={1}
                 value={teaching}
@@ -152,7 +154,7 @@ export default function Ratings(): React.ReactElement | null {
             <StepperField
                 className="depthLabel"
                 name="depthOfKnowledge"
-                max={10}
+                max={RatingConfig.MAX_RATING}
                 min={0}
                 step={1}
                 value={depthOfKnowledge}
@@ -165,7 +167,7 @@ export default function Ratings(): React.ReactElement | null {
             <StepperField
                 className="relevanceLabel"
                 name="relevance"
-                max={10}
+                max={RatingConfig.MAX_RATING}
                 min={0}
                 step={1}
                 value={relevance}

@@ -1,6 +1,8 @@
 import {BookRating} from "./API";
 
 export default class RatingConfig {
+    static readonly MAX_RATING: number = 10;
+
     overallEnjoymentWeighting: number;
     pacingWeighting: number;
     proseWeighting: number;
@@ -30,10 +32,10 @@ export default class RatingConfig {
     }
 
     public getRating(givenRating: BookRating): number {
-        return givenRating.isFiction ? this.getFictionRating(givenRating) : this.getNonFictionRating(givenRating)
+        return givenRating.isFiction ? this.getFictionRatingPercentage(givenRating) : this.getNonFictionRating(givenRating)
     }
 
-    private getFictionRating(givenRating: BookRating): number {
+    private getFictionRatingPercentage(givenRating: BookRating): number {
         const totalWeight:number = this.overallEnjoymentWeighting +
             this.pacingWeighting +
             this.proseWeighting +
@@ -41,6 +43,7 @@ export default class RatingConfig {
             this.storytellingWeighting +
             this.complexityWeighting +
             this.relevanceWeighting;
+        console.log("Total Weight: %o", totalWeight)
         const totalValue:number = (givenRating.overallEnjoyment??0) * this.overallEnjoymentWeighting +
             (givenRating.pacing??0) * this.pacingWeighting +
             (givenRating.prose??0) * this.proseWeighting +
@@ -49,7 +52,10 @@ export default class RatingConfig {
             (givenRating.complexity??0) * this.complexityWeighting +
             (givenRating.characterDevelopment??0) * this.characterDevelopmentWeighting;
 
-        return totalValue/totalWeight;
+        console.log("totalValue: %o", totalValue)
+        console.log("totalValue/totalWeight: %o", totalValue/totalWeight)
+
+        return (totalValue/totalWeight)/RatingConfig.MAX_RATING;
     }
 
     private getNonFictionRating(givenRating: BookRating): number {

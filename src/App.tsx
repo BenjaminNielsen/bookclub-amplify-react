@@ -19,7 +19,7 @@ import {addSuggestionBook, fetchSuggestionBooks} from "./services/suggestionBook
 import UserBookDetails from "./components/MyBooks/UserBookDetails/UserBookDetails";
 import MyBooksLayout from "./components/MyBooks/MyBooksLayout";
 import Ratings from "./components/MyBooks/Ratings/Ratings";
-import {createBookRatingsId, getBookRatingsId} from "./services/ratingsLoader";
+import {createBookRatingsId, editBookRatingsId} from "./services/ratingsLoader";
 import SuggestionsLayout from "./components/Suggestions/SuggestionsLayout";
 
 
@@ -56,16 +56,19 @@ export function App() {
                             action: deleteUserBookById,
                         },
                         {
-                            path: ":bookId/rating/:id",
-                            loader: getBookRatingsId,
+                            path: ":id/rating/edit",
+                            action: editBookRatingsId,
+                            loader: getUserBookById,
                             element: <Ratings/>,
+                        },
+                        {
+                            path: ":id/rating/new",
+                            loader: getUserBookById,
                             action: createBookRatingsId
+                            ,element: <Ratings/>,
                         },
                         {
-                            path: ":bookId/rating/:id/edit",
-                        },
-                        {
-                            path: ":bookId/rating/:id/destroy",
+                            path: ":bookId/rating/destroy",
                         },
 
                     ]

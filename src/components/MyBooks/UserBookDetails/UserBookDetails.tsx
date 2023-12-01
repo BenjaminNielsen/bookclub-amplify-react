@@ -82,7 +82,7 @@ export default function UserBookDetails(): React.ReactElement | null {
                                    value={dateFinished ?? ""}
                                    onChange={onDateFinishedChanged}/>
                         <div>
-                            {dateFinished && <Link to={`rating/${userBook.id}`}>
+                            {dateFinished && <Link to={`rating/${userBook.userBooksUserRatingId==null?"new":"edit"}`}>
                                 <Button type="button" variation="primary" className="ratingsButton">Ratings</Button>
                             </Link>}
                         </div>
