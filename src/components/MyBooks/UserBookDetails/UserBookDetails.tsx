@@ -38,11 +38,11 @@ export default function UserBookDetails(): React.ReactElement | null {
     }
 
     return (
-            <Card
+            <Card className="card"
                 borderRadius="medium"
                 variation="outlined"
             >
-                <Image
+                <Image className="imageThumbnail"
                     src={userBook.thumbnailUrl ?? ""}
                     alt={"thumbnail for " + userBook.title}
                 />
@@ -67,7 +67,7 @@ export default function UserBookDetails(): React.ReactElement | null {
                         <input type="hidden" name="numberInSeries" value={userBook?.numberInSeries ?? ""}/>
                         <input type="hidden" name="wordCount" value={userBook?.wordCount ?? ""}/>
                         <input type="hidden" name="description" value={userBook?.description ?? ""}/>
-
+                      
                         <SliderField name="progress" label="Percent Complete" value={percentComplete}
                                      onChange={setPercentComplete} min={0} max={100} step={1}/>
 
@@ -80,13 +80,13 @@ export default function UserBookDetails(): React.ReactElement | null {
                                    label={"Date Finished"}
                                    type="date"
                                    value={dateFinished ?? ""}
-                                   onChange={onDateFinishedChanged}/>
+                                   onChange={onDateFinishedChanged}/>                    
                         <div>
                             {dateFinished && <Link to={`rating/${userBook.userBooksUserRatingId==null?"new":"edit"}`}>
                                 <Button type="button" variation="primary" className="ratingsButton">Ratings</Button>
                             </Link>}
                         </div>
-                        <Button type="submit" colorTheme="info">Update</Button>
+                        <Button type="submit" colorTheme="info" className="updateButton">Update</Button>
                     </Form>
                     <Form
                         method="post"

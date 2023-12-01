@@ -14,6 +14,7 @@ export default function SuggestionsLayout(): React.ReactElement {
                         Add Book
                     </Button>
                 </Link>
+
             <Outlet/>
         </View>
     )
