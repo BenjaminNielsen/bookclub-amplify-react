@@ -1,5 +1,5 @@
 import React from "react";
-import './Ratings/RatingsDesign.scss';
+import './Ratings/Ratings.scss';
 import ContentLayout from "../Layout/ContentLayout/ContentLayout";
 import {Link, Outlet} from "react-router-dom";
 import {Button} from "@aws-amplify/ui-react";

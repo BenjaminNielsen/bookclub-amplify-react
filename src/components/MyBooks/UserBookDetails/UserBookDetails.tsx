@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import "../Ratings/RatingsDesign.scss";
+import "./UserBookDetails.scss";
 import {Button, Divider, Heading, Image, Rating, SliderField, TextField, View} from "@aws-amplify/ui-react";
 import {BookRating, UserBooks} from "../../../types/API";
 import {Form, Link, useLoaderData} from "react-router-dom";
@@ -70,10 +70,10 @@ export default function UserBookDetails(): React.ReactElement | null {
                            onChange={onDateFinishedChanged}/>
                 <div>
                     {dateFinished && <Link to={`rating/${userBook.userBooksUserRatingId == null ? "new" : "edit"}`}>
-                        <Button type="button" variation="primary" className="ratingsButton">Ratings</Button>
+                        <Button type="button" variation="primary" className="RatingsButton">Ratings</Button>
                     </Link>}
                 </div>
-                <Button type="submit" colorTheme="info" className="updateButton">Update</Button>
+                <Button type="submit" colorTheme="info" className="UpdateButton">Update</Button>
             </Form>
             <Form
                 method="post"
