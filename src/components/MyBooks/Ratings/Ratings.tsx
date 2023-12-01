@@ -132,18 +132,6 @@ export default function Ratings(): React.ReactElement | null {
                         onStepChange={handleOnComplexityChange}
                         label="Complexity"
                     />}
-
-                {isFiction &&
-                    <StepperField
-                                  className="characterDevelopmentLabel"
-                                  max={10}
-                                  min={0}
-                                  step={1}
-                                  value={characterDevelopment}
-                                  variation="quiet"
-                                  onStepChange={handleOnCharacterDevelopmentChange}
-                                  label="Character Development"
-                    />}
                 {!isFiction &&
                     <StepperField
                         className="teachingLabel"
@@ -167,26 +155,43 @@ export default function Ratings(): React.ReactElement | null {
                         onStepChange={handleOnDepthOfKnowledgeChange}
                         label="Depth of Knowledge"
                     />}
+        </Grid>
+        <Grid templateColumns={{base: '1fr', large: '1fr 1fr 1fr 1fr'}}
+            autoRows='min-content'
+            gap={tokens.space.xs}>
+                <View></View>
+                <View columnSpan={{base:1, large:2}}>
+                    {isFiction &&
+                        <StepperField
+                                    className="characterDevelopmentLabel"
+                                    max={10}
+                                    min={0}
+                                    step={1}
+                                    value={characterDevelopment}
+                                    variation="quiet"
+                                    onStepChange={handleOnCharacterDevelopmentChange}
+                                    label="Character Development"
+                        />}
+                    {!isFiction &&
+                        <StepperField
+                                    className="relevanceLabel"
+                                    max={10}
+                                    min={0}
+                                    step={1}
+                                    value={relevance}
+                                    variation="quiet"
+                                    onStepChange={handleOnRelevanceChange}
+                                    label="Relevance"
 
-                {!isFiction &&
-                    <StepperField
-                                  className="relevanceLabel"
-                                  max={10}
-                                  min={0}
-                                  step={1}
-                                  value={relevance}
-                                  variation="quiet"
-                                  onStepChange={handleOnRelevanceChange}
-                                  label="Relevance"
-
-                    />}
-                <TextAreaField columnStart="1" columnEnd="-1" className="notesLabel" label="Notes" id="notes" name="notes"  value={notes}
-                               onChange={onNotesChange}/>
-                <View columnStart="1" columnEnd="-1">
-                    <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
-                    <Link to="../">
-                        <Button variation="primary" className="submitButton">Submit</Button>
-                    </Link>
+                        />}
+                    <TextAreaField columnStart="1" columnEnd="-1" className="notesLabel" label="Notes" id="notes" name="notes"  value={notes}
+                                onChange={onNotesChange}/>
+                    <View columnStart="1" columnEnd="-1">
+                        <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
+                        <Link to="../">
+                            <Button variation="primary" className="submitButton">Submit</Button>
+                        </Link>
+                    </View>
                 </View>
         </Grid>
     </Card>
