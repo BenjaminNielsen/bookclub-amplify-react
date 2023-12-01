@@ -1,12 +1,25 @@
 import React, {useState} from "react";
-import {Button, Card, Divider, Heading, StepperField, SwitchField, TextAreaField} from "@aws-amplify/ui-react";
+import {
+    Button,
+    Card,
+    Divider,
+    Grid,
+    Heading,
+    StepperField,
+    SwitchField,
+    TextAreaField,
+    useTheme,
+    View
+} from "@aws-amplify/ui-react";
 import {BookRating} from "../../../types/API";
 import './RatingsDesign.scss';
-import {useLoaderData, Link, useNavigate} from "react-router-dom";
+import {Link, useLoaderData, useNavigate} from "react-router-dom";
 
 
 export default function Ratings(): React.ReactElement | null {
     const bookRating: BookRating | null = useLoaderData() as BookRating
+    const {tokens} = useTheme();
+
 
     const [overallEnjoyment, setOverallEnjoyment] = useState(bookRating?.overallEnjoyment ?? 0)
     const handleOnOverallEnjoymentChange = (newValue: number) => setOverallEnjoyment(newValue);
@@ -36,143 +49,151 @@ export default function Ratings(): React.ReactElement | null {
     const navigate = useNavigate();
 
 
-    return <Card variation="elevated">
-        <Heading className="RatingHeading" level={3}>Rating</Heading>
-        <Heading className="bookTitle" level={5}>"Title?"</Heading>
-        <div className="switchField">
-            <SwitchField
-                label={isFiction ? "Fiction" : "Non-Fiction"}
-                labelPosition="start"
-                isChecked={isFiction}
-                onChange={e => setIsFiction(e.target.checked)}
-            />
-        </div>
+    return <Card className="card" variation="elevated">
+        <Grid
+            templateColumns={{base: '1fr 1fr', large: '1fr 1fr 1fr'}}
+            autoRows='min-content'
+            gap={tokens.space.xs}
+        >
+            <View columnStart="1" columnEnd="-1">
+                <Heading className="RatingHeading" level={3}>Rating</Heading>
+                <Heading className="bookTitle" level={5}>"Title?"</Heading>
+                <div className="switchField">
+                    <SwitchField
+                        label={isFiction ? "Fiction" : "Non-Fiction"}
+                        labelPosition="start"
+                        isChecked={isFiction}
+                        onChange={e => setIsFiction(e.target.checked)}
+                    />
+                </div>
+                <Divider/>
+            </View>
 
-        <Divider/>
-        <StepperField
-            className="enjoymentLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={overallEnjoyment}
-            variation="quiet"
-            onStepChange={handleOnOverallEnjoymentChange}
-            label="Overall Enjoyment"
-        />
-        <StepperField
-            className="pacingLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={pacing}
-            variation="quiet"
-            onStepChange={handleOnPacingChange}
-            label="Pacing"
-        />
-        <StepperField
-            className="proseLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={prose}
-            variation="quiet"
-            onStepChange={handleOnProseChange}
-            label="Prose"
-        />
-        <StepperField
-            className="qualityLabel"
-            max={10}
-            min={0}
-            step={1}
-            value={qualityOfDiscussion}
-            variation="quiet"
-            onStepChange={handleOnQualityOfDiscussionChange}
-            label="Quality Of Discussion"
-        />
-        {isFiction &&
-            <StepperField
-                className="storyTellingLabel"
-                max={10}
-                min={0}
-                step={1}
-                value={storyTelling}
-                variation="quiet"
-                onStepChange={handleOnStoryTellingChange}
-                label="Story Telling"
-            />}
+                <StepperField
+                    className="enjoymentLabel"
+                    max={10}
+                    min={0}
+                    step={1}
+                    value={overallEnjoyment}
+                    variation="quiet"
+                    onStepChange={handleOnOverallEnjoymentChange}
+                    label="Overall Enjoyment"
+                />
+                <StepperField
+                    className="pacingLabel"
+                    max={10}
+                    min={0}
+                    step={1}
+                    value={pacing}
+                    variation="quiet"
+                    onStepChange={handleOnPacingChange}
+                    label="Pacing"
+                />
+                <StepperField
+                    className="proseLabel"
+                    max={10}
+                    min={0}
+                    step={1}
+                    value={prose}
+                    variation="quiet"
+                    onStepChange={handleOnProseChange}
+                    label="Prose"
+                />
+                <StepperField
+                    className="qualityLabel"
+                    max={10}
+                    min={0}
+                    step={1}
+                    value={qualityOfDiscussion}
+                    variation="quiet"
+                    onStepChange={handleOnQualityOfDiscussionChange}
+                    label="Quality Of Discussion"
+                />
+                {isFiction &&
+                    <StepperField
+                        className="storyTellingLabel"
+                        max={10}
+                        min={0}
+                        step={1}
+                        value={storyTelling}
+                        variation="quiet"
+                        onStepChange={handleOnStoryTellingChange}
+                        label="Story Telling"
+                    />}
 
-        {isFiction &&
-            <StepperField
-                className="complexityLabel"
-                max={10}
-                min={0}
-                step={1}
-                value={complexity}
-                variation="quiet"
-                onStepChange={handleOnComplexityChange}
-                label="Complexity"
-            />}
+                {isFiction &&
+                    <StepperField
+                        className="complexityLabel"
+                        max={10}
+                        min={0}
+                        step={1}
+                        value={complexity}
+                        variation="quiet"
+                        onStepChange={handleOnComplexityChange}
+                        label="Complexity"
+                    />}
+                {!isFiction &&
+                    <StepperField
+                        className="teachingLabel"
+                        max={10}
+                        min={0}
+                        step={1}
+                        value={teaching}
+                        variation="quiet"
+                        onStepChange={handleOnTeachingChange}
+                        label="Teaching"
+                    />}
 
-        {isFiction &&
-            <StepperField
-                className="characterDevelopmentLabel"
-                max={10}
-                min={0}
-                step={1}
-                value={characterDevelopment}
-                variation="quiet"
-                onStepChange={handleOnCharacterDevelopmentChange}
-                label="Character Development"
-            />}
+                {!isFiction &&
+                    <StepperField
+                        className="depthLabel"
+                        max={10}
+                        min={0}
+                        step={1}
+                        value={depthOfKnowledge}
+                        variation="quiet"
+                        onStepChange={handleOnDepthOfKnowledgeChange}
+                        label="Depth of Knowledge"
+                    />}
+        </Grid>
+        <Grid templateColumns={{base: '1fr', large: '1fr 1fr 1fr 1fr'}}
+            autoRows='min-content'
+            gap={tokens.space.xs}>
+                <View></View>
+                <View columnSpan={{base:1, large:2}}>
+                    {isFiction &&
+                        <StepperField
+                                    className="characterDevelopmentLabel"
+                                    max={10}
+                                    min={0}
+                                    step={1}
+                                    value={characterDevelopment}
+                                    variation="quiet"
+                                    onStepChange={handleOnCharacterDevelopmentChange}
+                                    label="Character Development"
+                        />}
+                    {!isFiction &&
+                        <StepperField
+                                    className="relevanceLabel"
+                                    max={10}
+                                    min={0}
+                                    step={1}
+                                    value={relevance}
+                                    variation="quiet"
+                                    onStepChange={handleOnRelevanceChange}
+                                    label="Relevance"
 
-        {!isFiction &&
-            <StepperField
-                className="teachingLabel"
-                max={10}
-                min={0}
-                step={1}
-                value={teaching}
-                variation="quiet"
-                onStepChange={handleOnTeachingChange}
-                label="Teaching"
-            />}
-
-        {!isFiction &&
-            <StepperField
-                className="depthLabel"
-                max={10}
-                min={0}
-                step={1}
-                value={depthOfKnowledge}
-                variation="quiet"
-                onStepChange={handleOnDepthOfKnowledgeChange}
-                label="Depth of Knowledge"
-            />}
-
-        {!isFiction &&
-            <StepperField
-                className="relevanceLabel"
-                max={10}
-                min={0}
-                step={1}
-                value={relevance}
-                variation="quiet"
-                onStepChange={handleOnRelevanceChange}
-                label="Relevance"
-
-            />}
-        <div>
-
-            <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
-
-            <Link to="../">
-                <Button variation="primary" className="submitButton">Submit</Button>
-            </Link>
-        </div>
-
-        <TextAreaField className="notesLabel" label="Notes" id="notes" name="notes" value={notes}
-                       onChange={onNotesChange}/>
+                        />}
+                    <TextAreaField columnStart="1" columnEnd="-1" className="notesLabel" label="Notes" id="notes" name="notes"  value={notes}
+                                onChange={onNotesChange}/>
+                    <View columnStart="1" columnEnd="-1">
+                        <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
+                        <Link to="../">
+                            <Button variation="primary" className="submitButton">Submit</Button>
+                        </Link>
+                    </View>
+                </View>
+        </Grid>
     </Card>
-
 
 }
