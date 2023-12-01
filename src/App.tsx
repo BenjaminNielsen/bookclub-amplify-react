@@ -7,7 +7,7 @@ import BookSelection from "./components/MyBooks/BookSelection/BookSelection";
 import Events from "./components/Events/Events";
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import ErrorPage from "./components/ErrorPage/ErrorPage";
-import Layout from "./components/Layout/Layout";
+import SiteLayout from "./components/Layout/SiteLayout";
 import {
     addUserBook,
     deleteUserBookById,
@@ -28,7 +28,7 @@ export function App() {
     const router = createBrowserRouter([
         {
             path: "/*",
-            element: <Layout/>,
+            element: <SiteLayout/>,
             errorElement: <ErrorPage/>,
             children: [
                 {

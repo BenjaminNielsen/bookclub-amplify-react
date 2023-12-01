@@ -1,19 +1,22 @@
-import {Heading, View, Button} from "@aws-amplify/ui-react";
-import {Link, Outlet} from "react-router-dom";
 import React from "react";
 import './Ratings/RatingsDesign.scss';
+import ContentLayout from "../Layout/ContentLayout/ContentLayout";
+import {Link, Outlet} from "react-router-dom";
+import {Button} from "@aws-amplify/ui-react";
+import MainContentCard from "../GeneralComponents/MainContentCard/MainContentCard";
 
-export default function MyBooksLayout(): React.ReactElement  {
-
-    
+export default function MyBooksLayout(): React.ReactElement {
     return (
-        <View>
-            <Heading className="myBooksHeader" level={2}>My Books</Heading>
+        <ContentLayout title={'My Books'}>
             <Link to={"add"}>
-                <Button type="button" variation="primary" className="addBookButton">Add Book</Button>
+                <Button variation='primary'>
+                    Add Book
+                </Button>
             </Link>
-            <Outlet/>
-        </View>
-    )
 
+            <MainContentCard>
+                <Outlet/>
+            </MainContentCard>
+        </ContentLayout>
+    )
 }

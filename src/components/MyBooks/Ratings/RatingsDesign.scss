@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,500;1,100&family=Roboto:wght@100&display=swap');
 
-
 .RatingHeading{
     font-family: 'Raleway', sans-serif;
     color: colors.$dark_color;
@@ -66,21 +65,6 @@
     font-family: 'Roboto', sans-serif;
     font-size: medium;
     float: right;
- }
-
- .addBookButton{
-    font-family: 'Roboto', sans-serif;
-    font-size: large;
-    margin-top: 5px;
-    margin-left: 50px;
- }
- .myBooksHeader{
-    margin-top: 10px;
-    margin-left: 5px;
-    font-family: 'Raleway', sans-serif;
-    font-size:xxx-large;
-    font-weight: 300;
-
  }
 
  .ratingsButton{

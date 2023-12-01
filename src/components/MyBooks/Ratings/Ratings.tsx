@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {
     Button,
-    Card,
     Divider,
     Grid,
     Heading,
@@ -47,7 +46,7 @@ export default function Ratings(): React.ReactElement | null {
     const [isFiction, setIsFiction] = useState<boolean>(userBook?.userRating?.isFiction ?? true);
     const navigate = useNavigate();
 
-    return <Card variation="elevated">
+    return (
         <Form method="post">
             <Grid
                 templateColumns={{base: '1fr 1fr', large: '1fr 1fr 1fr'}}
@@ -197,7 +196,8 @@ export default function Ratings(): React.ReactElement | null {
                             onStepChange={handleOnRelevanceChange}
                             label="Relevance"
                         />}
-                    <TextAreaField columnStart="1" columnEnd="-1" className="notesLabel" label="Notes" id="notes" name="notes" value={notes} onChange={onNotesChange}/>
+                    <TextAreaField columnStart="1" columnEnd="-1" className="notesLabel" label="Notes" id="notes"
+                                   name="notes" value={notes} onChange={onNotesChange}/>
                     <View columnStart="1" columnEnd="-1">
                         <Button colorTheme="error" className="cancelButton" onClick={() => navigate(-1)}>Cancel</Button>
                         <Button variation="primary" type="submit" className="submitButton">Submit</Button>
@@ -205,7 +205,7 @@ export default function Ratings(): React.ReactElement | null {
                 </View>
             </Grid>
         </Form>
-    </Card>
+    )
 
 
 }
