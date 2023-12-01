@@ -73,6 +73,6 @@ export default class RatingConfig {
             (givenRating.teaching??0) * this.teachingWeighting +
             (givenRating.depthOfKnowledge??0) * this.depthOfKnowledgeWeighting +
             (givenRating.characterDevelopment??0) * this.characterDevelopmentWeighting;
-        return totalValue/totalWeight;
+        return totalValue/totalWeight/RatingConfig.MAX_RATING;
     }
 }

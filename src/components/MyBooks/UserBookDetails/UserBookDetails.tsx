@@ -41,12 +41,13 @@ export default function UserBookDetails(): React.ReactElement | null {
             <Card className="card"
                 borderRadius="medium"
                 variation="outlined"
+                  padding="small"
             >
-                <Image className="imageThumbnail"
+                <Image
                     src={userBook.thumbnailUrl ?? ""}
                     alt={"thumbnail for " + userBook.title}
                 />
-                <View padding="xs">
+                <View >
                     <Form
                         method="post"
                     >

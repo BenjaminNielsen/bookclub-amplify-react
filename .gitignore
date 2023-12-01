@@ -23,7 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 amplify-backup/
-src/ui-components/
 
 .vscode/*
 !.vscode/settings.json
