@@ -13,8 +13,9 @@ import {UserBooksCreateFormInputValues} from "../../../ui-components/UserBooksCr
 import suggestionBookToUserBook from "../../../services/bookConverters";
 import {SuggestionBooks} from "../../../types/API";
 import {Button, useAuthenticator, View} from "@aws-amplify/ui-react";
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 import ApprovalBadge from "./ApprovalBadge";
+import {useRowSelect} from "@table-library/react-table-library/select";
 
 
 
@@ -24,10 +25,20 @@ export default function BookClubSuggestions(): React.ReactElement | null {
     DEFAULT_OPTIONS.highlightOnHover = true;
     const materialTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(materialTheme);
+    const navigate = useNavigate()
     const suggestionBooks = useLoaderData() as SuggestionBooks[]
-
     const { user } = useAuthenticator();
+    const data: { nodes: Array<SuggestionBooks> } = {nodes: suggestionBooks}
 
+    const select = useRowSelect(data, {
+        onChange: onSelectChange,
+    });
+
+    function onSelectChange(action: any, state: any) {
+        if (state.id === null)
+            return
+        navigate(`${state.id}/edit`, {relative: "path"})
+    }
 
     async function onDeleteBook(id: string | null) {
         if (id == null) {
@@ -120,7 +131,7 @@ export default function BookClubSuggestions(): React.ReactElement | null {
 
     return (
         <View>
-            <CompactTable columns={COLUMNS} data={{nodes: suggestionBooks}} theme={theme}/>
+            <CompactTable columns={COLUMNS} data={data} theme={theme} select={select}/>
         </View>
     )
 }

@@ -1,4 +1,4 @@
-import {Button, Card} from "@aws-amplify/ui-react";
+import {Button, Card, SearchField} from "@aws-amplify/ui-react";
 import React, {useState} from "react";
 import ISBN from 'isbn3';
 import IsbnField from "./Fields/IsbnField";
@@ -28,7 +28,14 @@ export default function AddBook(): React.ReactElement | null {
     const [hasIsbnError, setHasIsbnError] = React.useState(false);
     const [detailsVisible, setDetailsVisible] = React.useState(false);
     const [hasBookCreateError, setHasBookCreateError] = React.useState(false);
+    const [searchValue, setSearchValue] = React.useState('');
 
+    const onSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSearchValue(event.target.value);
+    };
+    const onSearchClear = () => {
+        setSearchValue('');
+    };
     function setPopulatedFieldsToDefault() {
         setTitle('')
         setThumbnailUrl('')
@@ -121,6 +128,9 @@ export default function AddBook(): React.ReactElement | null {
                 <IsbnField value={givenIsbn} hasError={hasIsbnError} onChange={onIsbnChange}/>
                 <input name="thumbnailUrl" type="hidden" value={thumbnailUrl} />
                 <TitleField value={title} hasError={false} onChange={onTitleChange}/>
+                <SearchField labelHidden={false}   variation="quiet"
+                             value={searchValue} label={'Search For Title'} onChange={onSearchChange} onClear={onSearchClear}></SearchField>
+
                 <DescriptionField value={description} hasError={false} onChange={onDescriptionChange} isVisible={detailsVisible}/>
                 <AuthorField value={author} hasError={false} onChange={onAuthorChange} isVisible={detailsVisible}/>
                 <GenreField value={genre} hasError={false} onChange={onGenreChange} isVisible={detailsVisible}/>

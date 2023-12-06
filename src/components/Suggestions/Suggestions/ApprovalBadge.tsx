@@ -6,5 +6,5 @@ interface ApprovalBadgeProps {
     approved: boolean
 }
 export default function ApprovalBadge({owner, approved}: ApprovalBadgeProps): React.ReactElement {
-    return <Badge size="small" variation={approved?'success':'error'}>{owner.substring(0,5)}</Badge>
+    return <Badge size="small" variation={approved?'success':'error'}>{owner.substring(0,2)}</Badge>
 }
